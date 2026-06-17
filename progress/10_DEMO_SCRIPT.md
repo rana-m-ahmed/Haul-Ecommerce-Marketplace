@@ -1,12 +1,20 @@
-# 10 — Demo Script (what actually works right now)
+# 10 - Demo Script (what actually works right now)
 
-Unlike the roadmap, this file only reflects reality. Check an item only after it has been live-verified, not when it's merely coded. Re-run this entire checklist at the end of every sprint, together, across both tracks — anything that breaks gets logged in `07_BUGS.md` before the next sprint's prompts are issued.
+Unlike the roadmap, this file only reflects reality. Check an item only after it has been live-verified, not when it is merely coded. Re-run this entire checklist at the end of every sprint, together, across both tracks; anything that breaks gets logged in `07_BUGS.md` before the next sprint's prompts are issued.
+
+## Foundation
+
+- [x] Mock API starts locally and returns example payloads for every contract endpoint
+- [x] OpenAPI contract validates with `openapi-spec-validator`
+- [x] Seed catalog contains 50 products across all six frozen categories and all required card states
+
+## App And Product Flows
 
 - [ ] App launches to splash, resolves auth state correctly
 - [ ] Guest can enter instantly, no form
 - [ ] Email/Google sign-up works
 - [ ] Onboarding preferences save and skip correctly for returning users
-- [ ] Home loads with skeleton → real content
+- [ ] Home loads with skeleton -> real content
 - [ ] Search returns results, debounced, paginated
 - [ ] Product detail opens with hero transition, no jank
 - [ ] Add to cart updates instantly with bounce animation
