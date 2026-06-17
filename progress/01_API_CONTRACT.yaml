@@ -1,0 +1,1085 @@
+openapi: 3.0.3
+info:
+  title: Hual API
+  version: 0.1.0
+  description: >
+    Single source of truth for every request and response shape in Hual.
+    Field names here are final. Any field-name change requires a logged
+    decision in 06_DECISIONS.md before implementation.
+servers:
+  - url: http://localhost:8000
+    description: Local mock server
+  - url: https://hual-api.hf.space
+    description: Hugging Face Spaces deployment
+security:
+  - firebaseAuth: []
+tags:
+  - name: Health
+  - name: Catalog
+  - name: AI
+  - name: Events
+  - name: Cart
+  - name: Checkout
+components:
+  securitySchemes:
+    firebaseAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Firebase ID token. X-API-Key, if present, is only a non-secret client identifier.
+  schemas:
+    Category:
+      type: string
+      enum: [fashion, electronics, home, skincare, fitness, accessories]
+    ApiError:
+      type: object
+      required: [error, message]
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        fallbackMode:
+          type: boolean
+          nullable: true
+    Product:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - price
+        - salePrice
+        - category
+        - colors
+        - materials
+        - style
+        - tags
+        - searchTokens
+        - imageUrls
+        - rating
+        - reviewCount
+        - inventory
+        - isNew
+        - isSale
+        - createdAt
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: float
+        salePrice:
+          type: number
+          format: float
+          nullable: true
+        category:
+          $ref: "#/components/schemas/Category"
+        colors:
+          type: array
+          items:
+            type: string
+        materials:
+          type: array
+          items:
+            type: string
+        style:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        searchTokens:
+          type: array
+          items:
+            type: string
+        imageUrls:
+          type: array
+          items:
+            type: string
+            format: uri
+        rating:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 5
+        reviewCount:
+          type: integer
+          minimum: 0
+        inventory:
+          type: integer
+          minimum: 0
+        isNew:
+          type: boolean
+        isSale:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+    ProductSummary:
+      allOf:
+        - $ref: "#/components/schemas/Product"
+    Address:
+      type: object
+      required: [line1, city, country]
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        region:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+          nullable: true
+        country:
+          type: string
+          minLength: 2
+          maxLength: 2
+    CartItemInput:
+      type: object
+      required: [productId, quantity, priceSnapshot]
+      properties:
+        productId:
+          type: string
+        variantId:
+          type: string
+          nullable: true
+        quantity:
+          type: integer
+          minimum: 1
+          maximum: 20
+        priceSnapshot:
+          type: number
+          format: float
+          description: Client-visible previous product price, used only to report drift.
+    CartChange:
+      type: object
+      required: [productId, reason]
+      properties:
+        productId:
+          type: string
+        variantId:
+          type: string
+          nullable: true
+        reason:
+          type: string
+          enum: [price_changed, out_of_stock, quantity_reduced, unavailable]
+        oldPrice:
+          type: number
+          format: float
+          nullable: true
+        newPrice:
+          type: number
+          format: float
+          nullable: true
+        oldQuantity:
+          type: integer
+          nullable: true
+        newQuantity:
+          type: integer
+          nullable: true
+    OrderItem:
+      type: object
+      required: [productId, name, quantity, unitPrice, subtotal]
+      properties:
+        productId:
+          type: string
+        variantId:
+          type: string
+          nullable: true
+        name:
+          type: string
+        quantity:
+          type: integer
+        unitPrice:
+          type: number
+          format: float
+        subtotal:
+          type: number
+          format: float
+    Order:
+      type: object
+      required:
+        - orderId
+        - orderNumber
+        - items
+        - total
+        - currency
+        - status
+        - shippingAddress
+        - paymentIntentId
+        - createdAt
+      properties:
+        orderId:
+          type: string
+        orderNumber:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        total:
+          type: number
+          format: float
+        currency:
+          type: string
+        status:
+          type: string
+          enum: [confirmed, processing, shipped, delivered, canceled]
+        shippingAddress:
+          $ref: "#/components/schemas/Address"
+        paymentIntentId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    HealthResponse:
+      type: object
+      required: [status, version, timestamp]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+        version:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    SearchRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          nullable: true
+        category:
+          allOf:
+            - $ref: "#/components/schemas/Category"
+          nullable: true
+        colors:
+          type: array
+          items:
+            type: string
+        materials:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        sortBy:
+          type: string
+          enum: [relevance, newest, price_low, price_high, rating]
+          default: relevance
+        pageSize:
+          type: integer
+          minimum: 1
+          maximum: 24
+          default: 12
+        pageToken:
+          type: string
+          nullable: true
+    SearchResponse:
+      type: object
+      required: [products, pageToken, total, appliedFilters]
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductSummary"
+        pageToken:
+          type: string
+          nullable: true
+        total:
+          type: integer
+          minimum: 0
+        appliedFilters:
+          type: object
+          additionalProperties: true
+    ProductBatchRequest:
+      type: object
+      required: [ids]
+      properties:
+        ids:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            type: string
+    ProductBatchResponse:
+      type: object
+      required: [products, missingIds]
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/Product"
+        missingIds:
+          type: array
+          items:
+            type: string
+    RecommendationsResponse:
+      type: object
+      required: [products, fallbackUsed, reason]
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductSummary"
+        fallbackUsed:
+          type: boolean
+        reason:
+          type: string
+    DetectedAttributes:
+      type: object
+      required: [primaryCategory, objectType, colors, materials, style]
+      properties:
+        primaryCategory:
+          $ref: "#/components/schemas/Category"
+        objectType:
+          type: string
+          nullable: true
+        colors:
+          type: array
+          items:
+            type: string
+        materials:
+          type: array
+          items:
+            type: string
+        style:
+          type: string
+          nullable: true
+    VisualSearchResponse:
+      type: object
+      required: [products, detectedAttributes, matchScores, fallbackMode, queryTokens]
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProductSummary"
+        detectedAttributes:
+          $ref: "#/components/schemas/DetectedAttributes"
+        matchScores:
+          type: array
+          items:
+            type: number
+            format: float
+        fallbackMode:
+          type: boolean
+        queryTokens:
+          type: array
+          items:
+            type: string
+    ExplainProductRequest:
+      type: object
+      required: [uid, productId]
+      properties:
+        uid:
+          type: string
+        productId:
+          type: string
+    ExplainProductResponse:
+      type: object
+      required: [explanationText, provider, cached]
+      properties:
+        explanationText:
+          type: string
+        provider:
+          type: string
+          enum: [gemini, template]
+        cached:
+          type: boolean
+    EventRequest:
+      type: object
+      required: [eventType, sourceScreen]
+      properties:
+        eventType:
+          type: string
+          enum:
+            - purchase
+            - add_to_cart
+            - wishlist
+            - long_dwell
+            - product_view
+            - visual_search_match_tap
+            - text_search
+            - category_tap
+            - quick_bounce
+        productId:
+          type: string
+          nullable: true
+        category:
+          allOf:
+            - $ref: "#/components/schemas/Category"
+          nullable: true
+        sourceScreen:
+          type: string
+        metadata:
+          type: object
+          additionalProperties: true
+    EventResponse:
+      type: object
+      required: [accepted, eventId]
+      properties:
+        accepted:
+          type: boolean
+        eventId:
+          type: string
+    CartValidateRequest:
+      type: object
+      required: [items]
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItemInput"
+    CartValidateResponse:
+      type: object
+      required: [valid, changes]
+      properties:
+        valid:
+          type: boolean
+        changes:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartChange"
+    CreatePaymentIntentRequest:
+      type: object
+      required: [shippingAddress]
+      properties:
+        shippingAddress:
+          $ref: "#/components/schemas/Address"
+    CreatePaymentIntentResponse:
+      type: object
+      required: [clientSecret, amount, currency]
+      properties:
+        clientSecret:
+          type: string
+        amount:
+          type: integer
+          description: Server-calculated amount in minor currency units.
+        currency:
+          type: string
+    ConfirmOrderRequest:
+      type: object
+      required: [paymentIntentId]
+      properties:
+        paymentIntentId:
+          type: string
+    ConfirmOrderResponse:
+      type: object
+      required: [orderId, orderNumber, status]
+      properties:
+        orderId:
+          type: string
+        orderNumber:
+          type: string
+        status:
+          type: string
+          enum: [confirmed]
+    OrdersResponse:
+      type: object
+      required: [orders, count]
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: "#/components/schemas/Order"
+        count:
+          type: integer
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Liveness check and keep-warm target.
+      operationId: getHealth
+      security: []
+      responses:
+        "200":
+          description: OK.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+              examples:
+                success:
+                  value:
+                    status: ok
+                    version: 0.1.0
+                    timestamp: "2026-06-17T12:00:00Z"
+        "503":
+          description: Service unavailable.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: service_unavailable
+                    message: Service is warming up
+  /search:
+    post:
+      tags: [Catalog]
+      summary: Search catalog with filters, sorting, and cursor pagination.
+      operationId: searchProducts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+            examples:
+              request:
+                value:
+                  query: minimalist lamp
+                  category: home
+                  colors: [white, clay]
+                  materials: [ceramic]
+                  tags: [minimal, warm]
+                  sortBy: newest
+                  pageSize: 12
+                  pageToken: null
+      responses:
+        "200":
+          description: Search results.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+              examples:
+                success:
+                  value:
+                    products:
+                      - &productHomeLamp
+                        id: p017
+                        name: Arc Ceramic Table Lamp
+                        description: A softly curved ceramic lamp for warm desk and bedside lighting.
+                        price: 64.0
+                        salePrice: null
+                        category: home
+                        colors: [clay, white]
+                        materials: [ceramic, linen]
+                        style: [minimal, warm]
+                        tags: [lamp, lighting, decor]
+                        searchTokens: [arc, ceramic, table, lamp, home]
+                        imageUrls: [https://hual-assets.web.app/products/p017-1.jpg]
+                        rating: 4.7
+                        reviewCount: 91
+                        inventory: 18
+                        isNew: false
+                        isSale: false
+                        createdAt: "2026-05-10T09:00:00Z"
+                    pageToken: next_home_12
+                    total: 1
+                    appliedFilters:
+                      category: home
+                      sortBy: newest
+        "400":
+          description: Invalid search request.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: invalid_page_token
+                    message: pageToken could not be decoded
+  /products/{id}:
+    get:
+      tags: [Catalog]
+      summary: Get a single product by id.
+      operationId: getProduct
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          example: p017
+      responses:
+        "200":
+          description: Product detail.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+              examples:
+                success:
+                  value: *productHomeLamp
+        "404":
+          description: Product not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: not_found
+                    message: No product with that id
+  /products/batch:
+    post:
+      tags: [Catalog]
+      summary: Hydrate multiple product ids.
+      operationId: batchProducts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductBatchRequest"
+            examples:
+              request:
+                value:
+                  ids: [p017, p021, p999]
+      responses:
+        "200":
+          description: Hydrated products and missing ids.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductBatchResponse"
+              examples:
+                success:
+                  value:
+                    products:
+                      - *productHomeLamp
+                    missingIds: [p999]
+        "400":
+          description: Too many product ids.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: too_many_ids
+                    message: ids must contain 20 or fewer product ids
+  /recommendations/{uid}:
+    get:
+      tags: [AI]
+      summary: Personalized For You feed.
+      operationId: getRecommendations
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+          example: u_001
+      responses:
+        "200":
+          description: Recommended products.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RecommendationsResponse"
+              examples:
+                success:
+                  value:
+                    products:
+                      - *productHomeLamp
+                    fallbackUsed: false
+                    reason: preference_vector
+                cold_start_fallback:
+                  value:
+                    products:
+                      - *productHomeLamp
+                    fallbackUsed: true
+                    reason: trending
+        "404":
+          description: User profile not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: user_not_found
+                    message: No user profile with that uid
+  /visual-search:
+    post:
+      tags: [AI]
+      summary: Image-based product search.
+      operationId: visualSearch
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [image]
+              properties:
+                image:
+                  type: string
+                  format: binary
+                mlKitLabels:
+                  type: array
+                  items:
+                    type: string
+                  description: Optional client-side labels used when Gemini falls back.
+            examples:
+              request:
+                value:
+                  image: "@white-sneaker.jpg"
+                  mlKitLabels: [shoe, white, athletic]
+      responses:
+        "200":
+          description: Matched products and detected attributes.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VisualSearchResponse"
+              examples:
+                success:
+                  value:
+                    products:
+                      - id: p034
+                        name: Cloudlift Training Sneaker
+                        description: Lightweight training sneaker with breathable mesh and responsive foam.
+                        price: 88.0
+                        salePrice: 74.0
+                        category: fitness
+                        colors: [white, silver]
+                        materials: [mesh, rubber]
+                        style: [sporty, clean]
+                        tags: [sneaker, training, sale]
+                        searchTokens: [cloudlift, training, sneaker, white, fitness]
+                        imageUrls: [https://hual-assets.web.app/products/p034-1.jpg]
+                        rating: 4.6
+                        reviewCount: 144
+                        inventory: 22
+                        isNew: false
+                        isSale: true
+                        createdAt: "2026-04-22T09:00:00Z"
+                    detectedAttributes:
+                      primaryCategory: fitness
+                      objectType: sneaker
+                      colors: [white]
+                      materials: [mesh]
+                      style: sporty
+                    matchScores: [0.91]
+                    fallbackMode: false
+                    queryTokens: [sneaker, white, athletic]
+                fallback:
+                  value:
+                    products:
+                      - *productHomeLamp
+                    detectedAttributes:
+                      primaryCategory: home
+                      objectType: null
+                      colors: []
+                      materials: []
+                      style: null
+                    matchScores: [0.62]
+                    fallbackMode: true
+                    queryTokens: [decor]
+        "422":
+          description: Image could not be processed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: unsupported_image
+                    message: Upload a JPG, PNG, or HEIC image under 8 MB
+                    fallbackMode: true
+  /explain-product:
+    post:
+      tags: [AI]
+      summary: Short personalized explanation for a product.
+      operationId: explainProduct
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExplainProductRequest"
+            examples:
+              request:
+                value:
+                  uid: u_001
+                  productId: p017
+      responses:
+        "200":
+          description: Explanation text.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExplainProductResponse"
+              examples:
+                success:
+                  value:
+                    explanationText: Since you have been browsing warm minimalist decor, this ceramic lamp fits your recent home style signals.
+                    provider: gemini
+                    cached: false
+                template_fallback:
+                  value:
+                    explanationText: This product matches your recent interest in warm home decor.
+                    provider: template
+                    cached: false
+        "404":
+          description: Product or user not found.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: product_not_found
+                    message: Cannot explain a product that does not exist
+  /events:
+    post:
+      tags: [Events]
+      summary: Ingest a user behavior event.
+      operationId: createEvent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventRequest"
+            examples:
+              request:
+                value:
+                  eventType: product_view
+                  productId: p017
+                  category: home
+                  sourceScreen: home
+                  metadata:
+                    dwellMs: 4200
+      responses:
+        "200":
+          description: Event accepted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventResponse"
+              examples:
+                success:
+                  value:
+                    accepted: true
+                    eventId: e_20260617_0001
+        "400":
+          description: Invalid event.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: invalid_event_type
+                    message: eventType must be one of the documented values
+  /cart/validate:
+    post:
+      tags: [Cart]
+      summary: Preflight cart validation before checkout.
+      operationId: validateCart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CartValidateRequest"
+            examples:
+              request:
+                value:
+                  items:
+                    - productId: p017
+                      variantId: clay-white
+                      quantity: 1
+                      priceSnapshot: 64.0
+      responses:
+        "200":
+          description: Cart validation result.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartValidateResponse"
+              examples:
+                success:
+                  value:
+                    valid: true
+                    changes: []
+                drift_detected:
+                  value:
+                    valid: false
+                    changes:
+                      - productId: p017
+                        variantId: clay-white
+                        reason: price_changed
+                        oldPrice: 64.0
+                        newPrice: 58.0
+                        oldQuantity: null
+                        newQuantity: null
+        "409":
+          description: Cart cannot be checked out as submitted.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: cart_out_of_stock
+                    message: One or more cart items are no longer available
+  /create-payment-intent:
+    post:
+      tags: [Checkout]
+      summary: Create a Stripe test PaymentIntent from server-calculated cart total.
+      operationId: createPaymentIntent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentIntentRequest"
+            examples:
+              request:
+                value:
+                  shippingAddress:
+                    line1: 123 Main St
+                    line2: Apt 4
+                    city: Austin
+                    region: TX
+                    postalCode: "78701"
+                    country: US
+      responses:
+        "200":
+          description: Payment intent created.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreatePaymentIntentResponse"
+              examples:
+                success:
+                  value:
+                    clientSecret: pi_test_secret_abc
+                    amount: 6400
+                    currency: usd
+        "400":
+          description: Cart or address is invalid.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: empty_cart
+                    message: Add at least one in-stock item before checkout
+  /orders/confirm:
+    post:
+      tags: [Checkout]
+      summary: Confirm payment success and create the order idempotently.
+      operationId: confirmOrder
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmOrderRequest"
+            examples:
+              request:
+                value:
+                  paymentIntentId: pi_test_123
+      responses:
+        "200":
+          description: Order created or existing idempotent order returned.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConfirmOrderResponse"
+              examples:
+                success:
+                  value:
+                    orderId: o_001
+                    orderNumber: HUL-20260617-0007
+                    status: confirmed
+        "402":
+          description: Payment did not succeed.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: payment_not_succeeded
+                    message: PaymentIntent status was not succeeded
+  /orders/{uid}:
+    get:
+      tags: [Checkout]
+      summary: Order history for a user.
+      operationId: getOrders
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          schema:
+            type: string
+          example: u_001
+      responses:
+        "200":
+          description: User order history.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrdersResponse"
+              examples:
+                success:
+                  value:
+                    orders:
+                      - orderId: o_001
+                        orderNumber: HUL-20260617-0007
+                        items:
+                          - productId: p017
+                            variantId: clay-white
+                            name: Arc Ceramic Table Lamp
+                            quantity: 1
+                            unitPrice: 64.0
+                            subtotal: 64.0
+                        total: 64.0
+                        currency: usd
+                        status: confirmed
+                        shippingAddress:
+                          line1: 123 Main St
+                          line2: Apt 4
+                          city: Austin
+                          region: TX
+                          postalCode: "78701"
+                          country: US
+                        paymentIntentId: pi_test_123
+                        createdAt: "2026-06-17T12:10:00Z"
+                    count: 1
+        "403":
+          description: User can only read their own orders.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+              examples:
+                failure:
+                  value:
+                    error: forbidden
+                    message: Cannot read orders for a different user
