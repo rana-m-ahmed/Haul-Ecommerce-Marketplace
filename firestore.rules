@@ -1,0 +1,82 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function owns(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function hasOnly(keys) {
+      return request.resource.data.keys().hasOnly(keys);
+    }
+
+    function validCartItem() {
+      return hasOnly(['productId', 'variantId', 'quantity', 'priceSnapshot', 'addedAt', 'updatedAt'])
+        && request.resource.data.productId is string
+        && (!('variantId' in request.resource.data) || request.resource.data.variantId is string)
+        && request.resource.data.quantity is int
+        && request.resource.data.quantity >= 1
+        && request.resource.data.quantity <= 20
+        && request.resource.data.priceSnapshot is number;
+    }
+
+    match /products/{productId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /users/{uid} {
+      allow read: if owns(uid);
+      allow create, update: if owns(uid)
+        && hasOnly(['email', 'displayName', 'isGuest', 'preferences', 'preferencesCompleted', 'createdAt', 'lastActiveAt']);
+      allow delete: if false;
+
+      match /cart/{cartItemId} {
+        allow read, delete: if owns(uid);
+        allow create, update: if owns(uid) && validCartItem();
+      }
+
+      match /wishlist/{productId} {
+        allow read, delete: if owns(uid);
+        allow create, update: if owns(uid)
+          && hasOnly(['productId', 'addedAt'])
+          && request.resource.data.productId == productId;
+      }
+
+      match /events/{eventId} {
+        allow create: if owns(uid)
+          && hasOnly(['eventType', 'productId', 'category', 'timestamp', 'sourceScreen'])
+          && request.resource.data.eventType is string
+          && request.resource.data.sourceScreen is string;
+        allow read, update, delete: if false;
+      }
+
+      match /orders/{orderId} {
+        allow read: if owns(uid);
+        allow write: if false;
+      }
+    }
+
+    match /recommendations/{uid} {
+      allow read: if owns(uid);
+      allow write: if false;
+    }
+
+    match /explanations/{docId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    match /counters/orderSequence/{day} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

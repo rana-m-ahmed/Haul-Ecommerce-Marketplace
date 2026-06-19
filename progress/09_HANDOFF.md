@@ -1,32 +1,44 @@
 # 09 - Handoff
 
-**Session:** Sprint 0 / Foundation / Codex / 2026-06-17
+## What changed on 2026-06-19
 
-**What I did:**
-- Flattened the project to root-level `progress/`, `backend/`, and `app/` layout. The previous Flutter scaffold from `haul/` now lives in `app/`.
-- Replaced `progress/01_API_CONTRACT.yaml` with the complete OpenAPI 3.0.3 contract for all 12 Sprint API endpoints.
-- Added the FastAPI mock server in `backend/mock/`, backed by examples read from the OpenAPI contract.
-- Added `backend/seed/products.json` with 50 products across `fashion`, `electronics`, `home`, `skincare`, `fitness`, and `accessories`, covering normal, sale, new, out-of-stock, multi-variant, and missing-image card states.
-- Installed Python 3.12 user-scope on this machine because only the Microsoft Store Python stub existed initially.
-- Validated the OpenAPI contract and live-curl tested every mock route.
-- Initialized git with a shared `main` foundation commit containing only `progress/` and `backend/seed/products.json`; created `backend/main` and `app/main` branches from it.
+- Audited the current Firebase auth/storage/key wiring instead of assuming the earlier `Done` board status was accurate.
+- Fixed a real runtime blocker in `app/lib/main.dart`: Flutter now calls `WidgetsFlutterBinding.ensureInitialized()` and `Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)` before `runApp`.
+- Removed non-generated `com.example` placeholder identifiers from:
+  - `app/ios/Runner.xcodeproj/project.pbxproj`
+  - `app/macos/Runner/Configs/AppInfo.xcconfig`
+  - `app/macos/Runner.xcodeproj/project.pbxproj`
+  - `app/windows/runner/Runner.rc`
+  - `app/linux/CMakeLists.txt`
+- Downgraded `Replace placeholders with real keys` on the task board from `Done` to `Blocked`, because `app/lib/firebase_options.dart` still has real platform-config blockers.
 
-**What's now true about the app that wasn't true before:**
-- The API contract is complete and validates with `openapi-spec-validator`.
-- Track B has a local mock API target that returns the contract's success examples.
-- Seed product data is available before the real Firestore backend exists.
-- Sprint 0 rows in `progress/05_TASK_BOARD.md` are marked Done with verification evidence in `progress/08_TEST_LOG.md`.
+## What is true now that was not true before
 
-**What the next session needs to know:**
-- Run the mock server from repo root:
-  ```powershell
-  C:\Users\ranam\AppData\Local\Programs\Python\Python312\python.exe -m uvicorn backend.mock.app:app --host 127.0.0.1 --port 8000
-  ```
-- Flutter should point its API base URL at `http://127.0.0.1:8000` for desktop/web runs against the mock. For Android emulator runs, use `http://10.0.2.2:8000`.
-- The mock reads `progress/01_API_CONTRACT.yaml` at startup. To change a mocked response, update the contract example and restart uvicorn.
-- Success examples are returned by default. Alternate examples are available with `?example=...`, such as `?example=failure`, `?example=cold_start_fallback`, `?example=fallback`, or `?example=template_fallback`.
-- `progress/06_DECISIONS.md` already contains Decision-001 for FastAPI on Hugging Face Spaces, including the cold-start trade-off and keep-warm/client-loading mitigation. Do not reopen that debate without a new decision entry.
-- `app/lib/main.dart` still contains the invalid starter-code expression `colorScheme: .fromSeed(...)`; it is logged as `BUG-001` in `progress/07_BUGS.md` and was not fixed in Sprint 0.
+- Android Flutter startup is no longer missing Firebase initialization, so real FirebaseAuth / Firestore-backed app flows can bootstrap correctly on supported platforms.
+- The obvious shipped template IDs (`com.example.*`) are gone from the editable platform config files listed above.
+- The remaining placeholder problem is narrowed to real missing platform Firebase registration, not stray template metadata.
 
-**Open blockers (if any):**
-- None for Sprint 0. The only known issue is BUG-001 in the Flutter starter screen, which belongs to Sprint 1 app cleanup or replacement.
+## Verification completed
+
+- `python -m pytest backend/app/tests -q`: `67 passed, 1 skipped`
+- `D:\flutter\bin\cache\dart-sdk\bin\dart.exe analyze lib test`: `No issues found!`
+- `D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test test\debug_router_test.dart test\flow_golden_test.dart`
+  - `debug_router_test.dart`: passed
+  - `flow_golden_test.dart`: 3 golden failures with about 20% pixel diffs on all home-flow screenshots
+- Placeholder scan still reports:
+  - unconfigured iOS/macOS/Windows/Linux branches in `app/lib/firebase_options.dart`
+  - a web placeholder block in `app/lib/firebase_options.dart`
+
+## Required next session
+
+1. Decide whether to finish Firebase platform setup or intentionally scope Firebase support to Android-only for now.
+2. If multi-platform support is required, register real Firebase apps for web and Apple platforms, add the missing config files/values, and regenerate `app/lib/firebase_options.dart`.
+3. Investigate `BUG-013` by comparing `app/test/failures/` against `progress/screenshots/sprint2_flows/` to see whether the home-flow goldens changed because of a real UI regression or stale baselines.
+4. Keep Sprint 6 checkout work in mind: `backend/app/services/checkout_service.py` still returns contract examples and does not use Stripe.
+5. If a physical Android phone becomes available, continue the previously blocked camera/profile-memory acceptance run from the prior handoff.
+
+## Open blockers
+
+- `BUG-011`: Firebase is only truly configured for Android; `app/lib/firebase_options.dart` still contains unsupported placeholder branches for other platforms.
+- `BUG-012`: Stripe checkout is not wired end-to-end yet; checkout service still returns contract examples.
+- `BUG-013`: Flow goldens are currently failing on all three Sprint 2 home screenshots.

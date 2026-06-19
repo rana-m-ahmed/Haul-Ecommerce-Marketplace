@@ -1,0 +1,12 @@
+node_modules/
+.npm-cache/
+firebase-debug.log
+*.py[cod]
+__pycache__/
+.pytest_cache/
+
+# Firebase secrets
+*firebase-adminsdk*
+google-services.json
+GoogleService-Info.plist
+.env

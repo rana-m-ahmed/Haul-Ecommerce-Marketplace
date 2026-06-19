@@ -25,3 +25,11 @@ Never edit or delete a past entry. If a decision is reversed, add a new entry th
 **Context:**
 **Decision:**
 **Reasoning:**
+
+---
+
+### Decision-004 - Add optional price-range fields to SearchRequest
+**Date:** Sprint 3 / 2026-06-17
+**Context:** Sprint 3 requires `/search` to support price-range filtering, but the locked OpenAPI `SearchRequest` only included query/category/colors/materials/tags/sort/page fields.
+**Decision:** Add optional `minPrice` and `maxPrice` request fields to `progress/01_API_CONTRACT.yaml`. Existing response shapes and existing request fields remain unchanged.
+**Reasoning:** Price filtering cannot be represented safely with the current contract. Optional numeric bounds preserve compatibility with Track B clients built against the mock while making the requested catalog API behavior explicit and typed.

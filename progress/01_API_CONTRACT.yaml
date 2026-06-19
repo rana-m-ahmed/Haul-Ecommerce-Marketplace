@@ -278,6 +278,14 @@ components:
           type: array
           items:
             type: string
+        minPrice:
+          type: number
+          format: float
+          nullable: true
+        maxPrice:
+          type: number
+          format: float
+          nullable: true
         sortBy:
           type: string
           enum: [relevance, newest, price_low, price_high, rating]
@@ -549,6 +557,8 @@ paths:
                   colors: [white, clay]
                   materials: [ceramic]
                   tags: [minimal, warm]
+                  minPrice: 20.0
+                  maxPrice: 120.0
                   sortBy: newest
                   pageSize: 12
                   pageToken: null

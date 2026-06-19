@@ -7,6 +7,12 @@ Unlike the roadmap, this file only reflects reality. Check an item only after it
 - [x] Mock API starts locally and returns example payloads for every contract endpoint
 - [x] OpenAPI contract validates with `openapi-spec-validator`
 - [x] Seed catalog contains 50 products across all six frozen categories and all required card states
+- [x] Real FastAPI backend starts locally and returns HTTP 200 from `/health`
+- [x] Real catalog API starts locally and returns `/search` results from the 50-product seed with contract-shaped fields
+- [x] `/cart/validate` reports price drift and stock changes from current catalog truth without backend-owned cart state
+- [x] AI backend returns usable visual-search and explanation fallbacks with Gemini disabled
+- [x] AI backend personalizes recommendations for different event histories and falls back to trending for cold starts
+- [x] Repeated identical visual-search image returns from hash cache in under 200ms
 
 ## App And Product Flows
 
@@ -31,3 +37,15 @@ Unlike the roadmap, this file only reflects reality. Check an item only after it
 - [ ] Logout clears all state cleanly
 - [ ] Flutter Web build loads fresh and the core flow works with no install
 - [ ] Backend survives a 2+ hour idle gap without a visibly broken first request
+
+## Sprint 3 Track B Note - 2026-06-17
+
+Home, Search, and first-pass Product detail are implemented and screenshot-tested, but the checklist items above remain unchecked until the required physical-device/profile-mode hero transition verification is completed. Current environment exposes only Windows, Chrome, and Edge as Flutter devices.
+
+## Sprint 4 Track B Note - 2026-06-17
+
+Cart offline sync, swipe-to-delete, and Wishlist integration have been implemented and golden-tested, but similarly wait on physical-device verification before being marked fully checked in this live script.
+
+## Sprint 5 Track B Note - 2026-06-19
+
+Camera/visual search, cold-start processing copy, fallback badges, personalized/trending For You, and delayed product explanations are implemented and covered by 53 passing Flutter tests. Four screenshots exist in `progress/screenshots/sprint5_visual_search/`, and debug/profile Android APKs compile. The live checklist remains unchecked until a USB-debugging-authorized physical Android device completes the required camera and memory run; ADB detected no device in this session.

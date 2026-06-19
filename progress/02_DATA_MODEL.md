@@ -29,6 +29,19 @@
 | Orders | Read own orders only. Client cannot create or edit directly — Admin SDK only. |
 | Recommendations/Explanations | Read own cached doc only. Backend writes. |
 
+## Firestore Composite Indexes
+
+Catalog search uses the existing `products.category` field from the frozen model; do not introduce `categoryId`.
+
+| Collection | Fields | Supports |
+|---|---|---|
+| `products` | `category` ASC, `createdAt` DESC | Category filter + newest sort |
+| `products` | `category` ASC, `price` ASC | Category filter + price low sort/range |
+| `products` | `category` ASC, `price` DESC | Category filter + price high sort/range |
+| `products` | `category` ASC, `rating` DESC | Category filter + rating sort |
+| `products` | `category` ASC, `searchTokens` ARRAY, `createdAt` DESC | Category + local token search + newest |
+| `users/{uid}/events` | `timestamp` DESC | Recent behavior-event reads for Sprint 5 recommendations |
+
 ## Recommendation Event Weights
 
 | Event | Weight |
