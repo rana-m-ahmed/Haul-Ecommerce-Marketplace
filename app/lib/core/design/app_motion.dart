@@ -26,6 +26,12 @@ abstract final class AppMotion {
   /// Cold-start copy threshold for backend calls.
   static const Duration durationWakingThreshold = Duration(seconds: 2);
 
+  /// Upper bound for network-backed loading states.
+  static const Duration durationNetworkTimeout = Duration(seconds: 20);
+
+  /// Loop duration for branded shimmer effects.
+  static const Duration durationShimmer = Duration(seconds: 2);
+
   // ── Curve tokens ─────────────────────────────────────────────────────
 
   /// Standard ease-out for most transitions.
@@ -91,9 +97,7 @@ abstract final class AppMotion {
   }) {
     if (itemCount <= 0) return Duration.zero;
     final totalStagger = (itemCount - 1) * intervalMs;
-    return Duration(
-      milliseconds: totalStagger + itemDuration.inMilliseconds,
-    );
+    return Duration(milliseconds: totalStagger + itemDuration.inMilliseconds);
   }
 
   // ── Hero tag convention ──────────────────────────────────────────────
@@ -243,10 +247,7 @@ class _StaggeredListItemState extends State<StaggeredListItem>
   Widget build(BuildContext context) {
     return FadeTransition(
       opacity: _opacity,
-      child: SlideTransition(
-        position: _slide,
-        child: widget.child,
-      ),
+      child: SlideTransition(position: _slide, child: widget.child),
     );
   }
 }

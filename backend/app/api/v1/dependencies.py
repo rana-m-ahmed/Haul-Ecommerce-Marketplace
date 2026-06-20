@@ -6,10 +6,12 @@ from backend.app.services.ai_service import AiService
 from backend.app.services.cart_service import CartService
 from backend.app.services.catalog_service import CatalogService
 from backend.app.services.checkout_service import CheckoutService
+from backend.app.services.checkout_repository import checkout_repository
 from backend.app.services.event_repository import event_repository
 from backend.app.services.event_service import EventService
 from backend.app.services.health_service import HealthService
 from backend.app.core.gemini_client import GeminiClient
+from backend.app.core.stripe_client import StripeClient
 
 
 @lru_cache
@@ -40,7 +42,12 @@ def get_cart_service() -> CartService:
 
 @lru_cache
 def get_checkout_service() -> CheckoutService:
-    return CheckoutService()
+    settings = get_settings()
+    return CheckoutService(
+        checkout_repository(settings),
+        StripeClient(settings),
+        currency=settings.stripe_currency,
+    )
 
 
 def get_health_service() -> HealthService:

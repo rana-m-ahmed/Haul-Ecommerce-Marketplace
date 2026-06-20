@@ -55,6 +55,16 @@ class UserRepository {
     }
     return null;
   }
+
+  Future<void> promoteGuest(String uid, User user) async {
+    await _users.doc(uid).update({
+      'email': user.email,
+      'displayName': user.displayName,
+      'isGuest': false,
+      'preferencesCompleted': true,
+      'lastActiveAt': FieldValue.serverTimestamp(),
+    });
+  }
 }
 
 @riverpod

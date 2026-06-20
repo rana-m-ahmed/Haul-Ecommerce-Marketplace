@@ -33,3 +33,11 @@ Never edit or delete a past entry. If a decision is reversed, add a new entry th
 **Context:** Sprint 3 requires `/search` to support price-range filtering, but the locked OpenAPI `SearchRequest` only included query/category/colors/materials/tags/sort/page fields.
 **Decision:** Add optional `minPrice` and `maxPrice` request fields to `progress/01_API_CONTRACT.yaml`. Existing response shapes and existing request fields remain unchanged.
 **Reasoning:** Price filtering cannot be represented safely with the current contract. Optional numeric bounds preserve compatibility with Track B clients built against the mock while making the requested catalog API behavior explicit and typed.
+
+---
+
+### Decision-005 - Use a Firestore-valid nested path for daily order counters
+**Date:** Sprint 6 / 2026-06-19
+**Context:** The conceptual data-model path `counters/orderSequence/{YYYYMMDD}` has an odd number of path segments, so Firestore cannot address it as a document.
+**Decision:** Store each atomic daily counter at `counters/orderSequence/days/{YYYYMMDD}`. The counter remains in the documented `counters/orderSequence` namespace and is updated in the same transaction as the order.
+**Reasoning:** Firestore document paths require an even number of alternating collection/document segments. Adding the `days` subcollection makes the intended model executable without changing API behavior or order-number format.

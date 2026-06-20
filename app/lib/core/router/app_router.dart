@@ -16,25 +16,12 @@ import '../../features/entry/preferences_screen.dart';
 import '../../features/cart/cart_screen.dart';
 import '../../features/wishlist/wishlist_screen.dart';
 import '../../features/visual_search/camera_screen.dart';
-import '../../core/design/design.dart';
+import '../../features/checkout/checkout_screens.dart';
+import '../../features/profile/profile_screen.dart';
 
 part 'app_router.g.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
-
-class _PlaceholderScreen extends StatelessWidget {
-  const _PlaceholderScreen(this.title);
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(title: Text(title)),
-      body: Center(child: Text(title, style: AppTypography.h1)),
-    );
-  }
-}
 
 class RouterNotifier extends ChangeNotifier {
   RouterNotifier(this.ref) {
@@ -59,11 +46,9 @@ GoRouter appRouter(Ref ref) {
       final authState = ref.read(authControllerProvider);
       final isSplash = state.uri.path == '/splash';
       final isAuth = state.uri.path == '/auth';
+      final isLinking = isAuth && state.uri.queryParameters['link'] == 'true';
       final isOnboarding = state.uri.path == '/onboarding';
       final isPreferences = state.uri.path == '/preferences';
-      final isProtected =
-          state.uri.path.startsWith('/orders') ||
-          state.uri.path.startsWith('/profile');
 
       if (authState is AuthStateLoading) {
         return isSplash ? null : '/splash';
@@ -74,8 +59,7 @@ GoRouter appRouter(Ref ref) {
         if (authState is AuthStateNewUser) return '/preferences';
         if (authState is AuthStateAuthenticated) return '/home';
       }
-      if (authState is AuthStateGuest && isProtected) return '/auth';
-      if (isAuth || isOnboarding) {
+      if ((isAuth && !isLinking) || isOnboarding) {
         if (authState is AuthStateGuest) return '/home';
         if (authState is AuthStateNewUser) return '/preferences';
         if (authState is AuthStateAuthenticated) return '/home';
@@ -100,7 +84,11 @@ GoRouter appRouter(Ref ref) {
         path: '/onboarding',
         builder: (context, state) => const OnboardingScreen(),
       ),
-      GoRoute(path: '/auth', builder: (context, state) => const AuthScreen()),
+      GoRoute(
+        path: '/auth',
+        builder: (context, state) =>
+            AuthScreen(linkMode: state.uri.queryParameters['link'] == 'true'),
+      ),
       GoRoute(
         path: '/preferences',
         builder: (context, state) => const PreferencesScreen(),
@@ -142,8 +130,7 @@ GoRouter appRouter(Ref ref) {
             routes: [
               GoRoute(
                 path: '/profile',
-                builder: (context, state) =>
-                    const _PlaceholderScreen('Profile'),
+                builder: (context, state) => const ProfileScreen(),
               ),
             ],
           ),
@@ -170,11 +157,23 @@ GoRouter appRouter(Ref ref) {
       ),
       GoRoute(
         path: '/checkout',
-        builder: (context, state) => const _PlaceholderScreen('Checkout'),
+        builder: (context, state) => const CheckoutScreen(),
       ),
       GoRoute(
         path: '/order-success',
-        builder: (context, state) => const _PlaceholderScreen('Order Success'),
+        builder: (context, state) =>
+            OrderSuccessScreen(order: state.extra! as ConfirmOrderResponse),
+      ),
+      GoRoute(
+        path: '/orders',
+        builder: (context, state) => const OrdersScreen(),
+        routes: [
+          GoRoute(
+            path: ':id',
+            builder: (context, state) =>
+                OrderDetailScreen(order: state.extra! as OrderSnapshot),
+          ),
+        ],
       ),
       GoRoute(
         path: '/wishlist',

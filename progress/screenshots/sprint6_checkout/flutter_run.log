@@ -1,0 +1,40 @@
+Launching lib/main.dart on sdk gphone64 x86 64 in debug mode...
+Running Gradle task 'assembleDebug'...                          
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if "Windows_NT" == "Windows_NT" setlocal
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set DEFAULT_JVM_OPTS= 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set DIRNAME=D:\projects\Haul-Ecommerce-Marketplace\app\android\ 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if "D:\projects\Haul-Ecommerce-Marketplace\app\android\" == "" set DIRNAME=. 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set APP_BASE_NAME=gradlew 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set APP_HOME=D:\projects\Haul-Ecommerce-Marketplace\app\android\ 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if defined JAVA_HOME goto findJavaFromJavaHome 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set JAVA_HOME=C:\Program Files\Android\Android Studio\jbr 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set JAVA_EXE=C:\Program Files\Android\Android Studio\jbr/bin/java.exe 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if exist "C:\Program Files\Android\Android Studio\jbr/bin/java.exe" goto init 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if not "Windows_NT" == "Windows_NT" goto win9xME_args 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if "@eval[2+2]" == "4" goto 4NT_args 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set CMD_LINE_ARGS= 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set _SKIP=2 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>if "x-q" == "x" goto execute 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set CMD_LINE_ARGS=-q -Ptarget-platform=android-x64 -Ptarget=D:\projects\Haul-Ecommerce-Marketplace\app\lib/main.dart -Pbase-application-name=android.app.Application -Pdart-defines=SEFVTF9TVFJJUEVfUFVCTElTSEFCTEVfS0VZPXBrX3Rlc3RfNTFUY2hPQkZPenk0SnoxVU9jbVRLaHNvd0tGNkV1cmpJY0RaaEdJMWtGNFlnRmV1TnkwUEMyQ1F2ZWhoWGxIV3JzOVNEZDBnQ3RmZExGT2J6TnpSWHlYN0YwMGN2OHNSNWZN,RkxVVFRFUl9WRVJTSU9OPTMuNDQuMg==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzlhNmM0ODQyMw==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049NzdlMmU5NDc3Mg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMi4y -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false -Pfilesystem-scheme=org-dartlang-root assembleDebug 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>goto execute 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>set CLASSPATH=D:\projects\Haul-Ecommerce-Marketplace\app\android\\gradle\wrapper\gradle-wrapper.jar 
+
+D:\projects\Haul-Ecommerce-Marketplace\app\android>"C:\Program Files\Android\Android Studio\jbr/bin/java.exe"    "-Dorg.gradle.appname=gradlew" -classpath "D:\projects\Haul-Ecommerce-Marketplace\app\android\\gradle\wrapper\gradle-wrapper.jar" org.gradle.wrapper.GradleWrapperMain -q -Ptarget-platform=android-x64 -Ptarget=D:\projects\Haul-Ecommerce-Marketplace\app\lib/main.dart -Pbase-application-name=android.app.Application -Pdart-defines=SEFVTF9TVFJJUEVfUFVCTElTSEFCTEVfS0VZPXBrX3Rlc3RfNTFUY2hPQkZPenk0SnoxVU9jbVRLaHNvd0tGNkV1cmpJY0RaaEdJMWtGNFlnRmV1TnkwUEMyQ1F2ZWhoWGxIV3JzOVNEZDBnQ3RmZExGT2J6TnpSWHlYN0YwMGN2OHNSNWZN,RkxVVFRFUl9WRVJTSU9OPTMuNDQuMg==,RkxVVFRFUl9DSEFOTkVMPXN0YWJsZQ==,RkxVVFRFUl9HSVRfVVJMPWh0dHBzOi8vZ2l0aHViLmNvbS9mbHV0dGVyL2ZsdXR0ZXIuZ2l0,RkxVVFRFUl9GUkFNRVdPUktfUkVWSVNJT049YzlhNmM0ODQyMw==,RkxVVFRFUl9FTkdJTkVfUkVWSVNJT049NzdlMmU5NDc3Mg==,RkxVVFRFUl9EQVJUX1ZFUlNJT049My4xMi4y -Pdart-obfuscation=false -Ptrack-widget-creation=true -Ptree-shake-icons=false -Pfilesystem-scheme=org-dartlang-root assembleDebug 

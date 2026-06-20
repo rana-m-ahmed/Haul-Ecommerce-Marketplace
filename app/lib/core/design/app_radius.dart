@@ -11,23 +11,32 @@ abstract final class AppRadius {
   static const double bottomSheet = 28;
   static const double chip = 999;
   static const double image = 16;
+  static const double micro = 4;
 
   // ── BorderRadius shortcuts ───────────────────────────────────────────
 
-  static const BorderRadius cardBorderRadius =
-      BorderRadius.all(Radius.circular(card));
+  static const BorderRadius cardBorderRadius = BorderRadius.all(
+    Radius.circular(card),
+  );
 
-  static const BorderRadius buttonBorderRadius =
-      BorderRadius.all(Radius.circular(button));
+  static const BorderRadius buttonBorderRadius = BorderRadius.all(
+    Radius.circular(button),
+  );
 
   static const BorderRadius bottomSheetBorderRadius = BorderRadius.only(
     topLeft: Radius.circular(bottomSheet),
     topRight: Radius.circular(bottomSheet),
   );
 
-  static const BorderRadius chipBorderRadius =
-      BorderRadius.all(Radius.circular(chip));
+  static const BorderRadius chipBorderRadius = BorderRadius.all(
+    Radius.circular(chip),
+  );
 
-  static const BorderRadius imageBorderRadius =
-      BorderRadius.all(Radius.circular(image));
+  static const BorderRadius imageBorderRadius = BorderRadius.all(
+    Radius.circular(image),
+  );
+
+  static const BorderRadius microBorderRadius = BorderRadius.all(
+    Radius.circular(micro),
+  );
 }

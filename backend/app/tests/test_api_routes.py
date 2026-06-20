@@ -104,7 +104,9 @@ def test_get_product_success(client) -> None:
     body = response.json()
     assert_model(generated.Product, body)
     assert body["id"] == "p017"
-    assert body["searchTokens"] == ["arc", "ceramic", "decor", "lamp", "lighting", "table"]
+    assert {"arc", "ceramic", "decor", "lamp", "lighting", "table"}.issubset(
+        set(body["searchTokens"])
+    )
 
 
 def test_get_product_not_found(client) -> None:

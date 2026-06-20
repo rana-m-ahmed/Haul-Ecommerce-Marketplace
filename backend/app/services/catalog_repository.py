@@ -27,6 +27,11 @@ def normalize_product(product: dict) -> dict:
     normalized = deepcopy(product)
     normalized["searchTokens"] = search_tokens(
         str(normalized.get("name", "")),
+        str(normalized.get("description", "")),
+        str(normalized.get("category", "")),
+        [str(color) for color in normalized.get("colors", [])],
+        [str(material) for material in normalized.get("materials", [])],
+        [str(style) for style in normalized.get("style", [])],
         [str(tag) for tag in normalized.get("tags", [])],
     )
     return normalized

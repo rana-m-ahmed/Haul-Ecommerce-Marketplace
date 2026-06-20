@@ -13,13 +13,13 @@ router = APIRouter(tags=["Checkout"])
 @router.post(
     "/orders/confirm",
     response_model=ConfirmOrderResponse,
-    dependencies=[Depends(require_firebase_user)],
 )
 def confirm_order(
     payload: ConfirmOrderRequest,
+    user: AuthenticatedUser = Depends(require_firebase_user),
     service: CheckoutService = Depends(get_checkout_service),
 ) -> dict:
-    return service.confirm_order(payload.model_dump())
+    return service.confirm_order(user.uid, payload.model_dump())
 
 
 @router.get("/orders/{uid}", response_model=OrdersResponse)

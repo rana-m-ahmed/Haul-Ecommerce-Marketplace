@@ -6,11 +6,7 @@ import '../../core/design/design.dart';
 ///
 /// Shows the sparkle icon with optional label text.
 class HaulAiBadge extends StatefulWidget {
-  const HaulAiBadge({
-    super.key,
-    this.label = 'AI Pick',
-    this.compact = false,
-  });
+  const HaulAiBadge({super.key, this.label = 'AI Pick', this.compact = false});
 
   final String label;
   final bool compact;
@@ -28,7 +24,7 @@ class _HaulAiBadgeState extends State<HaulAiBadge>
     super.initState();
     _shimmerController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 2000),
+      duration: AppMotion.durationShimmer,
     )..repeat();
   }
 
@@ -46,7 +42,7 @@ class _HaulAiBadgeState extends State<HaulAiBadge>
         return Container(
           padding: EdgeInsets.symmetric(
             horizontal: widget.compact ? AppSpacing.xs : AppSpacing.sm,
-            vertical: widget.compact ? 2 : AppSpacing.xxs,
+            vertical: widget.compact ? AppSpacing.micro : AppSpacing.xxs,
           ),
           decoration: BoxDecoration(
             color: AppColors.accentSoft.withValues(alpha: 0.3),
@@ -68,11 +64,7 @@ class _HaulAiBadgeState extends State<HaulAiBadge>
                 SizedBox(width: AppSpacing.xxs),
                 Text(
                   widget.label,
-                  style: AppTypography.caption.copyWith(
-                    color: AppColors.accent,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 11,
-                  ),
+                  style: AppTypography.badge.copyWith(color: AppColors.accent),
                 ),
               ],
             ],

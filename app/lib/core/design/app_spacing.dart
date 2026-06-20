@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 ///
 /// Scale: 4, 8, 12, 16, 24, 32, 48, 64.
 abstract final class AppSpacing {
+  static const double micro = 2;
   static const double xxs = 4;
   static const double xs = 8;
   static const double sm = 12;
@@ -22,17 +23,22 @@ abstract final class AppSpacing {
   static const EdgeInsets paddingLg = EdgeInsets.all(lg);
   static const EdgeInsets paddingXl = EdgeInsets.all(xl);
 
-  static const EdgeInsets paddingHorizontalMd =
-      EdgeInsets.symmetric(horizontal: md);
-  static const EdgeInsets paddingHorizontalLg =
-      EdgeInsets.symmetric(horizontal: lg);
+  static const EdgeInsets paddingHorizontalMd = EdgeInsets.symmetric(
+    horizontal: md,
+  );
+  static const EdgeInsets paddingHorizontalLg = EdgeInsets.symmetric(
+    horizontal: lg,
+  );
 
-  static const EdgeInsets paddingVerticalXs =
-      EdgeInsets.symmetric(vertical: xs);
-  static const EdgeInsets paddingVerticalSm =
-      EdgeInsets.symmetric(vertical: sm);
-  static const EdgeInsets paddingVerticalMd =
-      EdgeInsets.symmetric(vertical: md);
+  static const EdgeInsets paddingVerticalXs = EdgeInsets.symmetric(
+    vertical: xs,
+  );
+  static const EdgeInsets paddingVerticalSm = EdgeInsets.symmetric(
+    vertical: sm,
+  );
+  static const EdgeInsets paddingVerticalMd = EdgeInsets.symmetric(
+    vertical: md,
+  );
 
   // ── SizedBox gaps (vertical) ─────────────────────────────────────────
 

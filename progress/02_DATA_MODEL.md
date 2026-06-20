@@ -15,7 +15,7 @@
 | `users/{uid}/orders/{orderId}` | Order history | `orderNumber`, `items`, `total`, `currency`, `status`, `shippingAddress`, `paymentIntentId`, `createdAt` |
 | `recommendations/{uid}` | Cached For You | `forYouProductIds`, `hydratedAt`, `generatedAt`, `reason` |
 | `explanations/{uid_productId}` | Cached AI explanations | `uid`, `productId`, `explanationText`, `provider`, `generatedAt`, `expiresAt` |
-| `counters/orderSequence/{YYYYMMDD}` | Atomic daily order-number counter | `count` |
+| `counters/orderSequence/days/{YYYYMMDD}` | Atomic daily order-number counter | `count` |
 
 ## Firestore Rules Policy
 

@@ -1,8 +1,13 @@
 import 'dart:convert';
+
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, kReleaseMode, TargetPlatform;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+import '../design/app_motion.dart';
 
 part 'api_client.g.dart';
 
@@ -34,16 +39,29 @@ ApiClient apiClient(Ref ref) {
 
   return ApiClient(
     httpClient: client,
-    baseUrl: _resolveBaseUrl(),
+    baseUrl: resolveApiBaseUrl(),
     authToken: authToken,
   );
 }
 
-Uri _resolveBaseUrl() {
+Uri resolveApiBaseUrl() {
   if (_configuredBaseUrl.isNotEmpty) {
     return Uri.parse(_configuredBaseUrl);
   }
-  return Uri.parse('http://localhost:8000');
+  if (!kReleaseMode) {
+    if (kIsWeb) {
+      return Uri.parse('http://127.0.0.1:8001');
+    }
+    return switch (defaultTargetPlatform) {
+      TargetPlatform.android => Uri.parse('http://10.0.2.2:8001'),
+      TargetPlatform.iOS => Uri.parse('http://127.0.0.1:8001'),
+      TargetPlatform.macOS => Uri.parse('http://127.0.0.1:8001'),
+      TargetPlatform.windows => Uri.parse('http://127.0.0.1:8001'),
+      TargetPlatform.linux => Uri.parse('http://127.0.0.1:8001'),
+      TargetPlatform.fuchsia => Uri.parse('http://127.0.0.1:8001'),
+    };
+  }
+  return Uri.parse('https://hual-api.hf.space');
 }
 
 class ApiClient {
@@ -85,6 +103,7 @@ class ApiClient {
 
   Future<VisualSearchResponse> visualSearch({
     required String imagePath,
+    List<int>? imageBytes,
     List<String> mlKitLabels = const [],
   }) async {
     final request = http.MultipartRequest('POST', _uri('/visual-search'));
@@ -97,13 +116,22 @@ class ApiClient {
         ? extension
         : 'jpeg';
     request.files.add(
-      await http.MultipartFile.fromPath(
-        'image',
-        imagePath,
-        contentType: MediaType('image', subtype),
-      ),
+      imageBytes == null
+          ? await http.MultipartFile.fromPath(
+              'image',
+              imagePath,
+              contentType: MediaType('image', subtype),
+            )
+          : http.MultipartFile.fromBytes(
+              'image',
+              imageBytes,
+              filename: imagePath.split(RegExp(r'[/\\]')).last,
+              contentType: MediaType('image', subtype),
+            ),
     );
-    final streamed = await _httpClient.send(request);
+    final streamed = await _httpClient
+        .send(request)
+        .timeout(AppMotion.durationNetworkTimeout);
     final response = await http.Response.fromStream(streamed);
     return VisualSearchResponse.fromJson(_decode(response));
   }
@@ -119,14 +147,34 @@ class ApiClient {
     return ExplainProductResponse.fromJson(json);
   }
 
+  Future<PaymentIntentResponse> createPaymentIntent(
+    ShippingAddress address,
+  ) async {
+    final json = await _post('/create-payment-intent', {
+      'shippingAddress': address.toJson(),
+    });
+    return PaymentIntentResponse.fromJson(json);
+  }
+
+  Future<ConfirmOrderResponse> confirmOrder(String paymentIntentId) async {
+    final json = await _post('/orders/confirm', {
+      'paymentIntentId': paymentIntentId,
+    });
+    return ConfirmOrderResponse.fromJson(json);
+  }
+
+  Future<OrdersResponse> getOrders(String uid) async {
+    final json = await _get('/orders/${Uri.encodeComponent(uid)}');
+    return OrdersResponse.fromJson(json);
+  }
+
   Future<Map<String, dynamic>> _get(
     String path, {
     bool authenticated = true,
   }) async {
-    final response = await _httpClient.get(
-      _uri(path),
-      headers: await _headers(authenticated: authenticated),
-    );
+    final response = await _httpClient
+        .get(_uri(path), headers: await _headers(authenticated: authenticated))
+        .timeout(AppMotion.durationNetworkTimeout);
     return _decode(response);
   }
 
@@ -134,11 +182,9 @@ class ApiClient {
     String path,
     Map<String, dynamic> body,
   ) async {
-    final response = await _httpClient.post(
-      _uri(path),
-      headers: await _headers(),
-      body: jsonEncode(body),
-    );
+    final response = await _httpClient
+        .post(_uri(path), headers: await _headers(), body: jsonEncode(body))
+        .timeout(AppMotion.durationNetworkTimeout);
     return _decode(response);
   }
 
@@ -170,8 +216,7 @@ class ApiClient {
     return {
       'Accept': 'application/json',
       if (includeContentType) 'Content-Type': 'application/json',
-      if (token != null && token.isNotEmpty)
-        'Authorization': 'Bearer $token',
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
     };
   }
 
@@ -510,6 +555,167 @@ class HealthResponse {
   final String status;
   final String version;
   final DateTime timestamp;
+}
+
+class ShippingAddress {
+  const ShippingAddress({
+    required this.line1,
+    required this.city,
+    required this.country,
+    this.line2,
+    this.region,
+    this.postalCode,
+  });
+
+  factory ShippingAddress.fromJson(Map<String, dynamic> json) =>
+      ShippingAddress(
+        line1: json['line1'] as String,
+        line2: json['line2'] as String?,
+        city: json['city'] as String,
+        region: json['region'] as String?,
+        postalCode: json['postalCode'] as String?,
+        country: json['country'] as String,
+      );
+
+  final String line1;
+  final String? line2;
+  final String city;
+  final String? region;
+  final String? postalCode;
+  final String country;
+
+  Map<String, dynamic> toJson() => {
+    'line1': line1,
+    'line2': line2,
+    'city': city,
+    'region': region,
+    'postalCode': postalCode,
+    'country': country,
+  };
+}
+
+class PaymentIntentResponse {
+  const PaymentIntentResponse({
+    required this.clientSecret,
+    required this.amount,
+    required this.currency,
+  });
+
+  factory PaymentIntentResponse.fromJson(Map<String, dynamic> json) =>
+      PaymentIntentResponse(
+        clientSecret: json['clientSecret'] as String,
+        amount: json['amount'] as int,
+        currency: json['currency'] as String,
+      );
+
+  final String clientSecret;
+  final int amount;
+  final String currency;
+
+  String get paymentIntentId => clientSecret.split('_secret_').first;
+}
+
+class ConfirmOrderResponse {
+  const ConfirmOrderResponse({
+    required this.orderId,
+    required this.orderNumber,
+    required this.status,
+  });
+
+  factory ConfirmOrderResponse.fromJson(Map<String, dynamic> json) =>
+      ConfirmOrderResponse(
+        orderId: json['orderId'] as String,
+        orderNumber: json['orderNumber'] as String,
+        status: json['status'] as String,
+      );
+
+  final String orderId;
+  final String orderNumber;
+  final String status;
+}
+
+class OrderItemSnapshot {
+  const OrderItemSnapshot({
+    required this.productId,
+    required this.name,
+    required this.quantity,
+    required this.unitPrice,
+    required this.subtotal,
+    this.variantId,
+  });
+
+  factory OrderItemSnapshot.fromJson(Map<String, dynamic> json) =>
+      OrderItemSnapshot(
+        productId: json['productId'] as String,
+        variantId: json['variantId'] as String?,
+        name: json['name'] as String,
+        quantity: json['quantity'] as int,
+        unitPrice: (json['unitPrice'] as num).toDouble(),
+        subtotal: (json['subtotal'] as num).toDouble(),
+      );
+
+  final String productId;
+  final String? variantId;
+  final String name;
+  final int quantity;
+  final double unitPrice;
+  final double subtotal;
+}
+
+class OrderSnapshot {
+  const OrderSnapshot({
+    required this.orderId,
+    required this.orderNumber,
+    required this.items,
+    required this.total,
+    required this.currency,
+    required this.status,
+    required this.shippingAddress,
+    required this.paymentIntentId,
+    required this.createdAt,
+  });
+
+  factory OrderSnapshot.fromJson(Map<String, dynamic> json) => OrderSnapshot(
+    orderId: json['orderId'] as String,
+    orderNumber: json['orderNumber'] as String,
+    items: (json['items'] as List)
+        .cast<Map<String, dynamic>>()
+        .map(OrderItemSnapshot.fromJson)
+        .toList(growable: false),
+    total: (json['total'] as num).toDouble(),
+    currency: json['currency'] as String,
+    status: json['status'] as String,
+    shippingAddress: ShippingAddress.fromJson(
+      Map<String, dynamic>.from(json['shippingAddress'] as Map),
+    ),
+    paymentIntentId: json['paymentIntentId'] as String,
+    createdAt: DateTime.parse(json['createdAt'] as String),
+  );
+
+  final String orderId;
+  final String orderNumber;
+  final List<OrderItemSnapshot> items;
+  final double total;
+  final String currency;
+  final String status;
+  final ShippingAddress shippingAddress;
+  final String paymentIntentId;
+  final DateTime createdAt;
+}
+
+class OrdersResponse {
+  const OrdersResponse({required this.orders, required this.count});
+
+  factory OrdersResponse.fromJson(Map<String, dynamic> json) => OrdersResponse(
+    orders: (json['orders'] as List)
+        .cast<Map<String, dynamic>>()
+        .map(OrderSnapshot.fromJson)
+        .toList(growable: false),
+    count: json['count'] as int,
+  );
+
+  final List<OrderSnapshot> orders;
+  final int count;
 }
 
 List<Product> _products(Object? value) {

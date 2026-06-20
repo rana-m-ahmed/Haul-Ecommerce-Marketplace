@@ -33,6 +33,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
   late final AnimationController _cartController;
   Product? _lastProduct;
   String? _selectedColor;
+  int _quantity = 1;
   bool _handledMissing = false;
   String? _explanationRequestedFor;
   ExplainProductResponse? _explanation;
@@ -163,11 +164,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
       ScaffoldMessenger.of(
         context,
       ).showSnackBar(const SnackBar(content: Text('Product not found.')));
-      if (context.canPop()) {
-        context.pop();
-      } else {
-        context.go('/home');
-      }
+      context.go('/home');
     });
   }
 
@@ -225,6 +222,11 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
                         }),
                       ),
                       AppSpacing.gapLg,
+                      _QuantitySelector(
+                        quantity: _quantity,
+                        onChanged: (val) => setState(() => _quantity = val),
+                      ),
+                      AppSpacing.gapLg,
                       _MetadataChips(product: product),
                       AppSpacing.gapLg,
                       if (_explanation != null)
@@ -267,16 +269,24 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
                           final item = CartItem(
                             productId: product.id,
                             variantId: _selectedColor,
-                            quantity: 1,
+                            quantity: _quantity,
                             priceSnapshot: product.salePrice ?? product.price,
                           );
                           try {
                             await ref.read(cartControllerProvider.notifier).addItem(item);
                             _bounceCart();
+                            if (mounted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Added $_quantity item${_quantity == 1 ? '' : 's'} to cart'),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            }
                           } catch (e) {
                             if (mounted) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text('Failed to add to cart')),
+                                const SnackBar(content: Text('Failed to add to cart')),
                               );
                             }
                           }
@@ -530,6 +540,60 @@ class _AiExplanationSection extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class _QuantitySelector extends StatelessWidget {
+  const _QuantitySelector({
+    required this.quantity,
+    required this.onChanged,
+  });
+
+  final int quantity;
+  final ValueChanged<int> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Quantity', style: AppTypography.h3),
+        AppSpacing.gapSm,
+        Container(
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            borderRadius: AppRadius.buttonBorderRadius,
+            border: Border.all(color: AppColors.border),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.remove_rounded),
+                onPressed: quantity > 1 ? () => onChanged(quantity - 1) : null,
+                color: AppColors.textPrimary,
+                disabledColor: AppColors.textSecondary.withValues(alpha: 0.3),
+              ),
+              Container(
+                width: 48,
+                alignment: Alignment.center,
+                child: Text(
+                  quantity.toString(),
+                  style: AppTypography.bodyLargeMedium,
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              IconButton(
+                icon: const Icon(Icons.add_rounded),
+                onPressed: quantity < 99 ? () => onChanged(quantity + 1) : null,
+                color: AppColors.textPrimary,
+                disabledColor: AppColors.textSecondary.withValues(alpha: 0.3),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

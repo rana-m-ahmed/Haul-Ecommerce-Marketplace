@@ -114,7 +114,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: AppColors.shimmerBase,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: AppRadius.microBorderRadius,
                   ),
                 ),
                 AppSpacing.gapXs,
@@ -123,7 +123,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                   width: 100,
                   decoration: BoxDecoration(
                     color: AppColors.shimmerBase,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: AppRadius.microBorderRadius,
                   ),
                 ),
                 AppSpacing.gapXs,
@@ -132,7 +132,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                   width: 60,
                   decoration: BoxDecoration(
                     color: AppColors.shimmerBase,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: AppRadius.microBorderRadius,
                   ),
                 ),
               ],
@@ -174,7 +174,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: AppColors.shimmerBase,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: AppRadius.microBorderRadius,
                     ),
                   ),
                   AppSpacing.gapXs,
@@ -183,7 +183,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                     width: 80,
                     decoration: BoxDecoration(
                       color: AppColors.shimmerBase,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: AppRadius.microBorderRadius,
                     ),
                   ),
                   AppSpacing.gapSm,
@@ -192,7 +192,7 @@ class _ProductCardSkeleton extends StatelessWidget {
                     width: 50,
                     decoration: BoxDecoration(
                       color: AppColors.shimmerBase,
-                      borderRadius: BorderRadius.circular(4),
+                      borderRadius: AppRadius.microBorderRadius,
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/auth/auth_provider.dart';
 import '../models/cart_item.dart';
@@ -11,12 +12,17 @@ class CartController extends _$CartController {
   Future<List<CartItem>> build() async {
     final authState = ref.watch(authControllerProvider);
 
-    if (authState is AuthStateAuthenticated) {
+    final uid = switch (authState) {
+      AuthStateAuthenticated(:final uid) => uid,
+      AuthStateGuest() => FirebaseAuth.instance.currentUser?.uid,
+      _ => null,
+    };
+    if (uid != null) {
       final repo = ref.read(cartRepositoryProvider);
-      final cache = await repo.getCachedCart(authState.uid);
+      final cache = await repo.getCachedCart(uid);
 
       // Async fetch from firestore without awaiting in build
-      _fetchFirestore(authState.uid);
+      _fetchFirestore(uid);
       return cache;
     }
 
@@ -36,9 +42,8 @@ class CartController extends _$CartController {
 
   Future<void> addItem(CartItem item) async {
     final authState = ref.read(authControllerProvider);
-    if (authState is! AuthStateAuthenticated) return;
-
-    final uid = authState.uid;
+    final uid = _uid(authState);
+    if (uid == null) return;
     final repo = ref.read(cartRepositoryProvider);
     final previousState = state;
 
@@ -77,9 +82,8 @@ class CartController extends _$CartController {
 
   Future<void> removeItem(String productId) async {
     final authState = ref.read(authControllerProvider);
-    if (authState is! AuthStateAuthenticated) return;
-
-    final uid = authState.uid;
+    final uid = _uid(authState);
+    if (uid == null) return;
     final repo = ref.read(cartRepositoryProvider);
     final previousState = state;
 
@@ -105,9 +109,8 @@ class CartController extends _$CartController {
 
   Future<void> updateQuantity(String productId, int quantity) async {
     final authState = ref.read(authControllerProvider);
-    if (authState is! AuthStateAuthenticated) return;
-
-    final uid = authState.uid;
+    final uid = _uid(authState);
+    if (uid == null) return;
     final repo = ref.read(cartRepositoryProvider);
     final previousState = state;
 
@@ -136,4 +139,10 @@ class CartController extends _$CartController {
       throw Exception('Failed to update quantity: $e');
     }
   }
+
+  String? _uid(AuthState authState) => switch (authState) {
+    AuthStateAuthenticated(:final uid) => uid,
+    AuthStateGuest() => FirebaseAuth.instance.currentUser?.uid,
+    _ => null,
+  };
 }

@@ -18,7 +18,6 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      floatingActionButton: const _CameraPulseFab(),
       body: SafeArea(
         child: RefreshIndicator(
           color: AppColors.accent,
@@ -72,7 +71,7 @@ class HomeScreen extends ConsumerWidget {
               ),
               _TrendingGrid(products: grid),
               const SliverToBoxAdapter(
-                child: SizedBox(height: AppSpacing.xxxl),
+                child: SizedBox(height: 120),
               ),
             ],
           ),
@@ -412,51 +411,6 @@ class _CompactMessage extends StatelessWidget {
       child: Text(
         message,
         style: AppTypography.bodySmall.copyWith(color: AppColors.textSecondary),
-      ),
-    );
-  }
-}
-
-class _CameraPulseFab extends StatefulWidget {
-  const _CameraPulseFab();
-
-  @override
-  State<_CameraPulseFab> createState() => _CameraPulseFabState();
-}
-
-class _CameraPulseFabState extends State<_CameraPulseFab>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-  late final Animation<double> _pulse;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: AppMotion.durationSlow,
-    )..repeat(reverse: true);
-    _pulse = Tween<double>(begin: 1, end: 1.12).animate(
-      CurvedAnimation(parent: _controller, curve: AppMotion.curveSpring),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ScaleTransition(
-      scale: _pulse,
-      child: FloatingActionButton(
-        heroTag: 'camera_fab',
-        onPressed: () => context.push('/camera'),
-        backgroundColor: AppColors.accent,
-        foregroundColor: AppColors.surface,
-        child: const Icon(Icons.photo_camera_rounded),
       ),
     );
   }

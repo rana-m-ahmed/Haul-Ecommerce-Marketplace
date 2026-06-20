@@ -65,6 +65,9 @@ class _FakeCameraGateway implements CameraGateway {
   }
 
   @override
+  Future<List<int>> bytesFor(String imagePath) => File(imagePath).readAsBytes();
+
+  @override
   Future<void> dispose() async {}
 
   @override
@@ -148,9 +151,7 @@ void main() {
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accent),
           ),
-          home: CameraScreen(
-            gateway: gateway,
-          ),
+          home: CameraScreen(gateway: gateway),
         ),
       ),
     );
@@ -239,6 +240,7 @@ void main() {
         );
       }),
       baseUrl: Uri.parse('http://test.local'),
+      authToken: 'test-token',
     );
     final account = ProviderContainer(
       overrides: [
@@ -293,6 +295,7 @@ void main() {
         return http.Response('{}', 404);
       }),
       baseUrl: Uri.parse('http://test.local'),
+      authToken: 'test-token',
     );
 
     await tester.pumpWidget(const SizedBox.shrink());
@@ -302,9 +305,7 @@ void main() {
         overrides: [
           apiClientProvider.overrideWithValue(api),
           authControllerProvider.overrideWith(
-            () => _MockAuthController(
-              const AuthStateAuthenticated('u_001'),
-            ),
+            () => _MockAuthController(const AuthStateAuthenticated('u_001')),
           ),
         ],
         child: MaterialApp(

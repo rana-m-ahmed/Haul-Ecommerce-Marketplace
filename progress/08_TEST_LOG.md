@@ -4,6 +4,305 @@ Append a new entry every session. Do not overwrite history; this file is the rec
 
 ---
 
+### UI Flow + Local Backend Wiring - 2026-06-20 / Codex
+
+**Commands run:**
+```powershell
+flutter analyze
+flutter test test/flow_golden_test.dart
+$job = Start-Job -ScriptBlock { Set-Location 'D:\projects\Haul-Ecommerce-Marketplace'; python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8001 }
+# wait for /health
+Invoke-WebRequest -Method Post http://127.0.0.1:8001/search -Headers @{ Authorization='Bearer test-token'; 'Content-Type'='application/json' } -Body '{"query":"lamp","pageSize":5}'
+```
+
+**Results:**
+```text
+flutter analyze: No issues found
+flow_golden_test.dart: All tests passed (3 flows)
+backend /search: HTTP 200 in 5.6 seconds, returned p017 and p015
+```
+
+**Verified behavior:**
+- Splash, onboarding, auth, preferences, guest home, and returning-user home flows still render correctly.
+- The app’s debug API base URL now resolves to the local backend host instead of the remote HF deployment.
+- Live product search works against the running backend and returns catalog data.
+
+**Open blocker:**
+- None for the local screen flow or backend wiring path.
+
+### Backend + Frontend Wiring Smoke - 2026-06-20 / Codex
+
+**Commands run:**
+```powershell
+$job = Start-Job -ScriptBlock { Set-Location 'D:\projects\Haul-Ecommerce-Marketplace'; python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8001 }
+# wait for /health
+flutter test test/backend_wiring_test.dart
+```
+
+**Results:**
+```text
+BACKEND_HEALTH_OK
+Flutter wiring smoke: 1 passed
+Backend log: GET /health 200, GET /health 200, POST /search 200, GET /products/p017 200
+```
+
+**Verified behavior:**
+- The backend boots cleanly and serves `/health` on `127.0.0.1:8001`.
+- The Flutter `ApiClient` can call the live backend directly and decode health, search, and product payloads.
+- The app/backend contract is wired end-to-end on the local machine, not just in isolated tests.
+
+**Open blocker:**
+- None for the local backend/frontend wiring path.
+
+### Firebase Fetch Debug - 2026-06-20 / Codex
+
+**Commands run:**
+```powershell
+python -m pytest backend/app/tests/test_config.py -q
+@'
+from backend.app.core.config import Settings
+from backend.app.services.catalog_repository import catalog_repository
+
+settings = Settings()
+repo = catalog_repository(settings)
+product = repo.get_product('p017')
+print(type(repo).__name__)
+print(product['id'])
+print(product['name'])
+'@ | python -
+python -m pytest backend/app/tests/test_api_routes.py backend/app/tests/test_ai_endpoints.py -q
+python -m pytest backend/app/tests -q
+```
+
+**Results:**
+```text
+test_config.py: 1 passed
+Live catalog smoke: FirestoreCatalogRepository -> p017 / Arc Ceramic Table Lamp
+API + AI slices: 36 passed
+Full backend suite: 74 passed, 2 skipped
+```
+
+**Verified behavior:**
+- Backend settings now load `backend/.env` from the repo root instead of depending on the current working directory.
+- A `HUAL_ENV_FILE` escape hatch lets tests opt out of env-file loading so the shared fixture stays deterministic.
+- The catalog repository now resolves to `FirestoreCatalogRepository` from the repo root and can read live Firestore product data.
+- The app no longer silently depends on the seed fallback just because it was launched from the workspace root.
+
+**Open blocker:**
+- None for this Firebase fetch path. Remaining open items are unrelated Sprint 7 blockers already tracked in `05_TASK_BOARD.md`.
+
+### Sprint 7 - Android Portfolio Pass - 2026-06-19 / Codex
+
+**Verified:**
+
+- `flutter analyze` -> no issues.
+- `flutter test` -> 61 tests passed after refreshing intentional token-polish goldens.
+- `flutter build apk --debug --no-pub` -> Android debug APK built.
+- `flutter build web --release --no-pub` -> web bundle compiled; not deployed.
+- Token grep -> no raw color/font/spacing/radius/duration values outside design token files.
+- Android emulator live run -> Home and guest Profile rendered; Profile screenshot saved.
+- Responsive Profile tests -> 360, 393, and 414 widths passed.
+- Session cleanup test -> registered resources disposed and cart/wishlist cache keys removed.
+
+**Bugs found:**
+
+- `BUG-019` fixed: guest Profile redirect loop.
+- `BUG-020` open: live Android logout still leaves the anonymous Firebase user persisted.
+
+**Open acceptance blockers:**
+
+- Missing `HAUL_STRIPE_PUBLISHABLE_KEY` prevents live Stripe success/decline flows.
+- Five-flow live acceptance run was not completed.
+- Firebase Hosting deployment lacks a registered web app/finished deploy.
+- Demo video was not recorded.
+
+---
+
+### Sprint 6 - Track B Live-Run Blocker Check - 2026-06-19 / Codex
+
+**Commands run:**
+```powershell
+D:\Sdk\platform-tools\adb.exe devices -l
+Get-ChildItem Env:HAUL_STRIPE_PUBLISHABLE_KEY
+if (Test-Path backend/.env) { Get-Content -Raw backend/.env }
+if (Get-Command emulator -ErrorAction SilentlyContinue) { emulator -list-avds }
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe analyze lib test
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test test/sprint6_checkout_test.dart
+```
+
+**Results:**
+```text
+ADB devices: none attached
+Flutter publishable key env var: not defined
+Android emulator AVDs: none listed
+Flutter analyzer: No issues found
+Focused checkout/orders UI suite: 4 passed
+```
+
+**What this verified:**
+- The implemented checkout/address, summary, recoverable payment-error, success prompt, and orders snapshot flows still pass their focused Flutter tests.
+- The task remains honestly blocked on the prompt's required live verification, not on a known code failure.
+- The environment still lacks both prerequisites for the required live Stripe run:
+  - no Android device/emulator
+  - no Flutter `HAUL_STRIPE_PUBLISHABLE_KEY=pk_test_...`
+
+**Open blocker:**
+- Could not perform the mandatory live guest 4242 success flow or decline/retry flow because there is no runnable Android target and no publishable key configured for the Flutter build.
+
+---
+
+### Full Stack Verification + Frontend Regression Fixes - 2026-06-19 / Codex
+
+**Commands run:**
+```powershell
+python -m pytest backend/app/tests -q
+python -m pytest backend/app/tests/test_product_seed.py -q
+$env:HUAL_AUTH_ALLOW_TEST_TOKENS='true'; python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8001
+Invoke-WebRequest http://127.0.0.1:8001/health
+Invoke-WebRequest -Method Post http://127.0.0.1:8001/search -Headers @{ Authorization='Bearer test-token'; 'Content-Type'='application/json' } -Body '{"query":"lamp","sortBy":"relevance","pageSize":12,"pageToken":null}'
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe analyze lib test
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test test/flow_golden_test.dart --update-goldens
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test test/cart_golden_test.dart test/sprint3_catalog_test.dart --update-goldens
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test
+D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart build apk --debug --no-pub
+```
+
+**Results:**
+```text
+Backend full suite: 73 passed, 2 skipped
+Backend seed suite: 2 passed
+Local backend health: 200 OK
+Local backend /search smoke: 200 OK, "lamp" returned 2 products
+Flutter analyzer: No issues found
+Flow golden refresh: 3 passed
+Cart + Sprint 3 golden refresh: 4 passed
+Full Flutter suite: 57 passed
+Debug APK: built successfully at build/app/outputs/flutter-apk/app-debug.apk
+```
+
+**Verified behavior:**
+- Backend starts locally and serves real `/health` and authenticated `/search` responses with test tokens enabled.
+- Seed data again preserves required catalog states, including intentional missing-image products for placeholder coverage.
+- The async recommendation/explanation regressions were eliminated by stabilizing provider lifetime and test auth/API overrides.
+- Product 404 fallback now redirects to `/home` consistently instead of depending on a fragile pop path.
+- Cart, onboarding/home flows, and Sprint 3 catalog/product goldens were refreshed against deterministic local API fixtures.
+- The full Flutter suite is green again, so the prior stale/golden regression bucket is resolved.
+
+**Remaining blocker:**
+- Live Stripe checkout success/decline verification still requires an Android device/emulator plus a real Flutter `HAUL_STRIPE_PUBLISHABLE_KEY=pk_test_...`.
+
+---
+
+### Sprint 6 - Track A Re-Verification - 2026-06-19 / Codex
+
+**Commands run:**
+```powershell
+python -m pytest backend/app/tests/test_checkout_service.py -q
+npx.cmd firebase emulators:exec --only firestore "python -m pytest backend/app/tests/test_checkout_firestore.py -q"
+```
+
+**Results:**
+```text
+Focused checkout service tests: 4 passed
+Firestore emulator checkout verification: 1 passed
+Firebase CLI required elevated access to its local config store in the user profile; emulator run then completed successfully without firebase login.
+Pytest emitted two .pytest_cache access warnings during the emulator run, but the test itself passed.
+```
+
+**Verified behavior:**
+- `/create-payment-intent` accepts only `shippingAddress`; attempts to include `amount` or `total` are rejected at the API boundary and Stripe is never called.
+- The server-calculated cart total remains authoritative; the create-intent response amount came from backend pricing, not request input.
+- Calling `/orders/confirm` twice with the same `paymentIntentId` returned the first order ID and left exactly one order in Firestore.
+- A failed Stripe status left the cart intact, created no order, and did not decrement inventory.
+- The Firestore-backed success path still clears the cart, decrements inventory once, and preserves the atomic `HUL-YYYYMMDD-NNNN` order-number flow.
+
+---
+
+### Sprint 6 - Track B Checkout UI + Production Catalog - 2026-06-19 / Codex
+
+**Commands run:**
+```powershell
+dart analyze lib test
+flutter test test/sprint6_checkout_test.dart --update-goldens
+flutter test test/sprint6_checkout_test.dart
+flutter test
+flutter build apk --debug --no-pub
+python -m pytest backend/app/tests -q
+python -m openapi_spec_validator progress/01_API_CONTRACT.yaml
+python scripts/import_seed_products.py
+# Direct production Firestore read-back and image URL HEAD audit
+```
+
+**Results:**
+```text
+Focused checkout UI: 4 passed
+Dart analyzer: No issues found
+Backend: 73 passed, 2 skipped
+OpenAPI: OK
+Android debug APK: built, 115,727,779 bytes
+Production Firestore: 50 products
+Categories: accessories 9, electronics 7, fashion 9, fitness 8, home 9, skincare 8
+States: 6 out of stock, 13 sale, 12 new
+p017 optimized tokens verified: ceramic, clay, home, lighting, warm
+Full Flutter suite: 48 passed, 9 failed
+Image audit: 44/44 configured URLs unreachable; 6 seed products have no image
+ADB: no attached Android device
+```
+
+**Verified behavior:**
+- Shipping form validates required address fields and two-letter country.
+- Checkout request body contains only `shippingAddress`; tests assert no client `amount` or `total`.
+- Summary renders the backend-returned authoritative minor-unit amount.
+- Payment errors remain inline and recoverable with the pay action still available.
+- Guest cart now persists under the anonymous Firebase UID.
+- Success screen uses the required spring celebration and offers genuine Firebase credential linking that preserves the guest UID/order history.
+- Orders list/detail render backend order snapshots, status badges, unit prices, subtotals, paid total, and shipping address.
+- Screenshots saved to `progress/screenshots/sprint6_checkout/order_success.png` and `orders_list.png`.
+
+**Blockers:**
+- Required live 4242 success and decline/retry runs were not possible: no Android device/emulator and no Flutter Stripe publishable key (`pk_test_...`) are available.
+- Firebase Hosting is not configured/deployed and all current product image URLs are broken. Architecture forbids switching product images to Cloud Storage.
+- Full-suite failures are logged as BUG-017; focused Sprint 6 tests are green.
+
+---
+
+### Sprint 6 - Track A Safe Payments - 2026-06-19 / Codex
+
+**Commands run:**
+```powershell
+python -m pytest backend/app/tests -q
+python backend/scripts/generate_schemas.py --check
+python -m openapi_spec_validator progress/01_API_CONTRACT.yaml
+npx.cmd firebase emulators:exec --only firestore "python -m pytest backend/app/tests/test_checkout_firestore.py -q"
+npm.cmd run test:rules
+# Stripe test API: standard pm_card_chargeDeclined fixture
+```
+
+**Results:**
+```text
+Backend suite: 71 passed, 2 skipped
+Checkout Firestore emulator integration: 1 passed
+Firestore security rules: passed
+Generated schema drift check: passed
+OpenAPI contract: OK
+Stripe decline fixture: status=requires_payment_method, amount=6400, livemode=False
+```
+
+**Verified behavior:**
+- `/create-payment-intent` prices the authenticated user's Firestore cart from current product price/inventory; client amount/total fields are rejected before Stripe is called.
+- `/orders/confirm` retrieves Stripe truth and rejects non-succeeded intents before touching Firestore.
+- A failed Stripe status leaves the cart present, inventory unchanged, and order count at zero in the emulator.
+- A successful confirm atomically creates one order, decrements inventory once, clears the cart, and allocates `HUL-YYYYMMDD-NNNN`.
+- Calling confirm twice with the same `uid+paymentIntentId` returns the first order ID; exactly one order exists afterward.
+- `/orders/{uid}` returns persisted order history and remains owner-only.
+
+**Notes:**
+- Recorded Decision-005 because the conceptual counter path had an invalid odd Firestore segment count; implementation uses `counters/orderSequence/days/{YYYYMMDD}`.
+- Backend checkout is complete, but the demo-script checkout boxes remain unchecked until Track B ships and live-verifies the Flutter checkout UI.
+- `BUG-014` records credential-rotation risk for local secrets.
+
+---
+
 ### Sprint QA Audit - 2026-06-19 / Codex
 
 **Command(s) run:**

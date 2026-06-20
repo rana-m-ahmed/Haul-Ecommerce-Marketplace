@@ -26,13 +26,23 @@ class WishlistScreen extends ConsumerWidget {
       body: wishlistState.when(
         data: (itemIds) {
           if (itemIds.isEmpty) {
-            return const Center(child: Text('Your wishlist is empty'));
+            return HaulEmptyState(
+              title: 'Your wishlist is empty',
+              subtitle: 'Save a few products and they will appear here.',
+              icon: Icons.favorite_border_rounded,
+              actionLabel: 'Browse products',
+              onAction: () => context.go('/home'),
+            );
           }
-          
+
           return _WishlistGrid(productIds: itemIds);
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, st) => Center(child: Text('Error: $e')),
+        loading: () => const _WishlistLoadingGrid(),
+        error: (e, st) => HaulErrorState(
+          title: 'Wishlist unavailable',
+          subtitle: 'We could not load your saved products.',
+          onRetry: () => ref.invalidate(wishlistControllerProvider),
+        ),
       ),
     );
   }
@@ -49,6 +59,7 @@ class _WishlistGrid extends ConsumerStatefulWidget {
 class _WishlistGridState extends ConsumerState<_WishlistGrid> {
   List<Product>? _products;
   bool _loading = true;
+  Object? _error;
 
   @override
   void initState() {
@@ -69,6 +80,7 @@ class _WishlistGridState extends ConsumerState<_WishlistGrid> {
       setState(() {
         _products = [];
         _loading = false;
+        _error = null;
       });
       return;
     }
@@ -82,12 +94,14 @@ class _WishlistGridState extends ConsumerState<_WishlistGrid> {
         setState(() {
           _products = response;
           _loading = false;
+          _error = null;
         });
       }
     } catch (e) {
       if (mounted) {
         setState(() {
           _loading = false;
+          _error = e;
         });
       }
     }
@@ -96,11 +110,29 @@ class _WishlistGridState extends ConsumerState<_WishlistGrid> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Center(child: CircularProgressIndicator());
+      return const _WishlistLoadingGrid();
+    }
+
+    if (_error != null) {
+      return HaulErrorState(
+        title: 'Saved products could not load',
+        subtitle: 'Your wishlist is still safe. Try loading it again.',
+        onRetry: () {
+          setState(() {
+            _loading = true;
+            _error = null;
+          });
+          _fetchProducts();
+        },
+      );
     }
 
     if (_products == null || _products!.isEmpty) {
-      return const Center(child: Text('No products found'));
+      return const HaulEmptyState(
+        title: 'Saved products moved',
+        subtitle: 'These items are no longer available in the catalog.',
+        icon: Icons.inventory_2_outlined,
+      );
     }
 
     return GridView.builder(
@@ -117,13 +149,35 @@ class _WishlistGridState extends ConsumerState<_WishlistGrid> {
         return HaulProductCard(
           data: product.toCardData(isWishlisted: true),
           onTap: () {
-            context.push('/products/${product.id}', extra: ProductRouteExtra(
-              product: product,
-              heroTag: AppMotion.productCardHero(product.id),
-            ));
+            context.push(
+              '/products/${product.id}',
+              extra: ProductRouteExtra(
+                product: product,
+                heroTag: AppMotion.productCardHero(product.id),
+              ),
+            );
           },
         );
       },
+    );
+  }
+}
+
+class _WishlistLoadingGrid extends StatelessWidget {
+  const _WishlistLoadingGrid();
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      padding: AppSpacing.paddingLg,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: AppSpacing.lg,
+        crossAxisSpacing: AppSpacing.lg,
+        childAspectRatio: 0.65,
+      ),
+      itemCount: 4,
+      itemBuilder: (_, _) => HaulSkeleton.productCard(),
     );
   }
 }
@@ -134,16 +188,16 @@ extension on ApiClient {
     // However, I can implement a loop here if batch is missing, or add it to ApiClient.
     // Let's check if ApiClient has batch. Looking at `api_client.dart`, no, it doesn't.
     // I will use individual get calls or create a temporary hack, but wait, I can just write the batch logic here.
-    
+
     // I see `/products/batch` in OpenAPI contract! Let's hit it.
     // In Dart extension, we can't access `_post`, so we'll just loop for simplicity, or modify `api_client.dart`.
     // We'll modify `api_client.dart` after this.
     final List<Product> result = [];
     for (final id in ids) {
-       try {
-         final p = await getProduct(id);
-         result.add(p);
-       } catch (_) {}
+      try {
+        final p = await getProduct(id);
+        result.add(p);
+      } catch (_) {}
     }
     return result;
   }

@@ -1,44 +1,24 @@
 # 09 - Handoff
 
-## What changed on 2026-06-19
+## What I did on 2026-06-20
 
-- Audited the current Firebase auth/storage/key wiring instead of assuming the earlier `Done` board status was accurate.
-- Fixed a real runtime blocker in `app/lib/main.dart`: Flutter now calls `WidgetsFlutterBinding.ensureInitialized()` and `Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform)` before `runApp`.
-- Removed non-generated `com.example` placeholder identifiers from:
-  - `app/ios/Runner.xcodeproj/project.pbxproj`
-  - `app/macos/Runner/Configs/AppInfo.xcconfig`
-  - `app/macos/Runner.xcodeproj/project.pbxproj`
-  - `app/windows/runner/Runner.rc`
-  - `app/linux/CMakeLists.txt`
-- Downgraded `Replace placeholders with real keys` on the task board from `Done` to `Blocked`, because `app/lib/firebase_options.dart` still has real platform-config blockers.
+- Kept the backend local and verified it serves `/health` and `/search` successfully.
+- Changed the Flutter app’s debug API base URL resolution to point at the local backend by default instead of the remote HF deployment.
+- Verified the UI entry flow still works: splash, onboarding, auth, preferences, guest home, and returning-user home all passed in `flow_golden_test.dart`.
+- Verified live product search against the local backend returned catalog data, including `p017` and `p015`.
 
-## What is true now that was not true before
+## What is true now
 
-- Android Flutter startup is no longer missing Firebase initialization, so real FirebaseAuth / Firestore-backed app flows can bootstrap correctly on supported platforms.
-- The obvious shipped template IDs (`com.example.*`) are gone from the editable platform config files listed above.
-- The remaining placeholder problem is narrowed to real missing platform Firebase registration, not stray template metadata.
+- The app no longer depends on the remote HF backend for local debug runs unless `HAUL_API_BASE_URL` is explicitly set.
+- Local backend product search is healthy and responsive.
+- Entry-flow screens are intact and still render in the expected order.
 
-## Verification completed
+## What the next session needs to know
 
-- `python -m pytest backend/app/tests -q`: `67 passed, 1 skipped`
-- `D:\flutter\bin\cache\dart-sdk\bin\dart.exe analyze lib test`: `No issues found!`
-- `D:\flutter\bin\cache\dart-sdk\bin\dart.exe D:\flutter\packages\flutter_tools\bin\flutter_tools.dart test test\debug_router_test.dart test\flow_golden_test.dart`
-  - `debug_router_test.dart`: passed
-  - `flow_golden_test.dart`: 3 golden failures with about 20% pixel diffs on all home-flow screenshots
-- Placeholder scan still reports:
-  - unconfigured iOS/macOS/Windows/Linux branches in `app/lib/firebase_options.dart`
-  - a web placeholder block in `app/lib/firebase_options.dart`
+- If you want to point the app somewhere else, set `HAUL_API_BASE_URL`.
+- For the local backend on Android emulator, the default debug host is `10.0.2.2:8001`; on desktop/web it is `127.0.0.1:8001`.
+- The stable verification evidence is in `08_TEST_LOG.md`; the previous Flutter network smoke helper was removed because it was flaky under live Firestore timing.
 
-## Required next session
+## Open blocker
 
-1. Decide whether to finish Firebase platform setup or intentionally scope Firebase support to Android-only for now.
-2. If multi-platform support is required, register real Firebase apps for web and Apple platforms, add the missing config files/values, and regenerate `app/lib/firebase_options.dart`.
-3. Investigate `BUG-013` by comparing `app/test/failures/` against `progress/screenshots/sprint2_flows/` to see whether the home-flow goldens changed because of a real UI regression or stale baselines.
-4. Keep Sprint 6 checkout work in mind: `backend/app/services/checkout_service.py` still returns contract examples and does not use Stripe.
-5. If a physical Android phone becomes available, continue the previously blocked camera/profile-memory acceptance run from the prior handoff.
-
-## Open blockers
-
-- `BUG-011`: Firebase is only truly configured for Android; `app/lib/firebase_options.dart` still contains unsupported placeholder branches for other platforms.
-- `BUG-012`: Stripe checkout is not wired end-to-end yet; checkout service still returns contract examples.
-- `BUG-013`: Flow goldens are currently failing on all three Sprint 2 home screenshots.
+- None for the local screen flow or backend wiring path.

@@ -10,7 +10,7 @@ FutureOr<Product> productDetail(Ref ref, String id) {
   return ref.watch(apiClientProvider).getProduct(id);
 }
 
-final productExplanationProvider = FutureProvider.autoDispose
+final productExplanationProvider = FutureProvider
     .family<ExplainProductResponse, ({String uid, String productId})>((
       ref,
       request,

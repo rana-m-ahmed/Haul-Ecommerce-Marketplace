@@ -21,10 +21,13 @@ No raw color, font, spacing, radius, or shadow value should ever appear outside 
 - Display/headings: **Syne** — distinctive, geometric, not a default Material/iOS look.
 - Body/UI text: **Inter**.
 - Scale: Display 32/28, H1 24, H2 20, H3 18, Body 16/14, Caption 12.
+- Micro labels: 10/11, reserved for compact badges where Caption cannot fit.
 
 ## Spacing Scale
 
 4, 8, 12, 16, 24, 32, 48, 64
+
+`2` is reserved for optical micro-gaps inside compact badges and indicators.
 
 ## Radius
 
@@ -32,6 +35,7 @@ No raw color, font, spacing, radius, or shadow value should ever appear outside 
 - Button: 14
 - Bottom sheet (top corners): 28
 - Chip/pill: 999
+- Micro indicator: 4
 
 ## Shadow
 

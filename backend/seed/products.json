@@ -1,52 +1,1930 @@
 [
-  {"id":"p001","name":"Boxy Linen Overshirt","description":"Relaxed linen overshirt with a soft drape for everyday layering.","price":72.0,"salePrice":null,"category":"fashion","colors":["olive","cream"],"materials":["linen","cotton"],"style":["casual","minimal"],"tags":["shirt","layering","multi-variant"],"searchTokens":["boxy","linen","overshirt","olive","fashion"],"imageUrls":["https://hual-assets.web.app/products/p001-1.jpg"],"rating":4.6,"reviewCount":88,"inventory":24,"isNew":false,"isSale":false,"createdAt":"2026-04-01T09:00:00Z"},
-  {"id":"p002","name":"Ribbed Knit Midi Dress","description":"Column midi dress with ribbed texture and an easy stretch fit.","price":96.0,"salePrice":78.0,"category":"fashion","colors":["black","moss"],"materials":["viscose","nylon"],"style":["modern","evening"],"tags":["dress","sale","knit"],"searchTokens":["ribbed","knit","midi","dress","fashion"],"imageUrls":["https://hual-assets.web.app/products/p002-1.jpg"],"rating":4.7,"reviewCount":132,"inventory":13,"isNew":false,"isSale":true,"createdAt":"2026-03-18T09:00:00Z"},
-  {"id":"p003","name":"Cropped Utility Jacket","description":"Lightweight utility jacket with roomy pockets and a cropped shape.","price":118.0,"salePrice":null,"category":"fashion","colors":["sand","navy"],"materials":["cotton","recycled polyester"],"style":["utility","street"],"tags":["jacket","new","outerwear"],"searchTokens":["cropped","utility","jacket","fashion"],"imageUrls":["https://hual-assets.web.app/products/p003-1.jpg"],"rating":4.8,"reviewCount":41,"inventory":17,"isNew":true,"isSale":false,"createdAt":"2026-06-01T09:00:00Z"},
-  {"id":"p004","name":"Tapered Travel Trouser","description":"Wrinkle-resistant tapered trouser built for long days and quick packing.","price":84.0,"salePrice":null,"category":"fashion","colors":["charcoal"],"materials":["recycled nylon","elastane"],"style":["travel","tailored"],"tags":["pants","travel","normal"],"searchTokens":["tapered","travel","trouser","fashion"],"imageUrls":["https://hual-assets.web.app/products/p004-1.jpg"],"rating":4.5,"reviewCount":76,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-02-20T09:00:00Z"},
-  {"id":"p005","name":"Soft Loop Hoodie","description":"Midweight hoodie with brushed interior and clean tonal drawcords.","price":68.0,"salePrice":54.0,"category":"fashion","colors":["heather gray","coral"],"materials":["cotton fleece"],"style":["athleisure","cozy"],"tags":["hoodie","sale","multi-variant"],"searchTokens":["soft","loop","hoodie","fashion"],"imageUrls":["https://hual-assets.web.app/products/p005-1.jpg"],"rating":4.4,"reviewCount":203,"inventory":31,"isNew":false,"isSale":true,"createdAt":"2026-01-30T09:00:00Z"},
-  {"id":"p006","name":"Pleated Satin Skirt","description":"Fluid pleated skirt with a quiet sheen and elastic waist.","price":79.0,"salePrice":null,"category":"fashion","colors":["champagne"],"materials":["recycled satin"],"style":["soft","occasion"],"tags":["skirt","missing-image"],"searchTokens":["pleated","satin","skirt","fashion"],"imageUrls":[],"rating":4.2,"reviewCount":19,"inventory":7,"isNew":false,"isSale":false,"createdAt":"2026-04-13T09:00:00Z"},
-  {"id":"p007","name":"Washed Denim Shacket","description":"Structured denim shirt-jacket with a washed finish and snap front.","price":104.0,"salePrice":null,"category":"fashion","colors":["indigo","washed black"],"materials":["denim"],"style":["casual","heritage"],"tags":["denim","jacket","multi-variant"],"searchTokens":["washed","denim","shacket","fashion"],"imageUrls":["https://hual-assets.web.app/products/p007-1.jpg"],"rating":4.6,"reviewCount":67,"inventory":15,"isNew":false,"isSale":false,"createdAt":"2026-02-09T09:00:00Z"},
-  {"id":"p008","name":"Air Cotton Tee Pack","description":"Two-pack of breathable cotton tees with a soft lived-in handfeel.","price":44.0,"salePrice":null,"category":"fashion","colors":["white","black"],"materials":["cotton"],"style":["basic","minimal"],"tags":["tee","essentials","new"],"searchTokens":["air","cotton","tee","pack","fashion"],"imageUrls":["https://hual-assets.web.app/products/p008-1.jpg"],"rating":4.3,"reviewCount":54,"inventory":39,"isNew":true,"isSale":false,"createdAt":"2026-06-03T09:00:00Z"},
-  {"id":"p009","name":"Tailored Wool Coat","description":"Single-breasted wool coat with clean lapels and a longline cut.","price":188.0,"salePrice":149.0,"category":"fashion","colors":["camel"],"materials":["wool","polyester lining"],"style":["tailored","classic"],"tags":["coat","sale"],"searchTokens":["tailored","wool","coat","fashion"],"imageUrls":["https://hual-assets.web.app/products/p009-1.jpg"],"rating":4.9,"reviewCount":112,"inventory":5,"isNew":false,"isSale":true,"createdAt":"2026-01-08T09:00:00Z"},
-  {"id":"p010","name":"Pocket Noise-Canceling Earbuds","description":"Compact earbuds with adaptive noise canceling and a pocketable case.","price":129.0,"salePrice":99.0,"category":"electronics","colors":["graphite","white"],"materials":["recycled plastic","silicone"],"style":["portable","sleek"],"tags":["earbuds","sale","multi-variant"],"searchTokens":["noise","canceling","earbuds","electronics"],"imageUrls":["https://hual-assets.web.app/products/p010-1.jpg"],"rating":4.7,"reviewCount":341,"inventory":28,"isNew":false,"isSale":true,"createdAt":"2026-02-02T09:00:00Z"},
-  {"id":"p011","name":"MagSafe Desk Charger","description":"Weighted aluminum stand for phone, watch, and earbuds charging.","price":86.0,"salePrice":null,"category":"electronics","colors":["silver"],"materials":["aluminum","braided cable"],"style":["desk","minimal"],"tags":["charger","desk","normal"],"searchTokens":["magsafe","desk","charger","electronics"],"imageUrls":["https://hual-assets.web.app/products/p011-1.jpg"],"rating":4.5,"reviewCount":98,"inventory":19,"isNew":false,"isSale":false,"createdAt":"2026-03-05T09:00:00Z"},
-  {"id":"p012","name":"Pebble Bluetooth Speaker","description":"Water-resistant speaker with warm tuning and a woven carry loop.","price":58.0,"salePrice":null,"category":"electronics","colors":["terracotta","navy"],"materials":["fabric","rubber"],"style":["portable","outdoor"],"tags":["speaker","new","multi-variant"],"searchTokens":["pebble","bluetooth","speaker","electronics"],"imageUrls":["https://hual-assets.web.app/products/p012-1.jpg"],"rating":4.4,"reviewCount":73,"inventory":22,"isNew":true,"isSale":false,"createdAt":"2026-06-02T09:00:00Z"},
-  {"id":"p013","name":"Slim Mechanical Keyboard","description":"Low-profile mechanical keyboard with quiet tactile switches.","price":142.0,"salePrice":null,"category":"electronics","colors":["black"],"materials":["aluminum","pbt keycaps"],"style":["workspace","precise"],"tags":["keyboard","workspace"],"searchTokens":["slim","mechanical","keyboard","electronics"],"imageUrls":["https://hual-assets.web.app/products/p013-1.jpg"],"rating":4.8,"reviewCount":187,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-01-19T09:00:00Z"},
-  {"id":"p014","name":"USB-C Travel Hub","description":"Six-port travel hub with HDMI, card reader, and pass-through charging.","price":64.0,"salePrice":49.0,"category":"electronics","colors":["space gray"],"materials":["aluminum"],"style":["travel","utility"],"tags":["hub","sale"],"searchTokens":["usb-c","travel","hub","electronics"],"imageUrls":["https://hual-assets.web.app/products/p014-1.jpg"],"rating":4.3,"reviewCount":126,"inventory":44,"isNew":false,"isSale":true,"createdAt":"2026-02-14T09:00:00Z"},
-  {"id":"p015","name":"Focus Smart Lamp","description":"Dimmable smart lamp with warm-to-cool light and app scenes.","price":112.0,"salePrice":null,"category":"electronics","colors":["white","charcoal"],"materials":["polycarbonate","steel"],"style":["smart-home","minimal"],"tags":["lamp","smart","multi-variant"],"searchTokens":["focus","smart","lamp","electronics"],"imageUrls":["https://hual-assets.web.app/products/p015-1.jpg"],"rating":4.6,"reviewCount":59,"inventory":16,"isNew":true,"isSale":false,"createdAt":"2026-06-04T09:00:00Z"},
-  {"id":"p016","name":"Mini Action Camera","description":"Pocket camera with 4K stabilization and a magnetic clip mount.","price":179.0,"salePrice":null,"category":"electronics","colors":["black"],"materials":["polycarbonate","glass"],"style":["adventure","compact"],"tags":["camera","missing-image"],"searchTokens":["mini","action","camera","electronics"],"imageUrls":[],"rating":4.1,"reviewCount":28,"inventory":9,"isNew":false,"isSale":false,"createdAt":"2026-04-05T09:00:00Z"},
-  {"id":"p017","name":"Arc Ceramic Table Lamp","description":"A softly curved ceramic lamp for warm desk and bedside lighting.","price":64.0,"salePrice":null,"category":"home","colors":["clay","white"],"materials":["ceramic","linen"],"style":["minimal","warm"],"tags":["lamp","lighting","decor"],"searchTokens":["arc","ceramic","table","lamp","home"],"imageUrls":["https://hual-assets.web.app/products/p017-1.jpg"],"rating":4.7,"reviewCount":91,"inventory":18,"isNew":false,"isSale":false,"createdAt":"2026-05-10T09:00:00Z"},
-  {"id":"p018","name":"Woven Storage Basket Set","description":"Three nested storage baskets with sturdy handles and natural texture.","price":54.0,"salePrice":42.0,"category":"home","colors":["natural"],"materials":["seagrass"],"style":["organic","tidy"],"tags":["storage","sale","basket"],"searchTokens":["woven","storage","basket","home"],"imageUrls":["https://hual-assets.web.app/products/p018-1.jpg"],"rating":4.5,"reviewCount":117,"inventory":26,"isNew":false,"isSale":true,"createdAt":"2026-03-01T09:00:00Z"},
-  {"id":"p019","name":"Stoneware Dinner Set","description":"Four-place stoneware set with softly irregular edges.","price":118.0,"salePrice":null,"category":"home","colors":["speckle white","sage"],"materials":["stoneware"],"style":["artisan","modern"],"tags":["dinnerware","new","multi-variant"],"searchTokens":["stoneware","dinner","set","home"],"imageUrls":["https://hual-assets.web.app/products/p019-1.jpg"],"rating":4.8,"reviewCount":65,"inventory":12,"isNew":true,"isSale":false,"createdAt":"2026-06-05T09:00:00Z"},
-  {"id":"p020","name":"Cotton Gauze Throw","description":"Layered cotton gauze throw with a crinkled soft finish.","price":48.0,"salePrice":null,"category":"home","colors":["rust","cream"],"materials":["cotton"],"style":["cozy","textured"],"tags":["throw","blanket","multi-variant"],"searchTokens":["cotton","gauze","throw","home"],"imageUrls":["https://hual-assets.web.app/products/p020-1.jpg"],"rating":4.4,"reviewCount":84,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-02-22T09:00:00Z"},
-  {"id":"p021","name":"Modular Oak Shelf","description":"Stackable oak shelf with rounded posts and adjustable levels.","price":136.0,"salePrice":null,"category":"home","colors":["oak"],"materials":["oak veneer","steel"],"style":["modular","scandi"],"tags":["shelf","furniture"],"searchTokens":["modular","oak","shelf","home"],"imageUrls":["https://hual-assets.web.app/products/p021-1.jpg"],"rating":4.6,"reviewCount":49,"inventory":8,"isNew":false,"isSale":false,"createdAt":"2026-04-17T09:00:00Z"},
-  {"id":"p022","name":"Marble Catchall Tray","description":"Small marble tray for jewelry, keys, and bedside essentials.","price":34.0,"salePrice":28.0,"category":"home","colors":["white marble"],"materials":["marble"],"style":["elegant","minimal"],"tags":["tray","sale"],"searchTokens":["marble","catchall","tray","home"],"imageUrls":["https://hual-assets.web.app/products/p022-1.jpg"],"rating":4.2,"reviewCount":38,"inventory":21,"isNew":false,"isSale":true,"createdAt":"2026-02-03T09:00:00Z"},
-  {"id":"p023","name":"Ripple Glass Carafe","description":"Ribbed glass carafe with a tumbler lid for bedside hydration.","price":39.0,"salePrice":null,"category":"home","colors":["clear","smoke"],"materials":["glass"],"style":["bedside","refined"],"tags":["carafe","multi-variant"],"searchTokens":["ripple","glass","carafe","home"],"imageUrls":["https://hual-assets.web.app/products/p023-1.jpg"],"rating":4.5,"reviewCount":52,"inventory":30,"isNew":false,"isSale":false,"createdAt":"2026-03-24T09:00:00Z"},
-  {"id":"p024","name":"Framed Linen Wall Art","description":"Textural linen art panel in a thin natural frame.","price":89.0,"salePrice":null,"category":"home","colors":["linen"],"materials":["linen","wood"],"style":["quiet","gallery"],"tags":["wall-art","missing-image"],"searchTokens":["framed","linen","wall","art","home"],"imageUrls":[],"rating":4.0,"reviewCount":15,"inventory":6,"isNew":true,"isSale":false,"createdAt":"2026-06-07T09:00:00Z"},
-  {"id":"p025","name":"Cedar Drawer Sachets","description":"Set of cedar and lavender sachets for fresh drawers and closets.","price":18.0,"salePrice":null,"category":"home","colors":["natural"],"materials":["cedar","cotton"],"style":["fresh","utility"],"tags":["closet","scent"],"searchTokens":["cedar","drawer","sachets","home"],"imageUrls":["https://hual-assets.web.app/products/p025-1.jpg"],"rating":4.3,"reviewCount":44,"inventory":40,"isNew":false,"isSale":false,"createdAt":"2026-01-12T09:00:00Z"},
-  {"id":"p026","name":"Barrier Repair Gel Cream","description":"Light gel cream with ceramides for daily barrier support.","price":32.0,"salePrice":null,"category":"skincare","colors":["white"],"materials":["ceramides","squalane"],"style":["daily","gentle"],"tags":["moisturizer","new"],"searchTokens":["barrier","repair","gel","cream","skincare"],"imageUrls":["https://hual-assets.web.app/products/p026-1.jpg"],"rating":4.8,"reviewCount":221,"inventory":34,"isNew":true,"isSale":false,"createdAt":"2026-06-01T09:00:00Z"},
-  {"id":"p027","name":"Vitamin C Dew Serum","description":"Brightening serum with vitamin C derivative and calming green tea.","price":46.0,"salePrice":39.0,"category":"skincare","colors":["amber"],"materials":["vitamin c","green tea"],"style":["brightening","daily"],"tags":["serum","sale"],"searchTokens":["vitamin","c","dew","serum","skincare"],"imageUrls":["https://hual-assets.web.app/products/p027-1.jpg"],"rating":4.5,"reviewCount":174,"inventory":27,"isNew":false,"isSale":true,"createdAt":"2026-02-10T09:00:00Z"},
-  {"id":"p028","name":"Mineral Cloud SPF 40","description":"Mineral sunscreen with a soft satin finish and no heavy residue.","price":28.0,"salePrice":null,"category":"skincare","colors":["white"],"materials":["zinc oxide"],"style":["sun-care","lightweight"],"tags":["spf","sunscreen"],"searchTokens":["mineral","cloud","spf","skincare"],"imageUrls":["https://hual-assets.web.app/products/p028-1.jpg"],"rating":4.4,"reviewCount":138,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-03-15T09:00:00Z"},
-  {"id":"p029","name":"AHA Soft Glow Toner","description":"Gentle exfoliating toner with lactic acid and aloe.","price":24.0,"salePrice":null,"category":"skincare","colors":["clear"],"materials":["lactic acid","aloe"],"style":["exfoliating","gentle"],"tags":["toner","normal"],"searchTokens":["aha","soft","glow","toner","skincare"],"imageUrls":["https://hual-assets.web.app/products/p029-1.jpg"],"rating":4.2,"reviewCount":86,"inventory":41,"isNew":false,"isSale":false,"createdAt":"2026-01-25T09:00:00Z"},
-  {"id":"p030","name":"Oat Milk Cleanser","description":"Creamy cleanser for calm morning and evening routines.","price":22.0,"salePrice":18.0,"category":"skincare","colors":["cream"],"materials":["oat","glycerin"],"style":["calming","daily"],"tags":["cleanser","sale"],"searchTokens":["oat","milk","cleanser","skincare"],"imageUrls":["https://hual-assets.web.app/products/p030-1.jpg"],"rating":4.6,"reviewCount":152,"inventory":29,"isNew":false,"isSale":true,"createdAt":"2026-02-28T09:00:00Z"},
-  {"id":"p031","name":"Clay Reset Mask","description":"Soft clay mask that balances shine without a tight finish.","price":30.0,"salePrice":null,"category":"skincare","colors":["sage"],"materials":["kaolin clay","matcha"],"style":["reset","weekly"],"tags":["mask","missing-image"],"searchTokens":["clay","reset","mask","skincare"],"imageUrls":[],"rating":4.1,"reviewCount":47,"inventory":12,"isNew":false,"isSale":false,"createdAt":"2026-04-12T09:00:00Z"},
-  {"id":"p032","name":"Lip Sleep Balm Trio","description":"Three overnight lip balms in sheer fruit tints.","price":26.0,"salePrice":null,"category":"skincare","colors":["berry","peach","clear"],"materials":["shea butter","lanolin"],"style":["overnight","soft"],"tags":["lip","multi-variant","new"],"searchTokens":["lip","sleep","balm","trio","skincare"],"imageUrls":["https://hual-assets.web.app/products/p032-1.jpg"],"rating":4.7,"reviewCount":99,"inventory":23,"isNew":true,"isSale":false,"createdAt":"2026-06-06T09:00:00Z"},
-  {"id":"p033","name":"Hydra Mist Essence","description":"Fine facial mist with hyaluronic acid for midday refresh.","price":21.0,"salePrice":null,"category":"skincare","colors":["clear"],"materials":["hyaluronic acid","rosewater"],"style":["refreshing","portable"],"tags":["mist","hydration"],"searchTokens":["hydra","mist","essence","skincare"],"imageUrls":["https://hual-assets.web.app/products/p033-1.jpg"],"rating":4.3,"reviewCount":64,"inventory":37,"isNew":false,"isSale":false,"createdAt":"2026-03-08T09:00:00Z"},
-  {"id":"p034","name":"Cloudlift Training Sneaker","description":"Lightweight training sneaker with breathable mesh and responsive foam.","price":88.0,"salePrice":74.0,"category":"fitness","colors":["white","silver"],"materials":["mesh","rubber"],"style":["sporty","clean"],"tags":["sneaker","training","sale"],"searchTokens":["cloudlift","training","sneaker","white","fitness"],"imageUrls":["https://hual-assets.web.app/products/p034-1.jpg"],"rating":4.6,"reviewCount":144,"inventory":22,"isNew":false,"isSale":true,"createdAt":"2026-04-22T09:00:00Z"},
-  {"id":"p035","name":"Grip Yoga Mat","description":"Cushioned yoga mat with dry-grip texture and alignment marks.","price":64.0,"salePrice":null,"category":"fitness","colors":["sage","charcoal"],"materials":["natural rubber"],"style":["studio","minimal"],"tags":["yoga","mat","multi-variant"],"searchTokens":["grip","yoga","mat","fitness"],"imageUrls":["https://hual-assets.web.app/products/p035-1.jpg"],"rating":4.8,"reviewCount":196,"inventory":18,"isNew":false,"isSale":false,"createdAt":"2026-02-18T09:00:00Z"},
-  {"id":"p036","name":"Adjustable Dumbbell Pair","description":"Compact adjustable dumbbells for quick home strength sessions.","price":168.0,"salePrice":null,"category":"fitness","colors":["black"],"materials":["steel","rubber"],"style":["home-gym","strength"],"tags":["dumbbell","strength"],"searchTokens":["adjustable","dumbbell","pair","fitness"],"imageUrls":["https://hual-assets.web.app/products/p036-1.jpg"],"rating":4.7,"reviewCount":83,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-01-15T09:00:00Z"},
-  {"id":"p037","name":"Cooling Run Cap","description":"Featherweight running cap with laser perforation and a quick adjust strap.","price":30.0,"salePrice":null,"category":"fitness","colors":["coral","black"],"materials":["nylon"],"style":["running","lightweight"],"tags":["cap","new","multi-variant"],"searchTokens":["cooling","run","cap","fitness"],"imageUrls":["https://hual-assets.web.app/products/p037-1.jpg"],"rating":4.4,"reviewCount":57,"inventory":33,"isNew":true,"isSale":false,"createdAt":"2026-06-08T09:00:00Z"},
-  {"id":"p038","name":"Loop Resistance Bands","description":"Five resistance bands with a cotton pouch and printed strength levels.","price":24.0,"salePrice":18.0,"category":"fitness","colors":["multi"],"materials":["latex"],"style":["portable","training"],"tags":["bands","sale"],"searchTokens":["loop","resistance","bands","fitness"],"imageUrls":["https://hual-assets.web.app/products/p038-1.jpg"],"rating":4.2,"reviewCount":121,"inventory":45,"isNew":false,"isSale":true,"createdAt":"2026-02-11T09:00:00Z"},
-  {"id":"p039","name":"Insulated Sport Bottle","description":"Leakproof insulated bottle with a straw lid for workouts and commutes.","price":38.0,"salePrice":null,"category":"fitness","colors":["teal","white","black"],"materials":["stainless steel"],"style":["hydration","durable"],"tags":["bottle","multi-variant"],"searchTokens":["insulated","sport","bottle","fitness"],"imageUrls":["https://hual-assets.web.app/products/p039-1.jpg"],"rating":4.5,"reviewCount":172,"inventory":28,"isNew":false,"isSale":false,"createdAt":"2026-03-19T09:00:00Z"},
-  {"id":"p040","name":"Recovery Foam Roller","description":"Medium-density foam roller with a textured recovery surface.","price":34.0,"salePrice":null,"category":"fitness","colors":["slate"],"materials":["eva foam"],"style":["recovery","home-gym"],"tags":["foam-roller","missing-image"],"searchTokens":["recovery","foam","roller","fitness"],"imageUrls":[],"rating":4.0,"reviewCount":39,"inventory":14,"isNew":false,"isSale":false,"createdAt":"2026-04-09T09:00:00Z"},
-  {"id":"p041","name":"Studio Ankle Weights","description":"Soft-touch ankle weights with secure hook-and-loop closure.","price":46.0,"salePrice":null,"category":"fitness","colors":["sand"],"materials":["silicone","iron sand"],"style":["studio","low-impact"],"tags":["weights","new"],"searchTokens":["studio","ankle","weights","fitness"],"imageUrls":["https://hual-assets.web.app/products/p041-1.jpg"],"rating":4.6,"reviewCount":71,"inventory":20,"isNew":true,"isSale":false,"createdAt":"2026-06-09T09:00:00Z"},
-  {"id":"p042","name":"Sculpted Leather Tote","description":"Structured leather tote with padded handles and a laptop sleeve.","price":148.0,"salePrice":null,"category":"accessories","colors":["espresso","black"],"materials":["leather","cotton lining"],"style":["work","polished"],"tags":["bag","multi-variant"],"searchTokens":["sculpted","leather","tote","accessories"],"imageUrls":["https://hual-assets.web.app/products/p042-1.jpg"],"rating":4.8,"reviewCount":115,"inventory":11,"isNew":false,"isSale":false,"createdAt":"2026-03-03T09:00:00Z"},
-  {"id":"p043","name":"Oval Acetate Sunglasses","description":"Oval sunglasses with smoky lenses and polished acetate frames.","price":58.0,"salePrice":46.0,"category":"accessories","colors":["tortoise","black"],"materials":["acetate","polycarbonate"],"style":["retro","sun"],"tags":["sunglasses","sale","multi-variant"],"searchTokens":["oval","acetate","sunglasses","accessories"],"imageUrls":["https://hual-assets.web.app/products/p043-1.jpg"],"rating":4.4,"reviewCount":82,"inventory":27,"isNew":false,"isSale":true,"createdAt":"2026-02-16T09:00:00Z"},
-  {"id":"p044","name":"Fine Hoop Earring Set","description":"Three pairs of fine hoop earrings in graduated sizes.","price":36.0,"salePrice":null,"category":"accessories","colors":["gold"],"materials":["gold-plated brass"],"style":["jewelry","everyday"],"tags":["earrings","normal"],"searchTokens":["fine","hoop","earring","set","accessories"],"imageUrls":["https://hual-assets.web.app/products/p044-1.jpg"],"rating":4.3,"reviewCount":66,"inventory":32,"isNew":false,"isSale":false,"createdAt":"2026-01-27T09:00:00Z"},
-  {"id":"p045","name":"Braided Leather Belt","description":"Flexible braided belt with a brushed metal buckle.","price":42.0,"salePrice":null,"category":"accessories","colors":["tan","black"],"materials":["leather","zinc alloy"],"style":["classic","casual"],"tags":["belt","multi-variant"],"searchTokens":["braided","leather","belt","accessories"],"imageUrls":["https://hual-assets.web.app/products/p045-1.jpg"],"rating":4.5,"reviewCount":48,"inventory":0,"isNew":false,"isSale":false,"createdAt":"2026-02-24T09:00:00Z"},
-  {"id":"p046","name":"Silk Square Scarf","description":"Printed silk scarf that can be worn at the neck, hair, or bag handle.","price":52.0,"salePrice":null,"category":"accessories","colors":["coral","cream"],"materials":["silk"],"style":["print","soft"],"tags":["scarf","new","multi-variant"],"searchTokens":["silk","square","scarf","accessories"],"imageUrls":["https://hual-assets.web.app/products/p046-1.jpg"],"rating":4.7,"reviewCount":33,"inventory":18,"isNew":true,"isSale":false,"createdAt":"2026-06-10T09:00:00Z"},
-  {"id":"p047","name":"Commuter Card Wallet","description":"Slim card wallet with RFID lining and an exterior transit pocket.","price":34.0,"salePrice":28.0,"category":"accessories","colors":["forest"],"materials":["vegan leather"],"style":["commute","slim"],"tags":["wallet","sale"],"searchTokens":["commuter","card","wallet","accessories"],"imageUrls":["https://hual-assets.web.app/products/p047-1.jpg"],"rating":4.2,"reviewCount":91,"inventory":35,"isNew":false,"isSale":true,"createdAt":"2026-03-11T09:00:00Z"},
-  {"id":"p048","name":"Canvas Weekend Pouch","description":"Durable pouch for chargers, makeup, or small travel essentials.","price":29.0,"salePrice":null,"category":"accessories","colors":["natural","navy"],"materials":["canvas","brass"],"style":["travel","utility"],"tags":["pouch","missing-image"],"searchTokens":["canvas","weekend","pouch","accessories"],"imageUrls":[],"rating":4.1,"reviewCount":22,"inventory":24,"isNew":false,"isSale":false,"createdAt":"2026-04-15T09:00:00Z"},
-  {"id":"p049","name":"Minimal Watch Strap","description":"Replacement watch strap with quick-release pins and a smooth finish.","price":40.0,"salePrice":null,"category":"accessories","colors":["stone","black"],"materials":["silicone","stainless steel"],"style":["tech","minimal"],"tags":["watch-strap","multi-variant"],"searchTokens":["minimal","watch","strap","accessories"],"imageUrls":["https://hual-assets.web.app/products/p049-1.jpg"],"rating":4.4,"reviewCount":55,"inventory":29,"isNew":false,"isSale":false,"createdAt":"2026-03-21T09:00:00Z"},
-  {"id":"p050","name":"Pearl Hair Pin Duo","description":"Two pearl-finish hair pins for polished everyday styling.","price":24.0,"salePrice":null,"category":"accessories","colors":["pearl"],"materials":["resin pearl","steel"],"style":["hair","polished"],"tags":["hair-pin","new"],"searchTokens":["pearl","hair","pin","duo","accessories"],"imageUrls":["https://hual-assets.web.app/products/p050-1.jpg"],"rating":4.6,"reviewCount":37,"inventory":16,"isNew":true,"isSale":false,"createdAt":"2026-06-11T09:00:00Z"}
+  {
+    "id": "p001",
+    "name": "Boxy Linen Overshirt",
+    "description": "Relaxed linen overshirt with a soft drape for everyday layering.",
+    "price": 72.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "olive",
+      "cream"
+    ],
+    "materials": [
+      "linen",
+      "cotton"
+    ],
+    "style": [
+      "casual",
+      "minimal"
+    ],
+    "tags": [
+      "shirt",
+      "layering",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "boxy",
+      "linen",
+      "overshirt",
+      "olive",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.6,
+    "reviewCount": 88,
+    "inventory": 24,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-01T09:00:00Z"
+  },
+  {
+    "id": "p002",
+    "name": "Ribbed Knit Midi Dress",
+    "description": "Column midi dress with ribbed texture and an easy stretch fit.",
+    "price": 96.0,
+    "salePrice": 78.0,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "moss"
+    ],
+    "materials": [
+      "viscose",
+      "nylon"
+    ],
+    "style": [
+      "modern",
+      "evening"
+    ],
+    "tags": [
+      "dress",
+      "sale",
+      "knit"
+    ],
+    "searchTokens": [
+      "ribbed",
+      "knit",
+      "midi",
+      "dress",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.7,
+    "reviewCount": 132,
+    "inventory": 13,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-03-18T09:00:00Z"
+  },
+  {
+    "id": "p003",
+    "name": "Cropped Utility Jacket",
+    "description": "Lightweight utility jacket with roomy pockets and a cropped shape.",
+    "price": 118.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "sand",
+      "navy"
+    ],
+    "materials": [
+      "cotton",
+      "recycled polyester"
+    ],
+    "style": [
+      "utility",
+      "street"
+    ],
+    "tags": [
+      "jacket",
+      "new",
+      "outerwear"
+    ],
+    "searchTokens": [
+      "cropped",
+      "utility",
+      "jacket",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.8,
+    "reviewCount": 41,
+    "inventory": 17,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-01T09:00:00Z"
+  },
+  {
+    "id": "p004",
+    "name": "Tapered Travel Trouser",
+    "description": "Wrinkle-resistant tapered trouser built for long days and quick packing.",
+    "price": 84.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "charcoal"
+    ],
+    "materials": [
+      "recycled nylon",
+      "elastane"
+    ],
+    "style": [
+      "travel",
+      "tailored"
+    ],
+    "tags": [
+      "pants",
+      "travel",
+      "normal"
+    ],
+    "searchTokens": [
+      "tapered",
+      "travel",
+      "trouser",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.5,
+    "reviewCount": 76,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-02-20T09:00:00Z"
+  },
+  {
+    "id": "p005",
+    "name": "Soft Loop Hoodie",
+    "description": "Midweight hoodie with brushed interior and clean tonal drawcords.",
+    "price": 68.0,
+    "salePrice": 54.0,
+    "category": "fashion",
+    "colors": [
+      "heather gray",
+      "coral"
+    ],
+    "materials": [
+      "cotton fleece"
+    ],
+    "style": [
+      "athleisure",
+      "cozy"
+    ],
+    "tags": [
+      "hoodie",
+      "sale",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "soft",
+      "loop",
+      "hoodie",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.4,
+    "reviewCount": 203,
+    "inventory": 31,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-01-30T09:00:00Z"
+  },
+  {
+    "id": "p006",
+    "name": "Pleated Satin Skirt",
+    "description": "Fluid pleated skirt with a quiet sheen and elastic waist.",
+    "price": 79.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "champagne"
+    ],
+    "materials": [
+      "recycled satin"
+    ],
+    "style": [
+      "soft",
+      "occasion"
+    ],
+    "tags": [
+      "skirt",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "pleated",
+      "satin",
+      "skirt",
+      "fashion"
+    ],
+    "imageUrls": [],
+    "rating": 4.2,
+    "reviewCount": 19,
+    "inventory": 7,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-13T09:00:00Z"
+  },
+  {
+    "id": "p007",
+    "name": "Washed Denim Shacket",
+    "description": "Structured denim shirt-jacket with a washed finish and snap front.",
+    "price": 104.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "indigo",
+      "washed black"
+    ],
+    "materials": [
+      "denim"
+    ],
+    "style": [
+      "casual",
+      "heritage"
+    ],
+    "tags": [
+      "denim",
+      "jacket",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "washed",
+      "denim",
+      "shacket",
+      "fashion"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 67,
+    "inventory": 15,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-02-09T09:00:00Z"
+  },
+  {
+    "id": "p008",
+    "name": "Air Cotton Tee Pack",
+    "description": "Two-pack of breathable cotton tees with a soft lived-in handfeel.",
+    "price": 44.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "white",
+      "black"
+    ],
+    "materials": [
+      "cotton"
+    ],
+    "style": [
+      "basic",
+      "minimal"
+    ],
+    "tags": [
+      "tee",
+      "essentials",
+      "new"
+    ],
+    "searchTokens": [
+      "air",
+      "cotton",
+      "tee",
+      "pack",
+      "fashion"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.3,
+    "reviewCount": 54,
+    "inventory": 39,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-03T09:00:00Z"
+  },
+  {
+    "id": "p009",
+    "name": "Tailored Wool Coat",
+    "description": "Single-breasted wool coat with clean lapels and a longline cut.",
+    "price": 188.0,
+    "salePrice": 149.0,
+    "category": "fashion",
+    "colors": [
+      "camel"
+    ],
+    "materials": [
+      "wool",
+      "polyester lining"
+    ],
+    "style": [
+      "tailored",
+      "classic"
+    ],
+    "tags": [
+      "coat",
+      "sale"
+    ],
+    "searchTokens": [
+      "tailored",
+      "wool",
+      "coat",
+      "fashion"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.9,
+    "reviewCount": 112,
+    "inventory": 5,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-01-08T09:00:00Z"
+  },
+  {
+    "id": "p010",
+    "name": "Pocket Noise-Canceling Earbuds",
+    "description": "Compact earbuds with adaptive noise canceling and a pocketable case.",
+    "price": 129.0,
+    "salePrice": 99.0,
+    "category": "electronics",
+    "colors": [
+      "graphite",
+      "white"
+    ],
+    "materials": [
+      "recycled plastic",
+      "silicone"
+    ],
+    "style": [
+      "portable",
+      "sleek"
+    ],
+    "tags": [
+      "earbuds",
+      "sale",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "noise",
+      "canceling",
+      "earbuds",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.7,
+    "reviewCount": 341,
+    "inventory": 28,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-02T09:00:00Z"
+  },
+  {
+    "id": "p011",
+    "name": "MagSafe Desk Charger",
+    "description": "Weighted aluminum stand for phone, watch, and earbuds charging.",
+    "price": 86.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "silver"
+    ],
+    "materials": [
+      "aluminum",
+      "braided cable"
+    ],
+    "style": [
+      "desk",
+      "minimal"
+    ],
+    "tags": [
+      "charger",
+      "desk",
+      "normal"
+    ],
+    "searchTokens": [
+      "magsafe",
+      "desk",
+      "charger",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 98,
+    "inventory": 19,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-05T09:00:00Z"
+  },
+  {
+    "id": "p012",
+    "name": "Pebble Bluetooth Speaker",
+    "description": "Water-resistant speaker with warm tuning and a woven carry loop.",
+    "price": 58.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "terracotta",
+      "navy"
+    ],
+    "materials": [
+      "fabric",
+      "rubber"
+    ],
+    "style": [
+      "portable",
+      "outdoor"
+    ],
+    "tags": [
+      "speaker",
+      "new",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "pebble",
+      "bluetooth",
+      "speaker",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 73,
+    "inventory": 22,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-02T09:00:00Z"
+  },
+  {
+    "id": "p013",
+    "name": "Slim Mechanical Keyboard",
+    "description": "Low-profile mechanical keyboard with quiet tactile switches.",
+    "price": 142.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black"
+    ],
+    "materials": [
+      "aluminum",
+      "pbt keycaps"
+    ],
+    "style": [
+      "workspace",
+      "precise"
+    ],
+    "tags": [
+      "keyboard",
+      "workspace"
+    ],
+    "searchTokens": [
+      "slim",
+      "mechanical",
+      "keyboard",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.8,
+    "reviewCount": 187,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-01-19T09:00:00Z"
+  },
+  {
+    "id": "p014",
+    "name": "USB-C Travel Hub",
+    "description": "Six-port travel hub with HDMI, card reader, and pass-through charging.",
+    "price": 64.0,
+    "salePrice": 49.0,
+    "category": "electronics",
+    "colors": [
+      "space gray"
+    ],
+    "materials": [
+      "aluminum"
+    ],
+    "style": [
+      "travel",
+      "utility"
+    ],
+    "tags": [
+      "hub",
+      "sale"
+    ],
+    "searchTokens": [
+      "usb-c",
+      "travel",
+      "hub",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.3,
+    "reviewCount": 126,
+    "inventory": 44,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-14T09:00:00Z"
+  },
+  {
+    "id": "p015",
+    "name": "Focus Smart Lamp",
+    "description": "Dimmable smart lamp with warm-to-cool light and app scenes.",
+    "price": 112.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "white",
+      "charcoal"
+    ],
+    "materials": [
+      "polycarbonate",
+      "steel"
+    ],
+    "style": [
+      "smart-home",
+      "minimal"
+    ],
+    "tags": [
+      "lamp",
+      "smart",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "focus",
+      "smart",
+      "lamp",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 59,
+    "inventory": 16,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-04T09:00:00Z"
+  },
+  {
+    "id": "p016",
+    "name": "Mini Action Camera",
+    "description": "Pocket camera with 4K stabilization and a magnetic clip mount.",
+    "price": 179.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black"
+    ],
+    "materials": [
+      "polycarbonate",
+      "glass"
+    ],
+    "style": [
+      "adventure",
+      "compact"
+    ],
+    "tags": [
+      "camera",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "mini",
+      "action",
+      "camera",
+      "electronics"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.1,
+    "reviewCount": 28,
+    "inventory": 9,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-05T09:00:00Z"
+  },
+  {
+    "id": "p017",
+    "name": "Arc Ceramic Table Lamp",
+    "description": "A softly curved ceramic lamp for warm desk and bedside lighting.",
+    "price": 64.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "clay",
+      "white"
+    ],
+    "materials": [
+      "ceramic",
+      "linen"
+    ],
+    "style": [
+      "minimal",
+      "warm"
+    ],
+    "tags": [
+      "lamp",
+      "lighting",
+      "decor"
+    ],
+    "searchTokens": [
+      "arc",
+      "ceramic",
+      "table",
+      "lamp",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.7,
+    "reviewCount": 91,
+    "inventory": 18,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-05-10T09:00:00Z"
+  },
+  {
+    "id": "p018",
+    "name": "Woven Storage Basket Set",
+    "description": "Three nested storage baskets with sturdy handles and natural texture.",
+    "price": 54.0,
+    "salePrice": 42.0,
+    "category": "home",
+    "colors": [
+      "natural"
+    ],
+    "materials": [
+      "seagrass"
+    ],
+    "style": [
+      "organic",
+      "tidy"
+    ],
+    "tags": [
+      "storage",
+      "sale",
+      "basket"
+    ],
+    "searchTokens": [
+      "woven",
+      "storage",
+      "basket",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 117,
+    "inventory": 26,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-03-01T09:00:00Z"
+  },
+  {
+    "id": "p019",
+    "name": "Stoneware Dinner Set",
+    "description": "Four-place stoneware set with softly irregular edges.",
+    "price": 118.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "speckle white",
+      "sage"
+    ],
+    "materials": [
+      "stoneware"
+    ],
+    "style": [
+      "artisan",
+      "modern"
+    ],
+    "tags": [
+      "dinnerware",
+      "new",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "stoneware",
+      "dinner",
+      "set",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.8,
+    "reviewCount": 65,
+    "inventory": 12,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-05T09:00:00Z"
+  },
+  {
+    "id": "p020",
+    "name": "Cotton Gauze Throw",
+    "description": "Layered cotton gauze throw with a crinkled soft finish.",
+    "price": 48.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "rust",
+      "cream"
+    ],
+    "materials": [
+      "cotton"
+    ],
+    "style": [
+      "cozy",
+      "textured"
+    ],
+    "tags": [
+      "throw",
+      "blanket",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "cotton",
+      "gauze",
+      "throw",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 84,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-02-22T09:00:00Z"
+  },
+  {
+    "id": "p021",
+    "name": "Modular Oak Shelf",
+    "description": "Stackable oak shelf with rounded posts and adjustable levels.",
+    "price": 136.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "oak"
+    ],
+    "materials": [
+      "oak veneer",
+      "steel"
+    ],
+    "style": [
+      "modular",
+      "scandi"
+    ],
+    "tags": [
+      "shelf",
+      "furniture"
+    ],
+    "searchTokens": [
+      "modular",
+      "oak",
+      "shelf",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 49,
+    "inventory": 8,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-17T09:00:00Z"
+  },
+  {
+    "id": "p022",
+    "name": "Marble Catchall Tray",
+    "description": "Small marble tray for jewelry, keys, and bedside essentials.",
+    "price": 34.0,
+    "salePrice": 28.0,
+    "category": "home",
+    "colors": [
+      "white marble"
+    ],
+    "materials": [
+      "marble"
+    ],
+    "style": [
+      "elegant",
+      "minimal"
+    ],
+    "tags": [
+      "tray",
+      "sale"
+    ],
+    "searchTokens": [
+      "marble",
+      "catchall",
+      "tray",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.2,
+    "reviewCount": 38,
+    "inventory": 21,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-03T09:00:00Z"
+  },
+  {
+    "id": "p023",
+    "name": "Ripple Glass Carafe",
+    "description": "Ribbed glass carafe with a tumbler lid for bedside hydration.",
+    "price": 39.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "clear",
+      "smoke"
+    ],
+    "materials": [
+      "glass"
+    ],
+    "style": [
+      "bedside",
+      "refined"
+    ],
+    "tags": [
+      "carafe",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "ripple",
+      "glass",
+      "carafe",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 52,
+    "inventory": 30,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-24T09:00:00Z"
+  },
+  {
+    "id": "p024",
+    "name": "Framed Linen Wall Art",
+    "description": "Textural linen art panel in a thin natural frame.",
+    "price": 89.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "linen"
+    ],
+    "materials": [
+      "linen",
+      "wood"
+    ],
+    "style": [
+      "quiet",
+      "gallery"
+    ],
+    "tags": [
+      "wall-art",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "framed",
+      "linen",
+      "wall",
+      "art",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.0,
+    "reviewCount": 15,
+    "inventory": 6,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-07T09:00:00Z"
+  },
+  {
+    "id": "p025",
+    "name": "Cedar Drawer Sachets",
+    "description": "Set of cedar and lavender sachets for fresh drawers and closets.",
+    "price": 18.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "natural"
+    ],
+    "materials": [
+      "cedar",
+      "cotton"
+    ],
+    "style": [
+      "fresh",
+      "utility"
+    ],
+    "tags": [
+      "closet",
+      "scent"
+    ],
+    "searchTokens": [
+      "cedar",
+      "drawer",
+      "sachets",
+      "home"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.3,
+    "reviewCount": 44,
+    "inventory": 40,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-01-12T09:00:00Z"
+  },
+  {
+    "id": "p026",
+    "name": "Barrier Repair Gel Cream",
+    "description": "Light gel cream with ceramides for daily barrier support.",
+    "price": 32.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "white"
+    ],
+    "materials": [
+      "ceramides",
+      "squalane"
+    ],
+    "style": [
+      "daily",
+      "gentle"
+    ],
+    "tags": [
+      "moisturizer",
+      "new"
+    ],
+    "searchTokens": [
+      "barrier",
+      "repair",
+      "gel",
+      "cream",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.8,
+    "reviewCount": 221,
+    "inventory": 34,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-01T09:00:00Z"
+  },
+  {
+    "id": "p027",
+    "name": "Vitamin C Dew Serum",
+    "description": "Brightening serum with vitamin C derivative and calming green tea.",
+    "price": 46.0,
+    "salePrice": 39.0,
+    "category": "skincare",
+    "colors": [
+      "amber"
+    ],
+    "materials": [
+      "vitamin c",
+      "green tea"
+    ],
+    "style": [
+      "brightening",
+      "daily"
+    ],
+    "tags": [
+      "serum",
+      "sale"
+    ],
+    "searchTokens": [
+      "vitamin",
+      "c",
+      "dew",
+      "serum",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 174,
+    "inventory": 27,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-10T09:00:00Z"
+  },
+  {
+    "id": "p028",
+    "name": "Mineral Cloud SPF 40",
+    "description": "Mineral sunscreen with a soft satin finish and no heavy residue.",
+    "price": 28.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "white"
+    ],
+    "materials": [
+      "zinc oxide"
+    ],
+    "style": [
+      "sun-care",
+      "lightweight"
+    ],
+    "tags": [
+      "spf",
+      "sunscreen"
+    ],
+    "searchTokens": [
+      "mineral",
+      "cloud",
+      "spf",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 138,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-15T09:00:00Z"
+  },
+  {
+    "id": "p029",
+    "name": "AHA Soft Glow Toner",
+    "description": "Gentle exfoliating toner with lactic acid and aloe.",
+    "price": 24.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "clear"
+    ],
+    "materials": [
+      "lactic acid",
+      "aloe"
+    ],
+    "style": [
+      "exfoliating",
+      "gentle"
+    ],
+    "tags": [
+      "toner",
+      "normal"
+    ],
+    "searchTokens": [
+      "aha",
+      "soft",
+      "glow",
+      "toner",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.2,
+    "reviewCount": 86,
+    "inventory": 41,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-01-25T09:00:00Z"
+  },
+  {
+    "id": "p030",
+    "name": "Oat Milk Cleanser",
+    "description": "Creamy cleanser for calm morning and evening routines.",
+    "price": 22.0,
+    "salePrice": 18.0,
+    "category": "skincare",
+    "colors": [
+      "cream"
+    ],
+    "materials": [
+      "oat",
+      "glycerin"
+    ],
+    "style": [
+      "calming",
+      "daily"
+    ],
+    "tags": [
+      "cleanser",
+      "sale"
+    ],
+    "searchTokens": [
+      "oat",
+      "milk",
+      "cleanser",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 152,
+    "inventory": 29,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-28T09:00:00Z"
+  },
+  {
+    "id": "p031",
+    "name": "Clay Reset Mask",
+    "description": "Soft clay mask that balances shine without a tight finish.",
+    "price": 30.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "sage"
+    ],
+    "materials": [
+      "kaolin clay",
+      "matcha"
+    ],
+    "style": [
+      "reset",
+      "weekly"
+    ],
+    "tags": [
+      "mask",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "clay",
+      "reset",
+      "mask",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.1,
+    "reviewCount": 47,
+    "inventory": 12,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-12T09:00:00Z"
+  },
+  {
+    "id": "p032",
+    "name": "Lip Sleep Balm Trio",
+    "description": "Three overnight lip balms in sheer fruit tints.",
+    "price": 26.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "berry",
+      "peach",
+      "clear"
+    ],
+    "materials": [
+      "shea butter",
+      "lanolin"
+    ],
+    "style": [
+      "overnight",
+      "soft"
+    ],
+    "tags": [
+      "lip",
+      "multi-variant",
+      "new"
+    ],
+    "searchTokens": [
+      "lip",
+      "sleep",
+      "balm",
+      "trio",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.7,
+    "reviewCount": 99,
+    "inventory": 23,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-06T09:00:00Z"
+  },
+  {
+    "id": "p033",
+    "name": "Hydra Mist Essence",
+    "description": "Fine facial mist with hyaluronic acid for midday refresh.",
+    "price": 21.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "clear"
+    ],
+    "materials": [
+      "hyaluronic acid",
+      "rosewater"
+    ],
+    "style": [
+      "refreshing",
+      "portable"
+    ],
+    "tags": [
+      "mist",
+      "hydration"
+    ],
+    "searchTokens": [
+      "hydra",
+      "mist",
+      "essence",
+      "skincare"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.3,
+    "reviewCount": 64,
+    "inventory": 37,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-08T09:00:00Z"
+  },
+  {
+    "id": "p034",
+    "name": "Cloudlift Training Sneaker",
+    "description": "Lightweight training sneaker with breathable mesh and responsive foam.",
+    "price": 88.0,
+    "salePrice": 74.0,
+    "category": "fitness",
+    "colors": [
+      "white",
+      "silver"
+    ],
+    "materials": [
+      "mesh",
+      "rubber"
+    ],
+    "style": [
+      "sporty",
+      "clean"
+    ],
+    "tags": [
+      "sneaker",
+      "training",
+      "sale"
+    ],
+    "searchTokens": [
+      "cloudlift",
+      "training",
+      "sneaker",
+      "white",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 144,
+    "inventory": 22,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-04-22T09:00:00Z"
+  },
+  {
+    "id": "p035",
+    "name": "Grip Yoga Mat",
+    "description": "Cushioned yoga mat with dry-grip texture and alignment marks.",
+    "price": 64.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "sage",
+      "charcoal"
+    ],
+    "materials": [
+      "natural rubber"
+    ],
+    "style": [
+      "studio",
+      "minimal"
+    ],
+    "tags": [
+      "yoga",
+      "mat",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "grip",
+      "yoga",
+      "mat",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.8,
+    "reviewCount": 196,
+    "inventory": 18,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-02-18T09:00:00Z"
+  },
+  {
+    "id": "p036",
+    "name": "Adjustable Dumbbell Pair",
+    "description": "Compact adjustable dumbbells for quick home strength sessions.",
+    "price": 168.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black"
+    ],
+    "materials": [
+      "steel",
+      "rubber"
+    ],
+    "style": [
+      "home-gym",
+      "strength"
+    ],
+    "tags": [
+      "dumbbell",
+      "strength"
+    ],
+    "searchTokens": [
+      "adjustable",
+      "dumbbell",
+      "pair",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.7,
+    "reviewCount": 83,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-01-15T09:00:00Z"
+  },
+  {
+    "id": "p037",
+    "name": "Cooling Run Cap",
+    "description": "Featherweight running cap with laser perforation and a quick adjust strap.",
+    "price": 30.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "coral",
+      "black"
+    ],
+    "materials": [
+      "nylon"
+    ],
+    "style": [
+      "running",
+      "lightweight"
+    ],
+    "tags": [
+      "cap",
+      "new",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "cooling",
+      "run",
+      "cap",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 57,
+    "inventory": 33,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-08T09:00:00Z"
+  },
+  {
+    "id": "p038",
+    "name": "Loop Resistance Bands",
+    "description": "Five resistance bands with a cotton pouch and printed strength levels.",
+    "price": 24.0,
+    "salePrice": 18.0,
+    "category": "fitness",
+    "colors": [
+      "multi"
+    ],
+    "materials": [
+      "latex"
+    ],
+    "style": [
+      "portable",
+      "training"
+    ],
+    "tags": [
+      "bands",
+      "sale"
+    ],
+    "searchTokens": [
+      "loop",
+      "resistance",
+      "bands",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.2,
+    "reviewCount": 121,
+    "inventory": 45,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-11T09:00:00Z"
+  },
+  {
+    "id": "p039",
+    "name": "Insulated Sport Bottle",
+    "description": "Leakproof insulated bottle with a straw lid for workouts and commutes.",
+    "price": 38.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "teal",
+      "white",
+      "black"
+    ],
+    "materials": [
+      "stainless steel"
+    ],
+    "style": [
+      "hydration",
+      "durable"
+    ],
+    "tags": [
+      "bottle",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "insulated",
+      "sport",
+      "bottle",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 172,
+    "inventory": 28,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-19T09:00:00Z"
+  },
+  {
+    "id": "p040",
+    "name": "Recovery Foam Roller",
+    "description": "Medium-density foam roller with a textured recovery surface.",
+    "price": 34.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "slate"
+    ],
+    "materials": [
+      "eva foam"
+    ],
+    "style": [
+      "recovery",
+      "home-gym"
+    ],
+    "tags": [
+      "foam-roller",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "recovery",
+      "foam",
+      "roller",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.0,
+    "reviewCount": 39,
+    "inventory": 14,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-09T09:00:00Z"
+  },
+  {
+    "id": "p041",
+    "name": "Studio Ankle Weights",
+    "description": "Soft-touch ankle weights with secure hook-and-loop closure.",
+    "price": 46.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "sand"
+    ],
+    "materials": [
+      "silicone",
+      "iron sand"
+    ],
+    "style": [
+      "studio",
+      "low-impact"
+    ],
+    "tags": [
+      "weights",
+      "new"
+    ],
+    "searchTokens": [
+      "studio",
+      "ankle",
+      "weights",
+      "fitness"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 71,
+    "inventory": 20,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-09T09:00:00Z"
+  },
+  {
+    "id": "p042",
+    "name": "Sculpted Leather Tote",
+    "description": "Structured leather tote with padded handles and a laptop sleeve.",
+    "price": 148.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "espresso",
+      "black"
+    ],
+    "materials": [
+      "leather",
+      "cotton lining"
+    ],
+    "style": [
+      "work",
+      "polished"
+    ],
+    "tags": [
+      "bag",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "sculpted",
+      "leather",
+      "tote",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.8,
+    "reviewCount": 115,
+    "inventory": 11,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-03T09:00:00Z"
+  },
+  {
+    "id": "p043",
+    "name": "Oval Acetate Sunglasses",
+    "description": "Oval sunglasses with smoky lenses and polished acetate frames.",
+    "price": 58.0,
+    "salePrice": 46.0,
+    "category": "accessories",
+    "colors": [
+      "tortoise",
+      "black"
+    ],
+    "materials": [
+      "acetate",
+      "polycarbonate"
+    ],
+    "style": [
+      "retro",
+      "sun"
+    ],
+    "tags": [
+      "sunglasses",
+      "sale",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "oval",
+      "acetate",
+      "sunglasses",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 82,
+    "inventory": 27,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-02-16T09:00:00Z"
+  },
+  {
+    "id": "p044",
+    "name": "Fine Hoop Earring Set",
+    "description": "Three pairs of fine hoop earrings in graduated sizes.",
+    "price": 36.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "gold"
+    ],
+    "materials": [
+      "gold-plated brass"
+    ],
+    "style": [
+      "jewelry",
+      "everyday"
+    ],
+    "tags": [
+      "earrings",
+      "normal"
+    ],
+    "searchTokens": [
+      "fine",
+      "hoop",
+      "earring",
+      "set",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.3,
+    "reviewCount": 66,
+    "inventory": 32,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-01-27T09:00:00Z"
+  },
+  {
+    "id": "p045",
+    "name": "Braided Leather Belt",
+    "description": "Flexible braided belt with a brushed metal buckle.",
+    "price": 42.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "tan",
+      "black"
+    ],
+    "materials": [
+      "leather",
+      "zinc alloy"
+    ],
+    "style": [
+      "classic",
+      "casual"
+    ],
+    "tags": [
+      "belt",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "braided",
+      "leather",
+      "belt",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.5,
+    "reviewCount": 48,
+    "inventory": 0,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-02-24T09:00:00Z"
+  },
+  {
+    "id": "p046",
+    "name": "Silk Square Scarf",
+    "description": "Printed silk scarf that can be worn at the neck, hair, or bag handle.",
+    "price": 52.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "coral",
+      "cream"
+    ],
+    "materials": [
+      "silk"
+    ],
+    "style": [
+      "print",
+      "soft"
+    ],
+    "tags": [
+      "scarf",
+      "new",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "silk",
+      "square",
+      "scarf",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.7,
+    "reviewCount": 33,
+    "inventory": 18,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-10T09:00:00Z"
+  },
+  {
+    "id": "p047",
+    "name": "Commuter Card Wallet",
+    "description": "Slim card wallet with RFID lining and an exterior transit pocket.",
+    "price": 34.0,
+    "salePrice": 28.0,
+    "category": "accessories",
+    "colors": [
+      "forest"
+    ],
+    "materials": [
+      "vegan leather"
+    ],
+    "style": [
+      "commute",
+      "slim"
+    ],
+    "tags": [
+      "wallet",
+      "sale"
+    ],
+    "searchTokens": [
+      "commuter",
+      "card",
+      "wallet",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.2,
+    "reviewCount": 91,
+    "inventory": 35,
+    "isNew": false,
+    "isSale": true,
+    "createdAt": "2026-03-11T09:00:00Z"
+  },
+  {
+    "id": "p048",
+    "name": "Canvas Weekend Pouch",
+    "description": "Durable pouch for chargers, makeup, or small travel essentials.",
+    "price": 29.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "natural",
+      "navy"
+    ],
+    "materials": [
+      "canvas",
+      "brass"
+    ],
+    "style": [
+      "travel",
+      "utility"
+    ],
+    "tags": [
+      "pouch",
+      "missing-image"
+    ],
+    "searchTokens": [
+      "canvas",
+      "weekend",
+      "pouch",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.1,
+    "reviewCount": 22,
+    "inventory": 24,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-04-15T09:00:00Z"
+  },
+  {
+    "id": "p049",
+    "name": "Minimal Watch Strap",
+    "description": "Replacement watch strap with quick-release pins and a smooth finish.",
+    "price": 40.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "stone",
+      "black"
+    ],
+    "materials": [
+      "silicone",
+      "stainless steel"
+    ],
+    "style": [
+      "tech",
+      "minimal"
+    ],
+    "tags": [
+      "watch-strap",
+      "multi-variant"
+    ],
+    "searchTokens": [
+      "minimal",
+      "watch",
+      "strap",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.4,
+    "reviewCount": 55,
+    "inventory": 29,
+    "isNew": false,
+    "isSale": false,
+    "createdAt": "2026-03-21T09:00:00Z"
+  },
+  {
+    "id": "p050",
+    "name": "Pearl Hair Pin Duo",
+    "description": "Two pearl-finish hair pins for polished everyday styling.",
+    "price": 24.0,
+    "salePrice": null,
+    "category": "accessories",
+    "colors": [
+      "pearl"
+    ],
+    "materials": [
+      "resin pearl",
+      "steel"
+    ],
+    "style": [
+      "hair",
+      "polished"
+    ],
+    "tags": [
+      "hair-pin",
+      "new"
+    ],
+    "searchTokens": [
+      "pearl",
+      "hair",
+      "pin",
+      "duo",
+      "accessories"
+    ],
+    "imageUrls": [
+      "https://unsplash.com/photos/a-toy-shopping-cart-BQ9usyzHx_w"
+    ],
+    "rating": 4.6,
+    "reviewCount": 37,
+    "inventory": 16,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-06-11T09:00:00Z"
+  }
 ]

@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../features/search/search_provider.dart';
+import '../session/session_resource_registry.dart';
 import 'user_repository.dart';
 
 part 'auth_provider.g.dart';
@@ -81,28 +83,61 @@ class AuthController extends _$AuthController {
 
   Future<void> loginWithEmail(String email, String password) async {
     final normalizedEmail = email.trim().toLowerCase();
-    final hasPassword = password.trim().isNotEmpty;
-    if (normalizedEmail.isEmpty || !hasPassword) {
+    if (normalizedEmail.isEmpty || password.isEmpty) return;
+
+    state = const AuthStateLoading();
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: normalizedEmail,
+        password: password,
+      );
+    } catch (e) {
+      state = const AuthStateUnauthenticated();
+      rethrow;
+    }
+  }
+
+  Future<void> signUpWithEmail(
+    String email,
+    String password,
+    String username,
+  ) async {
+    final normalizedEmail = email.trim().toLowerCase();
+    if (normalizedEmail.isEmpty || password.isEmpty || username.trim().isEmpty) {
       return;
     }
 
     state = const AuthStateLoading();
     try {
-      // Try signing in first
-      try {
-        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      final currentUser = FirebaseAuth.instance.currentUser;
+
+      if (currentUser?.isAnonymous ?? false) {
+        final credential = EmailAuthProvider.credential(
           email: normalizedEmail,
           password: password,
         );
-      } on FirebaseAuthException catch (e) {
-        if (e.code == 'user-not-found' || e.code == 'invalid-credential') {
-          // If they don't exist, try creating them
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: normalizedEmail,
-            password: password,
-          );
-        } else {
-          rethrow;
+        final linked = await currentUser!.linkWithCredential(credential);
+        final user = linked.user;
+        if (user != null) {
+          await user.updateDisplayName(username.trim());
+          // Reload user to ensure displayName propagates
+          await user.reload();
+          await ref
+              .read(userRepositoryProvider)
+              .promoteGuest(user.uid, FirebaseAuth.instance.currentUser!);
+          state = AuthStateAuthenticated(user.uid);
+          return;
+        }
+      } else {
+        final credential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+              email: normalizedEmail,
+              password: password,
+            );
+        final user = credential.user;
+        if (user != null) {
+          await user.updateDisplayName(username.trim());
+          await user.reload();
         }
       }
     } catch (e) {
@@ -120,14 +155,22 @@ class AuthController extends _$AuthController {
         state = const AuthStateUnauthenticated();
         return;
       }
-      
+
       final googleAuth = await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
-      
-      await FirebaseAuth.instance.signInWithCredential(credential);
+      final currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser?.isAnonymous ?? false) {
+        final linked = await currentUser!.linkWithCredential(credential);
+        await ref
+            .read(userRepositoryProvider)
+            .promoteGuest(linked.user!.uid, linked.user!);
+        state = AuthStateAuthenticated(linked.user!.uid);
+      } else {
+        await FirebaseAuth.instance.signInWithCredential(credential);
+      }
     } catch (e) {
       state = const AuthStateUnauthenticated();
       rethrow;
@@ -139,7 +182,9 @@ class AuthController extends _$AuthController {
       final uid = (state as AuthStateNewUser).uid;
       state = const AuthStateLoading();
       try {
-        await ref.read(userRepositoryProvider).updatePreferences(uid, categories);
+        await ref
+            .read(userRepositoryProvider)
+            .updatePreferences(uid, categories);
         state = AuthStateAuthenticated(uid);
       } catch (e) {
         state = AuthStateNewUser(uid);
@@ -150,7 +195,29 @@ class AuthController extends _$AuthController {
 
   Future<void> logout() async {
     state = const AuthStateLoading();
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
+    try {
+      await const SessionCleaner().clear();
+      ref.read(recentSearchesProvider.notifier).clear();
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null && user.isAnonymous) {
+        await user.delete();
+      } else {
+        await FirebaseAuth.instance.signOut();
+      }
+      state = const AuthStateUnauthenticated();
+      try {
+        await GoogleSignIn().signOut();
+      } catch (_) {
+        // Firebase owns the app session; Google cleanup must not undo logout.
+      }
+    } catch (_) {
+      final user = FirebaseAuth.instance.currentUser;
+      state = user == null
+          ? const AuthStateUnauthenticated()
+          : user.isAnonymous
+          ? const AuthStateGuest()
+          : AuthStateAuthenticated(user.uid);
+      rethrow;
+    }
   }
 }

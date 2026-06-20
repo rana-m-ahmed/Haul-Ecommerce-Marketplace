@@ -86,7 +86,12 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [apiClientProvider.overrideWithValue(_fakeApiClient())],
+        overrides: [
+          authControllerProvider.overrideWith(
+            () => MockAuthController(const AuthStateGuest()),
+          ),
+          apiClientProvider.overrideWithValue(_fakeApiClient()),
+        ],
         child: MaterialApp(
           home: ProductDetailScreen(
             productId: 'p017',
@@ -126,7 +131,12 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
-        overrides: [apiClientProvider.overrideWithValue(_fakeApiClient())],
+        overrides: [
+          authControllerProvider.overrideWith(
+            () => MockAuthController(const AuthStateGuest()),
+          ),
+          apiClientProvider.overrideWithValue(_fakeApiClient()),
+        ],
         child: MaterialApp.router(routerConfig: router),
       ),
     );
@@ -172,6 +182,7 @@ ApiClient _fakeApiClient() {
       );
     }),
     baseUrl: Uri.parse('http://test.local'),
+    authToken: 'test-token',
   );
 }
 

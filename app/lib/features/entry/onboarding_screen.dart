@@ -55,7 +55,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
             ),
-            
+
             // Carousel
             Expanded(
               child: PageView(
@@ -69,12 +69,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   _OnboardingPage(
                     icon: Icons.auto_awesome,
                     title: 'Discover with AI',
-                    subtitle: 'Find exactly what you want using visual search and smart recommendations tailored just for you.',
+                    subtitle:
+                        'Find exactly what you want using visual search and smart recommendations tailored just for you.',
                   ),
                   _OnboardingPage(
                     icon: Icons.local_shipping_outlined,
                     title: 'Fast & Reliable',
-                    subtitle: 'Get your favorite items delivered quickly with real-time order tracking and secure payments.',
+                    subtitle:
+                        'Get your favorite items delivered quickly with real-time order tracking and secure payments.',
                   ),
                 ],
               ),
@@ -86,17 +88,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               children: List.generate(2, (index) {
                 return AnimatedContainer(
                   duration: AppMotion.durationFast,
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.xxs,
+                  ),
                   width: _currentPage == index ? 24 : 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: _currentPage == index ? AppColors.accent : AppColors.border,
-                    borderRadius: BorderRadius.circular(4),
+                    color: _currentPage == index
+                        ? AppColors.accent
+                        : AppColors.border,
+                    borderRadius: AppRadius.microBorderRadius,
                   ),
                 );
               }),
             ),
-            
+
             AppSpacing.gapXl,
 
             // Next / Get Started button
@@ -140,11 +146,7 @@ class _OnboardingPage extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: AppShadows.card,
             ),
-            child: Icon(
-              icon,
-              size: 64,
-              color: AppColors.accent,
-            ),
+            child: Icon(icon, size: 64, color: AppColors.accent),
           ),
           AppSpacing.gapXxl,
           Text(

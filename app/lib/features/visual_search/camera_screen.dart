@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,11 +7,19 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/api/api_client.dart';
 import '../../core/design/design.dart';
+import '../../core/session/session_resource_registry.dart';
 import '../../shared/widgets/widgets.dart';
 import '../catalog/catalog_ui.dart';
 import 'camera_gateway.dart';
+import 'visual_image_preview.dart';
 
-enum CameraViewState { initializing, ready, permissionDenied, error, processing }
+enum CameraViewState {
+  initializing,
+  ready,
+  permissionDenied,
+  error,
+  processing,
+}
 
 class CameraScreen extends ConsumerStatefulWidget {
   const CameraScreen({super.key, this.gateway});
@@ -34,12 +41,15 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
   String? _processingImagePath;
   bool _wakingUp = false;
   Timer? _wakingTimer;
+  late final SessionResourceDisposer _resourceDisposer;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     _gateway = widget.gateway ?? PluginCameraGateway();
+    _resourceDisposer = _gateway.dispose;
+    SessionResourceRegistry.instance.register(_resourceDisposer);
     _scanController = AnimationController(
       vsync: this,
       duration: AppMotion.durationScan,
@@ -76,7 +86,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
       _message = null;
     });
     try {
-      await _gateway.initialize();
+      await _gateway.initialize().timeout(AppMotion.durationNetworkTimeout);
       if (!mounted) return;
       setState(() => _state = CameraViewState.ready);
     } on CameraFailure catch (error) {
@@ -145,10 +155,14 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
 
     try {
       final labels = await _gateway.labelsFor(imagePath);
-      final response = await ref.read(apiClientProvider).visualSearch(
-        imagePath: imagePath,
-        mlKitLabels: labels,
-      );
+      final imageBytes = await _gateway.bytesFor(imagePath);
+      final response = await ref
+          .read(apiClientProvider)
+          .visualSearch(
+            imagePath: imagePath,
+            imageBytes: imageBytes,
+            mlKitLabels: labels,
+          );
       _wakingTimer?.cancel();
       if (!mounted) return;
       await _showResults(response);
@@ -190,9 +204,9 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
   }
 
   void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -202,6 +216,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
     _scanController.dispose();
     _focusController.dispose();
     _captureController.dispose();
+    SessionResourceRegistry.instance.unregister(_resourceDisposer);
     unawaited(_gateway.dispose());
     super.dispose();
   }
@@ -237,10 +252,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
         ),
       );
     }
-    if (_state == CameraViewState.processing &&
-        _processingImagePath != null &&
-        File(_processingImagePath!).existsSync()) {
-      return Image.file(File(_processingImagePath!), fit: BoxFit.cover);
+    if (_state == CameraViewState.processing && _processingImagePath != null) {
+      return buildVisualImagePreview(_processingImagePath!);
     }
     return const ColoredBox(color: AppColors.textPrimary);
   }
@@ -615,9 +628,10 @@ class _VisualSearchResultsSheetState extends State<_VisualSearchResultsSheet>
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    _slide = Tween(begin: const Offset(0, 0.22), end: Offset.zero).animate(
-      _controller,
-    );
+    _slide = Tween(
+      begin: const Offset(0, 0.22),
+      end: Offset.zero,
+    ).animate(_controller);
     _fade = CurvedAnimation(
       parent: _controller,
       curve: AppMotion.curveStandard,
@@ -724,8 +738,7 @@ class _VisualSearchResultsSheetState extends State<_VisualSearchResultsSheet>
                                 : null,
                           ),
                           heroTag: heroTag,
-                          onTap: () =>
-                              widget.onProductTap(product, heroTag),
+                          onTap: () => widget.onProductTap(product, heroTag),
                         ),
                       );
                     },

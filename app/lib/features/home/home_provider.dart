@@ -6,8 +6,7 @@ import '../../core/auth/auth_provider.dart';
 
 part 'home_provider.g.dart';
 
-final forYouProductsProvider =
-    FutureProvider.autoDispose<RecommendationsResponse>((ref) async {
+final forYouProductsProvider = FutureProvider<RecommendationsResponse>((ref) async {
   final client = ref.watch(apiClientProvider);
   final auth = ref.watch(authControllerProvider);
   if (auth is AuthStateAuthenticated) {

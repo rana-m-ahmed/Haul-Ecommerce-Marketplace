@@ -141,9 +141,8 @@ class _ColorSwatches extends StatelessWidget {
           alignment: Alignment.bottomLeft,
           child: Text(
             name,
-            style: AppTypography.caption.copyWith(
+            style: AppTypography.micro.copyWith(
               color: isLight ? AppColors.textPrimary : AppColors.surface,
-              fontSize: 10,
             ),
           ),
         );
@@ -225,7 +224,7 @@ class _ButtonsPreview extends StatelessWidget {
               HaulButton(
                 label: 'Buy',
                 onPressed: () {},
-                icon: Icons.shopping_bag_outlined,
+                icon: const Icon(Icons.shopping_bag_outlined),
                 size: HaulButtonSize.small,
               ),
             ],
@@ -244,11 +243,10 @@ class _ButtonsPreview extends StatelessWidget {
               ),
               AppSpacing.hGapXs,
               HaulButton(
-                label: 'Filter',
-                onPressed: () {},
+                label: 'Log out',
+                icon: const Icon(Icons.logout_rounded),
                 variant: HaulButtonVariant.secondary,
                 size: HaulButtonSize.small,
-                icon: Icons.tune_rounded,
               ),
             ],
           ),
@@ -271,11 +269,7 @@ class _ButtonsPreview extends StatelessWidget {
             children: [
               const HaulButton(label: 'Disabled', onPressed: null),
               AppSpacing.hGapXs,
-              HaulButton(
-                label: 'Loading',
-                onPressed: () {},
-                isLoading: true,
-              ),
+              HaulButton(label: 'Loading', onPressed: () {}, isLoading: true),
             ],
           ),
           AppSpacing.gapMd,
@@ -287,7 +281,7 @@ class _ButtonsPreview extends StatelessWidget {
             label: 'Checkout',
             onPressed: () {},
             fullWidth: true,
-            icon: Icons.lock_outline_rounded,
+            icon: const Icon(Icons.lock_outline_rounded),
           ),
         ],
       ),
@@ -455,7 +449,10 @@ class _ProductCardsGrid extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(_sampleCards[i].$1, style: AppTypography.captionMedium),
+                      Text(
+                        _sampleCards[i].$1,
+                        style: AppTypography.captionMedium,
+                      ),
                       AppSpacing.gapXxs,
                       HaulProductCard(
                         data: _sampleCards[i].$2,
@@ -471,8 +468,10 @@ class _ProductCardsGrid extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(_sampleCards[i + 1].$1,
-                            style: AppTypography.captionMedium),
+                        Text(
+                          _sampleCards[i + 1].$1,
+                          style: AppTypography.captionMedium,
+                        ),
                         AppSpacing.gapXxs,
                         HaulProductCard(
                           data: _sampleCards[i + 1].$2,
@@ -638,7 +637,7 @@ class _TokensPreview extends StatelessWidget {
                 height: s.toDouble(),
                 decoration: BoxDecoration(
                   color: AppColors.accent.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(AppSpacing.micro),
                   border: Border.all(color: AppColors.accent, width: 1),
                 ),
               );

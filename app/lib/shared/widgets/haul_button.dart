@@ -26,7 +26,7 @@ class HaulButton extends StatefulWidget {
   final VoidCallback? onPressed;
   final HaulButtonVariant variant;
   final HaulButtonSize size;
-  final IconData? icon;
+  final Widget? icon;
   final bool isLoading;
   final bool fullWidth;
 
@@ -122,7 +122,13 @@ class _HaulButtonState extends State<HaulButton>
         child = Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(widget.icon, size: isSmall ? 16 : 20, color: foregroundColor),
+            IconTheme(
+              data: IconThemeData(
+                size: isSmall ? 16.0 : 20.0,
+                color: foregroundColor,
+              ),
+              child: widget.icon!,
+            ),
             SizedBox(width: AppSpacing.xs),
             label,
           ],

@@ -21,6 +21,7 @@ abstract interface class CameraGateway {
   Future<void> toggleFlash();
   Future<String> capture();
   Future<String?> pickFromGallery();
+  Future<List<int>> bytesFor(String imagePath);
   Future<List<String>> labelsFor(String imagePath);
   Future<void> openSettings();
   Future<void> dispose();
@@ -121,6 +122,10 @@ class PluginCameraGateway implements CameraGateway {
     );
     return result?.path;
   }
+
+  @override
+  Future<List<int>> bytesFor(String imagePath) =>
+      XFile(imagePath).readAsBytes();
 
   @override
   Future<List<String>> labelsFor(String imagePath) async {

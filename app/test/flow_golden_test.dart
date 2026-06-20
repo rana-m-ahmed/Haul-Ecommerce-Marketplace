@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:haul/core/api/api_client.dart';
 import 'package:haul/main.dart';
 import 'package:haul/features/entry/onboarding_screen.dart';
 import 'package:haul/features/entry/auth_screen.dart';
 import 'package:haul/features/entry/preferences_screen.dart';
 import 'package:haul/features/home/home_screen.dart';
+import 'package:haul/features/cart/models/cart_item.dart';
+import 'package:haul/features/cart/providers/cart_controller.dart';
 import 'package:haul/shared/widgets/widgets.dart';
 import 'package:haul/core/auth/auth_provider.dart';
 
 import 'dart:io';
+import 'dart:convert';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
 
 class MockAuthController extends AuthController {
   final AuthState initialState;
@@ -38,12 +44,23 @@ class MockAuthController extends AuthController {
   Future<void> completePreferences(List<String> categories) async => state = const AuthStateAuthenticated('mock');
 }
 
+class _MockCartController extends CartController {
+  @override
+  Future<List<CartItem>> build() async => const [];
+}
+
 Future<void> pumpUntilHome(WidgetTester tester) async {
   for (var i = 0; i < 100; i += 1) {
     await tester.pump(const Duration(milliseconds: 100));
     if (find.byType(HomeScreen).evaluate().isNotEmpty) {
       return;
     }
+  }
+}
+
+Future<void> settleHomeAnimations(WidgetTester tester) async {
+  for (var index = 0; index < 24; index += 1) {
+    await tester.pump(const Duration(milliseconds: 100));
   }
 }
 
@@ -69,6 +86,8 @@ void main() {
           authControllerProvider.overrideWith(
             () => MockAuthController(const AuthStateUnauthenticated()),
           ),
+          apiClientProvider.overrideWithValue(_fakeApiClient()),
+          cartControllerProvider.overrideWith(_MockCartController.new),
         ],
         child: const HaulApp(),
       ),
@@ -130,6 +149,7 @@ void main() {
 
     // Should be on Home
     expect(find.byType(HomeScreen), findsOneWidget);
+    await settleHomeAnimations(tester);
     await expectLater(
       find.byType(HaulApp),
       matchesGoldenFile(
@@ -155,6 +175,8 @@ void main() {
           authControllerProvider.overrideWith(
             () => MockAuthController(const AuthStateUnauthenticated()),
           ),
+          apiClientProvider.overrideWithValue(_fakeApiClient()),
+          cartControllerProvider.overrideWith(_MockCartController.new),
         ],
         child: const HaulApp(),
       ),
@@ -173,6 +195,7 @@ void main() {
 
     // Should be on Home
     expect(find.byType(HomeScreen), findsOneWidget);
+    await settleHomeAnimations(tester);
     await expectLater(
       find.byType(HaulApp),
       matchesGoldenFile(
@@ -193,6 +216,8 @@ void main() {
           authControllerProvider.overrideWith(
             () => MockAuthController(const AuthStateAuthenticated('mock')),
           ),
+          apiClientProvider.overrideWithValue(_fakeApiClient()),
+          cartControllerProvider.overrideWith(_MockCartController.new),
         ],
         child: const HaulApp(),
       ),
@@ -201,6 +226,7 @@ void main() {
 
     // Should be on Home immediately
     expect(find.byType(HomeScreen), findsOneWidget);
+    await settleHomeAnimations(tester);
     await expectLater(
       find.byType(HaulApp),
       matchesGoldenFile(
@@ -209,3 +235,81 @@ void main() {
     );
   });
 }
+
+ApiClient _fakeApiClient() {
+  return ApiClient(
+    httpClient: MockClient((request) async {
+      if (request.url.path == '/search') {
+        return http.Response(
+          jsonEncode({
+            'products': _products,
+            'pageToken': null,
+            'total': _products.length,
+            'appliedFilters': {'sortBy': 'rating'},
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }
+      if (request.url.path.startsWith('/recommendations/')) {
+        return http.Response(
+          jsonEncode({
+            'products': _products.take(2).toList(),
+            'fallbackUsed': false,
+            'reason': 'preference_vector',
+          }),
+          200,
+          headers: {'content-type': 'application/json'},
+        );
+      }
+      return http.Response('{}', 404, headers: {'content-type': 'application/json'});
+    }),
+    baseUrl: Uri.parse('http://test.local'),
+    authToken: 'test-token',
+  );
+}
+
+final _products = [
+  {
+    'id': 'p017',
+    'name': 'Arc Ceramic Table Lamp',
+    'description':
+        'A softly curved ceramic lamp for warm desk and bedside lighting.',
+    'price': 64.0,
+    'salePrice': null,
+    'category': 'home',
+    'colors': ['clay', 'white'],
+    'materials': ['ceramic', 'linen'],
+    'style': ['minimal', 'warm'],
+    'tags': ['lamp', 'lighting', 'decor'],
+    'searchTokens': ['arc', 'ceramic', 'table', 'lamp', 'home'],
+    'imageUrls': <String>[],
+    'rating': 4.7,
+    'reviewCount': 91,
+    'inventory': 18,
+    'isNew': false,
+    'isSale': false,
+    'createdAt': '2026-05-10T09:00:00Z',
+  },
+  {
+    'id': 'p034',
+    'name': 'Cloudlift Training Sneaker',
+    'description':
+        'Lightweight training sneaker with breathable mesh and responsive foam.',
+    'price': 88.0,
+    'salePrice': 74.0,
+    'category': 'fitness',
+    'colors': ['white', 'silver'],
+    'materials': ['mesh', 'rubber'],
+    'style': ['sporty', 'clean'],
+    'tags': ['sneaker', 'training', 'sale'],
+    'searchTokens': ['cloudlift', 'training', 'sneaker', 'white', 'fitness'],
+    'imageUrls': <String>[],
+    'rating': 4.6,
+    'reviewCount': 144,
+    'inventory': 22,
+    'isNew': false,
+    'isSale': true,
+    'createdAt': '2026-04-22T09:00:00Z',
+  },
+];

@@ -71,7 +71,7 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    match /counters/orderSequence/{day} {
+    match /counters/orderSequence/days/{day} {
       allow read, write: if false;
     }
 

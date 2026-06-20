@@ -304,7 +304,9 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
               if (data.isSale) _buildBadge('Sale', AppColors.accent),
               if (data.isNew)
                 Padding(
-                  padding: EdgeInsets.only(top: data.isSale ? 4 : 0),
+                  padding: data.isSale
+                      ? const EdgeInsets.only(top: AppSpacing.xxs)
+                      : EdgeInsets.zero,
                   child: _buildBadge('New', AppColors.newBadge),
                 ),
               if (data.matchScore != null)
@@ -360,7 +362,7 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.xs,
-        vertical: 2,
+        vertical: AppSpacing.micro,
       ),
       decoration: BoxDecoration(
         color: color,
@@ -368,11 +370,7 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
       ),
       child: Text(
         label,
-        style: AppTypography.caption.copyWith(
-          color: AppColors.surface,
-          fontWeight: FontWeight.w600,
-          fontSize: 10,
-        ),
+        style: AppTypography.micro.copyWith(color: AppColors.surface),
       ),
     );
   }
@@ -382,7 +380,7 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.xs,
-        vertical: 2,
+        vertical: AppSpacing.micro,
       ),
       decoration: BoxDecoration(
         color: AppColors.accent.withValues(alpha: 0.9),
@@ -392,14 +390,10 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(Icons.auto_awesome, size: 10, color: AppColors.surface),
-          const SizedBox(width: 2),
+          const SizedBox(width: AppSpacing.micro),
           Text(
             '$percent% match',
-            style: AppTypography.caption.copyWith(
-              color: AppColors.surface,
-              fontWeight: FontWeight.w600,
-              fontSize: 10,
-            ),
+            style: AppTypography.micro.copyWith(color: AppColors.surface),
           ),
         ],
       ),
@@ -408,14 +402,18 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
 
   Widget _buildWishlistButton() {
     final wishlistedState = ref.watch(wishlistControllerProvider);
-    final wishlisted = wishlistedState.value?.contains(widget.data.id) ?? widget.data.isWishlisted;
-    
+    final wishlisted =
+        wishlistedState.value?.contains(widget.data.id) ??
+        widget.data.isWishlisted;
+
     return GestureDetector(
       onTap: () {
         if (widget.onWishlistToggle != null) {
           widget.onWishlistToggle!();
         } else {
-          ref.read(wishlistControllerProvider.notifier).toggleWishlist(widget.data.id);
+          ref
+              .read(wishlistControllerProvider.notifier)
+              .toggleWishlist(widget.data.id);
         }
       },
       child: AnimatedContainer(
@@ -471,7 +469,7 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
     return Row(
       children: [
         Icon(Icons.star_rounded, size: 14, color: AppColors.accent),
-        const SizedBox(width: 2),
+        const SizedBox(width: AppSpacing.micro),
         Text(
           data.rating.toStringAsFixed(1),
           style: AppTypography.caption.copyWith(

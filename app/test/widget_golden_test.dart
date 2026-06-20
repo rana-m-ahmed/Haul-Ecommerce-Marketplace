@@ -67,7 +67,7 @@ void main() {
                 HaulButton(
                   label: 'Add to Cart',
                   onPressed: () {},
-                  icon: Icons.shopping_bag_outlined,
+                  icon: const Icon(Icons.shopping_bag_outlined),
                 ),
                 AppSpacing.gapMd,
                 const HaulButton(label: 'Disabled', onPressed: null),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import '../../core/api/api_client.dart';
 import '../../core/design/design.dart';
+import '../../shared/widgets/widgets.dart';
 import 'providers/cart_controller.dart';
 import 'models/cart_item.dart';
 
@@ -23,21 +25,45 @@ class CartScreen extends ConsumerWidget {
       body: cartState.when(
         data: (items) {
           if (items.isEmpty) {
-            return const Center(child: Text('Your cart is empty'));
+            return HaulEmptyState(
+              title: 'Your cart is empty',
+              subtitle: 'Add something worth hauling home.',
+              icon: Icons.shopping_bag_outlined,
+              actionLabel: 'Explore products',
+              onAction: () => context.go('/home'),
+            );
           }
 
-          return ListView.separated(
-            padding: AppSpacing.paddingLg,
-            itemCount: items.length,
-            separatorBuilder: (context, index) => AppSpacing.gapMd,
-            itemBuilder: (context, index) {
-              final item = items[index];
-              return _CartItemTile(item: item);
-            },
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.separated(
+                  padding: AppSpacing.paddingLg,
+                  itemCount: items.length,
+                  separatorBuilder: (context, index) => AppSpacing.gapMd,
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    return _CartItemTile(item: item);
+                  },
+                ),
+              ),
+              Padding(
+                padding: AppSpacing.paddingLg,
+                child: HaulButton(
+                  label: 'Checkout',
+                  onPressed: () => context.push('/checkout'),
+                  fullWidth: true,
+                ),
+              ),
+            ],
           );
         },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, st) => Center(child: Text('Error: $e')),
+        loading: () => const _CartLoadingList(),
+        error: (e, st) => HaulErrorState(
+          title: 'Cart unavailable',
+          subtitle: 'Your cached cart is safe. Try loading it again.',
+          onRetry: () => ref.invalidate(cartControllerProvider),
+        ),
       ),
     );
   }
@@ -53,6 +79,7 @@ class _CartItemTile extends ConsumerStatefulWidget {
 
 class _CartItemTileState extends ConsumerState<_CartItemTile> {
   Product? _product;
+  bool _productFailed = false;
 
   @override
   void initState() {
@@ -61,6 +88,7 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
   }
 
   Future<void> _fetchProduct() async {
+    setState(() => _productFailed = false);
     try {
       final client = ref.read(apiClientProvider);
       final product = await client.getProduct(widget.item.productId);
@@ -69,8 +97,8 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
           _product = product;
         });
       }
-    } catch (e) {
-      // Handle error implicitly
+    } catch (_) {
+      if (mounted) setState(() => _productFailed = true);
     }
   }
 
@@ -131,7 +159,10 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    _product?.name ?? 'Loading...',
+                    _product?.name ??
+                        (_productFailed
+                            ? 'Product details unavailable'
+                            : 'Loading product details'),
                     style: AppTypography.bodySmallMedium,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -148,6 +179,11 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
                     '\$${widget.item.priceSnapshot.toStringAsFixed(0)}',
                     style: AppTypography.priceRegular,
                   ),
+                  if (_productFailed)
+                    TextButton(
+                      onPressed: _fetchProduct,
+                      child: const Text('Retry'),
+                    ),
                 ],
               ),
             ),
@@ -200,6 +236,24 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _CartLoadingList extends StatelessWidget {
+  const _CartLoadingList();
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: AppSpacing.paddingLg,
+      itemCount: 3,
+      separatorBuilder: (_, _) => AppSpacing.gapMd,
+      itemBuilder: (_, _) => HaulSkeleton.rect(
+        width: double.infinity,
+        height: 112,
+        borderRadius: AppRadius.cardBorderRadius,
       ),
     );
   }

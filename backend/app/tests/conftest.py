@@ -22,19 +22,40 @@ def contract() -> dict[str, Any]:
 
 @pytest.fixture()
 def client(monkeypatch: pytest.MonkeyPatch) -> TestClient:
+    monkeypatch.setenv("HUAL_ENV_FILE", "")
     monkeypatch.setenv("HUAL_AUTH_ALLOW_TEST_TOKENS", "true")
     from backend.app.core.config import get_settings
-    from backend.app.api.v1.dependencies import get_ai_service, get_cart_service, get_catalog_service, get_event_service
+    from backend.app.api.v1.dependencies import (
+        get_ai_service,
+        get_cart_service,
+        get_catalog_service,
+        get_checkout_service,
+        get_event_service,
+    )
     from backend.app.services.event_repository import LocalEventRepository
+    from backend.app.services.contract_examples import response_example
 
     get_settings.cache_clear()
     get_ai_service.cache_clear()
     get_cart_service.cache_clear()
     get_catalog_service.cache_clear()
+    get_checkout_service.cache_clear()
     get_event_service.cache_clear()
     LocalEventRepository._events = {}
     LocalEventRepository._cache = {}
     LocalEventRepository._users = {"u_001": {"isGuest": False, "preferences": ["home", "minimal", "warm"]}}
     from backend.app.main import create_app
 
-    return TestClient(create_app())
+    class ContractCheckoutService:
+        def create_payment_intent(self, uid: str, request: dict) -> dict:
+            return response_example("/create-payment-intent", "post")
+
+        def confirm_order(self, uid: str, request: dict) -> dict:
+            return response_example("/orders/confirm", "post")
+
+        def get_orders(self, uid: str) -> dict:
+            return response_example("/orders/{uid}", "get")
+
+    app = create_app()
+    app.dependency_overrides[get_checkout_service] = ContractCheckoutService
+    return TestClient(app)
