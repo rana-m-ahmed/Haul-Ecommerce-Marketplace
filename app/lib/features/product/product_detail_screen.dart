@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/api/api_client.dart';
 import '../../core/auth/auth_provider.dart';
@@ -38,6 +39,7 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
   String? _explanationRequestedFor;
   ExplainProductResponse? _explanation;
   bool _explanationVisible = false;
+  bool _isAddedToCart = false;
 
   @override
   void initState() {
@@ -253,47 +255,73 @@ class _ProductDetailScreenState extends ConsumerState<ProductDetailScreen>
                   borderRadius: AppRadius.cardBorderRadius,
                   boxShadow: AppShadows.elevated,
                 ),
-                child: Row(
-                  children: [
-                    Flexible(
-                      child: _PriceLine(product: product, compact: true),
-                    ),
-                    AppSpacing.hGapMd,
-                    Expanded(
-                      flex: 2,
-                      child: HaulButton(
-                        label: product.isOutOfStock
-                            ? 'Out of Stock'
-                            : 'Add to Cart',
-                        onPressed: product.isOutOfStock ? null : () async {
-                          final item = CartItem(
-                            productId: product.id,
-                            variantId: _selectedColor,
-                            quantity: _quantity,
-                            priceSnapshot: product.salePrice ?? product.price,
-                          );
-                          try {
-                            await ref.read(cartControllerProvider.notifier).addItem(item);
-                            _bounceCart();
-                            if (mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('Added $_quantity item${_quantity == 1 ? '' : 's'} to cart'),
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
-                            }
-                          } catch (e) {
-                            if (mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Failed to add to cart')),
-                              );
-                            }
-                          }
-                        },
-                      ),
-                    ),
-                  ],
+                child: AnimatedSwitcher(
+                  duration: AppMotion.durationFast,
+                  child: _isAddedToCart
+                      ? Container(
+                          key: const ValueKey('success'),
+                          width: double.infinity,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: AppColors.success,
+                            borderRadius: AppRadius.buttonBorderRadius,
+                          ),
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Icon(Icons.check_circle_rounded, color: AppColors.surface),
+                              AppSpacing.hGapSm,
+                              Text(
+                                'Added $_quantity item${_quantity == 1 ? '' : 's'} to cart',
+                                style: AppTypography.bodyLargeMedium.copyWith(color: AppColors.surface),
+                              ),
+                            ],
+                          ),
+                        )
+                      : Row(
+                          key: const ValueKey('idle'),
+                          children: [
+                            Flexible(
+                              child: _PriceLine(product: product, compact: true, multiplier: _quantity),
+                            ),
+                            AppSpacing.hGapMd,
+                            Expanded(
+                              flex: 2,
+                              child: HaulButton(
+                                label: product.isOutOfStock
+                                    ? 'Out of Stock'
+                                    : 'Add to Cart',
+                                onPressed: product.isOutOfStock ? null : () async {
+                                  final item = CartItem(
+                                    productId: product.id,
+                                    variantId: _selectedColor,
+                                    quantity: _quantity,
+                                    priceSnapshot: product.salePrice ?? product.price,
+                                  );
+                                  try {
+                                    await ref.read(cartControllerProvider.notifier).addItem(item);
+                                    _bounceCart();
+                                    if (mounted) {
+                                      setState(() => _isAddedToCart = true);
+                                      Future.delayed(const Duration(seconds: 2), () {
+                                        if (mounted) {
+                                          setState(() => _isAddedToCart = false);
+                                        }
+                                      });
+                                    }
+                                  } catch (e) {
+                                    if (mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        const SnackBar(content: Text('Failed to add to cart')),
+                                      );
+                                    }
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
                 ),
               ),
             ),
@@ -341,11 +369,13 @@ class _ProductGallery extends StatelessWidget {
                 : product.imageUrls[index];
             return imageUrl == null
                 ? const _ImagePlaceholder()
-                : Image.network(
-                    imageUrl,
+                : CachedNetworkImage(
+                    imageUrl: imageUrl,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
+                    memCacheWidth: 800,
+                    errorWidget: (context, url, error) =>
                         const _ImagePlaceholder(),
+                    placeholder: (context, url) => Container(color: AppColors.shimmerBase),
                   );
           },
         ),
@@ -372,10 +402,11 @@ class _ImagePlaceholder extends StatelessWidget {
 }
 
 class _PriceLine extends StatelessWidget {
-  const _PriceLine({required this.product, this.compact = false});
+  const _PriceLine({required this.product, this.compact = false, this.multiplier = 1});
 
   final Product product;
   final bool compact;
+  final int multiplier;
 
   @override
   Widget build(BuildContext context) {
@@ -384,18 +415,18 @@ class _PriceLine extends StatelessWidget {
       return Row(
         children: [
           Text(
-            '\$${product.salePrice!.toStringAsFixed(0)}',
+            '\$${(product.salePrice! * multiplier).toStringAsFixed(0)}',
             style: priceStyle.copyWith(color: AppColors.accent),
           ),
           AppSpacing.hGapXs,
           Text(
-            '\$${product.price.toStringAsFixed(0)}',
+            '\$${(product.price * multiplier).toStringAsFixed(0)}',
             style: AppTypography.priceOriginalStrikethrough,
           ),
         ],
       );
     }
-    return Text('\$${product.price.toStringAsFixed(0)}', style: priceStyle);
+    return Text('\$${(product.price * multiplier).toStringAsFixed(0)}', style: priceStyle);
   }
 }
 

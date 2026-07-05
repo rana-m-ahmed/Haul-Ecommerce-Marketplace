@@ -36,41 +36,48 @@ class _HaulAiBadgeState extends State<HaulAiBadge>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _shimmerController,
-      builder: (context, child) {
-        return Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: widget.compact ? AppSpacing.xs : AppSpacing.sm,
-            vertical: widget.compact ? AppSpacing.micro : AppSpacing.xxs,
-          ),
-          decoration: BoxDecoration(
-            color: AppColors.accentSoft.withValues(alpha: 0.3),
-            borderRadius: AppRadius.chipBorderRadius,
-            border: Border.all(
-              color: AppColors.accent.withValues(alpha: 0.3),
-              width: 1,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _shimmerController,
+        builder: (context, child) {
+          return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: widget.compact ? AppSpacing.xs : AppSpacing.sm,
+              vertical: widget.compact ? AppSpacing.micro : AppSpacing.xxs,
             ),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.auto_awesome,
-                size: widget.compact ? 10 : 14,
-                color: AppColors.accent,
+            decoration: BoxDecoration(
+              color: AppColors.accentSoft.withValues(
+                alpha: 0.2 + 0.2 * _shimmerController.value,
               ),
-              if (!widget.compact) ...[
-                SizedBox(width: AppSpacing.xxs),
-                Text(
-                  widget.label,
-                  style: AppTypography.badge.copyWith(color: AppColors.accent),
+              borderRadius: AppRadius.chipBorderRadius,
+              border: Border.all(
+                color: AppColors.accent.withValues(
+                  alpha: 0.2 + 0.3 * _shimmerController.value,
                 ),
-              ],
+                width: 1,
+              ),
+            ),
+            child: child,
+          );
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.auto_awesome,
+              size: widget.compact ? 10 : 14,
+              color: AppColors.accent,
+            ),
+            if (!widget.compact) ...[
+              SizedBox(width: AppSpacing.xxs),
+              Text(
+                widget.label,
+                style: AppTypography.badge.copyWith(color: AppColors.accent),
+              ),
             ],
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../core/api/api_client.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../core/design/design.dart';
 import '../../shared/widgets/widgets.dart';
 import 'providers/cart_controller.dart';
 import 'models/cart_item.dart';
+import '../product/product_provider.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
@@ -69,43 +70,16 @@ class CartScreen extends ConsumerWidget {
   }
 }
 
-class _CartItemTile extends ConsumerStatefulWidget {
+class _CartItemTile extends ConsumerWidget {
   const _CartItemTile({required this.item});
   final CartItem item;
 
   @override
-  ConsumerState<_CartItemTile> createState() => _CartItemTileState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productAsync = ref.watch(productDetailProvider(item.productId));
 
-class _CartItemTileState extends ConsumerState<_CartItemTile> {
-  Product? _product;
-  bool _productFailed = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchProduct();
-  }
-
-  Future<void> _fetchProduct() async {
-    setState(() => _productFailed = false);
-    try {
-      final client = ref.read(apiClientProvider);
-      final product = await client.getProduct(widget.item.productId);
-      if (mounted) {
-        setState(() {
-          _product = product;
-        });
-      }
-    } catch (_) {
-      if (mounted) setState(() => _productFailed = true);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Dismissible(
-      key: ValueKey(widget.item.productId),
+      key: ValueKey(item.productId),
       direction: DismissDirection.endToStart,
       background: Container(
         alignment: Alignment.centerRight,
@@ -120,7 +94,7 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
         final messenger = ScaffoldMessenger.of(context);
         ref
             .read(cartControllerProvider.notifier)
-            .removeItem(widget.item.productId)
+            .removeItem(item.productId)
             .catchError((e) {
               messenger.showSnackBar(
                 SnackBar(content: Text('Failed to remove item: $e')),
@@ -143,95 +117,119 @@ class _CartItemTileState extends ConsumerState<_CartItemTile> {
                 color: AppColors.border,
                 borderRadius: AppRadius.cardBorderRadius,
               ),
-              child: _product?.primaryImageUrl != null
-                  ? ClipRRect(
-                      borderRadius: AppRadius.cardBorderRadius,
-                      child: Image.network(
-                        _product!.primaryImageUrl!,
-                        fit: BoxFit.cover,
-                      ),
-                    )
-                  : const Icon(Icons.image_outlined),
+              child: productAsync.when(
+                loading: () => HaulSkeleton.rect(width: 80, height: 80, borderRadius: AppRadius.cardBorderRadius),
+                error: (_, _) => const Icon(Icons.error_outline),
+                data: (product) => product.primaryImageUrl != null
+                    ? ClipRRect(
+                        borderRadius: AppRadius.cardBorderRadius,
+                        child: CachedNetworkImage(
+                          imageUrl: product.primaryImageUrl!,
+                          fit: BoxFit.cover,
+                          memCacheWidth: 200,
+                          memCacheHeight: 200,
+                          errorWidget: (context, url, error) => const Icon(Icons.image_not_supported_outlined),
+                          placeholder: (context, url) => Container(color: AppColors.shimmerBase),
+                        ),
+                      )
+                    : const Icon(Icons.image_outlined),
+              ),
             ),
             AppSpacing.hGapMd,
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    _product?.name ??
-                        (_productFailed
-                            ? 'Product details unavailable'
-                            : 'Loading product details'),
-                    style: AppTypography.bodySmallMedium,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (widget.item.variantId != null) ...[
-                    AppSpacing.gapXxs,
-                    Text(
-                      'Color: ${widget.item.variantId}',
-                      style: AppTypography.caption,
+                  productAsync.when(
+                    loading: () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        HaulSkeleton.rect(width: 120, height: 14),
+                        AppSpacing.gapXs,
+                        HaulSkeleton.rect(width: 80, height: 14),
+                      ],
                     ),
-                  ],
+                    error: (_, _) => Text('Product details unavailable', style: AppTypography.bodySmallMedium),
+                    data: (product) => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          product.name,
+                          style: AppTypography.bodySmallMedium,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        if (item.variantId != null) ...[
+                          AppSpacing.gapXxs,
+                          Text(
+                            'Color: ${item.variantId}',
+                            style: AppTypography.caption,
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
                   AppSpacing.gapXs,
                   Text(
-                    '\$${widget.item.priceSnapshot.toStringAsFixed(0)}',
+                    '\$${item.priceSnapshot.toStringAsFixed(0)}',
                     style: AppTypography.priceRegular,
                   ),
-                  if (_productFailed)
-                    TextButton(
-                      onPressed: _fetchProduct,
-                      child: const Text('Retry'),
-                    ),
                 ],
               ),
             ),
             AppSpacing.hGapMd,
             Row(
               children: [
-                IconButton(
-                  icon: const Icon(Icons.remove_circle_outline),
-                  onPressed: widget.item.quantity > 1
-                      ? () {
-                          final messenger = ScaffoldMessenger.of(context);
-                          ref
-                              .read(cartControllerProvider.notifier)
-                              .updateQuantity(
-                                widget.item.productId,
-                                widget.item.quantity - 1,
-                              )
-                              .catchError((e) {
-                                messenger.showSnackBar(
-                                  SnackBar(content: Text('Error: $e')),
-                                );
-                              });
-                        }
-                      : null,
-                ),
-                Text(
-                  widget.item.quantity.toString(),
-                  style: AppTypography.bodySmallMedium,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.add_circle_outline),
-                  onPressed: widget.item.quantity < 20
-                      ? () {
-                          final messenger = ScaffoldMessenger.of(context);
-                          ref
-                              .read(cartControllerProvider.notifier)
-                              .updateQuantity(
-                                widget.item.productId,
-                                widget.item.quantity + 1,
-                              )
-                              .catchError((e) {
-                                messenger.showSnackBar(
-                                  SnackBar(content: Text('Error: $e')),
-                                );
-                              });
-                        }
-                      : null,
-                ),
+                  if (item.quantity > 1)
+                    IconButton(
+                      icon: const Icon(Icons.remove_circle_outline),
+                      onPressed: () {
+                        final messenger = ScaffoldMessenger.of(context);
+                        ref
+                            .read(cartControllerProvider.notifier)
+                            .updateQuantity(
+                              item.productId,
+                              item.quantity - 1,
+                            )
+                            .catchError((e) {
+                              messenger.showSnackBar(
+                                SnackBar(content: Text('Error: $e')),
+                              );
+                            });
+                      },
+                    )
+                  else
+                    const IconButton(
+                      icon: Icon(Icons.remove_circle_outline),
+                      onPressed: null,
+                    ),
+                  Text(
+                    item.quantity.toString(),
+                    style: AppTypography.bodySmallMedium,
+                  ),
+                  if (item.quantity < 20)
+                    IconButton(
+                      icon: const Icon(Icons.add_circle_outline),
+                      onPressed: () {
+                        final messenger = ScaffoldMessenger.of(context);
+                        ref
+                            .read(cartControllerProvider.notifier)
+                            .updateQuantity(
+                              item.productId,
+                              item.quantity + 1,
+                            )
+                            .catchError((e) {
+                              messenger.showSnackBar(
+                                SnackBar(content: Text('Error: $e')),
+                              );
+                            });
+                      },
+                    )
+                  else
+                    const IconButton(
+                      icon: Icon(Icons.add_circle_outline),
+                      onPressed: null,
+                    ),
               ],
             ),
           ],

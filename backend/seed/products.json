@@ -1938,5 +1938,1886 @@
     "isNew": true,
     "isSale": false,
     "createdAt": "2026-06-11T09:00:00Z"
+  },
+  {
+    "id": "p051",
+    "name": "Noise Cancelling Earbuds",
+    "description": "Premium wireless earbuds with active noise cancellation.",
+    "price": 25.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "wireless",
+      "earbuds",
+      "noise",
+      "cancelling",
+      "earbuds"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1606741965326-cb990ae01bb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx3aXJlbGVzcyUyMGVhcmJ1ZHN8ZW58MHwxfHx8MTc4MzI0MTkxOXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 10,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:42.400131Z"
+  },
+  {
+    "id": "p052",
+    "name": "4K Action Camera",
+    "description": "Rugged and waterproof camera for extreme sports.",
+    "price": 27.5,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "action",
+      "camera",
+      "4k",
+      "action",
+      "camera"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1598114912510-446d33ce87de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxhY3Rpb24lMjBjYW1lcmF8ZW58MHwxfHx8MTc4MzI0MTkyMHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 11,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:43.180224Z"
+  },
+  {
+    "id": "p053",
+    "name": "Smart Thermostat",
+    "description": "Energy-saving smart home thermostat with Wi-Fi.",
+    "price": 30.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "smart",
+      "thermostat",
+      "smart",
+      "thermostat"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1608377205619-03a0b4c4e270?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHRoZXJtb3N0YXR8ZW58MHwxfHx8MTc4MzI0MTkyMXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 12,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:44.017245Z"
+  },
+  {
+    "id": "p054",
+    "name": "Ergonomic Mouse",
+    "description": "Vertical wireless mouse to reduce wrist strain.",
+    "price": 32.5,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "ergonomic",
+      "mouse",
+      "ergonomic",
+      "mouse"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxlcmdvbm9taWMlMjBtb3VzZXxlbnwwfDF8fHwxNzgzMjQxOTIyfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 13,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:44.579791Z"
+  },
+  {
+    "id": "p055",
+    "name": "Portable SSD 1TB",
+    "description": "High-speed external solid state drive.",
+    "price": 35.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "portable",
+      "ssd",
+      "portable",
+      "ssd",
+      "1tb"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1659543038895-4c873e8b9a55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxwb3J0YWJsZSUyMHNzZHxlbnwwfDF8fHwxNzgzMjQxOTIyfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 14,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:45.414116Z"
+  },
+  {
+    "id": "p056",
+    "name": "Drone with Camera",
+    "description": "Compact foldable drone with 4K video recording.",
+    "price": 37.5,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "drone",
+      "camera",
+      "drone",
+      "with",
+      "camera"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1487219116710-23ffcb172b2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxkcm9uZSUyMGNhbWVyYXxlbnwwfDF8fHwxNzgzMjQxOTIzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 15,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:46.380212Z"
+  },
+  {
+    "id": "p057",
+    "name": "Gaming Headset",
+    "description": "Over-ear headset with surround sound and mic.",
+    "price": 40.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "gaming",
+      "headset",
+      "gaming",
+      "headset"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1610041321420-a596dd14ebc9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBoZWFkc2V0fGVufDB8MXx8fDE3ODMyNDE5MjR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 16,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:47.169240Z"
+  },
+  {
+    "id": "p058",
+    "name": "E-Reader",
+    "description": "High-resolution e-ink display for reading anywhere.",
+    "price": 42.5,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "e-reader",
+      "tablet",
+      "e-reader"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1676107779674-f77343861e81?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxlLXJlYWRlciUyMHRhYmxldHxlbnwwfDF8fHwxNzgzMjQxOTI1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 17,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:47.966782Z"
+  },
+  {
+    "id": "p059",
+    "name": "Smart Ring",
+    "description": "Wearable fitness and sleep tracker in a ring.",
+    "price": 45.0,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "smart",
+      "ring",
+      "tracker",
+      "smart",
+      "ring"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1651752090085-50375d90bf8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzbWFydCUyMHJpbmclMjB0cmFja2VyfGVufDB8MXx8fDE3ODMyNDE5MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 18,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:48.812888Z"
+  },
+  {
+    "id": "p060",
+    "name": "Mechanical Numpad",
+    "description": "Standalone mechanical number pad for data entry.",
+    "price": 47.5,
+    "salePrice": null,
+    "category": "electronics",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "electronics",
+      "new"
+    ],
+    "searchTokens": [
+      "mechanical",
+      "numpad",
+      "mechanical",
+      "numpad"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1781887609372-f7196f321780?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxtZWNoYW5pY2FsJTIwbnVtcGFkfGVufDB8MXx8fDE3ODMyNDE5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 19,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:49.613496Z"
+  },
+  {
+    "id": "p061",
+    "name": "Velvet Throw Pillow",
+    "description": "Soft velvet decorative pillow cover.",
+    "price": 50.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "velvet",
+      "pillow",
+      "velvet",
+      "throw",
+      "pillow"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1559051668-9024c9b5e84b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx2ZWx2ZXQlMjBwaWxsb3d8ZW58MHwxfHx8MTc4MzI0MTkyN3ww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 20,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:50.447142Z"
+  },
+  {
+    "id": "p062",
+    "name": "Cast Iron Skillet",
+    "description": "Pre-seasoned heavy duty cast iron pan.",
+    "price": 52.5,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "cast",
+      "iron",
+      "skillet",
+      "cast",
+      "iron",
+      "skillet"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1579805625996-db7b60587362?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxjYXN0JTIwaXJvbiUyMHNraWxsZXR8ZW58MHwxfHx8MTc4MzI0MTkyOHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 21,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:51.281024Z"
+  },
+  {
+    "id": "p063",
+    "name": "Bamboo Cutting Board",
+    "description": "Durable and eco-friendly kitchen cutting board.",
+    "price": 55.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "bamboo",
+      "cutting",
+      "board",
+      "bamboo",
+      "cutting",
+      "board"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1588142744473-3f9a9fb5b9ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxiYW1ib28lMjBjdXR0aW5nJTIwYm9hcmR8ZW58MHwxfHx8MTc4MzI0MTkyOXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 22,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:52.078196Z"
+  },
+  {
+    "id": "p064",
+    "name": "Espresso Machine",
+    "description": "Compact home espresso maker with milk frother.",
+    "price": 57.5,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "espresso",
+      "machine",
+      "espresso",
+      "machine"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1616388761741-a5936c6f61f6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxlc3ByZXNzbyUyMG1hY2hpbmV8ZW58MHwxfHx8MTc4MzI0MTkzMHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 23,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:52.630700Z"
+  },
+  {
+    "id": "p065",
+    "name": "Linen Duvet Cover",
+    "description": "Breathable natural linen duvet set.",
+    "price": 60.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "linen",
+      "duvet",
+      "cover",
+      "linen",
+      "duvet",
+      "cover"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1634665810235-011d663754e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxsaW5lbiUyMGR1dmV0JTIwY292ZXJ8ZW58MHwxfHx8MTc4MzI0MTkzMHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 24,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:53.430113Z"
+  },
+  {
+    "id": "p066",
+    "name": "Aromatherapy Diffuser",
+    "description": "Ultrasonic essential oil diffuser with timer.",
+    "price": 62.5,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "oil",
+      "diffuser",
+      "aromatherapy",
+      "diffuser"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1639677357385-92d3c33c0766?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxvaWwlMjBkaWZmdXNlcnxlbnwwfDF8fHwxNzgzMjQxOTMxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 25,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:54.240379Z"
+  },
+  {
+    "id": "p067",
+    "name": "Standing Desk Converter",
+    "description": "Adjustable height desk riser for laptops.",
+    "price": 65.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "standing",
+      "desk",
+      "standing",
+      "desk",
+      "converter"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1623177623442-979c1e42c255?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzdGFuZGluZyUyMGRlc2t8ZW58MHwxfHx8MTc4MzI0MTkzMnww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 26,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:54.756956Z"
+  },
+  {
+    "id": "p068",
+    "name": "Glass Food Storage",
+    "description": "Set of airtight glass meal prep containers.",
+    "price": 67.5,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "glass",
+      "food",
+      "storage",
+      "glass",
+      "food",
+      "storage"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1761984336685-95ceb1d581a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxnbGFzcyUyMGZvb2QlMjBzdG9yYWdlfGVufDB8MXx8fDE3ODMyNDE5MzN8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 27,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:55.573257Z"
+  },
+  {
+    "id": "p069",
+    "name": "Himalayan Salt Lamp",
+    "description": "Natural carved salt rock lamp on wooden base.",
+    "price": 70.0,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "salt",
+      "lamp",
+      "himalayan",
+      "salt",
+      "lamp"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1632323159122-a5e47eab2210?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzYWx0JTIwbGFtcHxlbnwwfDF8fHwxNzgzMjQxOTMzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 28,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:56.381153Z"
+  },
+  {
+    "id": "p070",
+    "name": "French Press",
+    "description": "Glass coffee press with stainless steel filter.",
+    "price": 72.5,
+    "salePrice": null,
+    "category": "home",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "home",
+      "new"
+    ],
+    "searchTokens": [
+      "french",
+      "press",
+      "coffee",
+      "french",
+      "press"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1708127368781-cd5f069a90a5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxmcmVuY2glMjBwcmVzcyUyMGNvZmZlZXxlbnwwfDF8fHwxNzgzMjQxOTM0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 29,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:56.950640Z"
+  },
+  {
+    "id": "p071",
+    "name": "Cashmere Scarf",
+    "description": "Ultra-soft winter scarf in neutral tones.",
+    "price": 75.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "cashmere",
+      "scarf",
+      "cashmere",
+      "scarf"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxwcm9kdWN0fGVufDB8MHx8fDE3ODMwOTg1ODh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 30,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:57.633382Z"
+  },
+  {
+    "id": "p072",
+    "name": "Running Shoes",
+    "description": "Lightweight athletic shoes for long distance.",
+    "price": 77.5,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "running",
+      "shoes",
+      "running",
+      "shoes"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxydW5uaW5nJTIwc2hvZXN8ZW58MHwxfHx8MTc4MzI0MTkzNXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 31,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:58.196805Z"
+  },
+  {
+    "id": "p073",
+    "name": "Leather Loafers",
+    "description": "Classic slip-on leather shoes for men.",
+    "price": 80.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "leather",
+      "loafers",
+      "leather",
+      "loafers"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1556004583-d2aaffbba592?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxsZWF0aGVyJTIwbG9hZmVyc3xlbnwwfDF8fHwxNzgzMjQxOTM2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 32,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:58:59.011878Z"
+  },
+  {
+    "id": "p074",
+    "name": "Trench Coat",
+    "description": "Water-resistant double-breasted coat.",
+    "price": 82.5,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "trench",
+      "coat",
+      "trench",
+      "coat"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1676716105765-e19fe6a01851?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx0cmVuY2glMjBjb2F0fGVufDB8MXx8fDE3ODMyNDE5Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 33,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:00.329770Z"
+  },
+  {
+    "id": "p075",
+    "name": "Silk Pajama Set",
+    "description": "Luxurious silk sleepwear for ultimate comfort.",
+    "price": 85.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "silk",
+      "pajamas",
+      "silk",
+      "pajama",
+      "set"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1584061606850-a57652a323a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzaWxrJTIwcGFqYW1hc3xlbnwwfDF8fHwxNzgzMjQxOTM4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 34,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:01.152149Z"
+  },
+  {
+    "id": "p076",
+    "name": "Aviator Sunglasses",
+    "description": "Classic metal-frame polarized sunglasses.",
+    "price": 87.5,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "aviator",
+      "sunglasses",
+      "aviator",
+      "sunglasses"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1567473810954-507d59716c25?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxhdmlhdG9yJTIwc3VuZ2xhc3Nlc3xlbnwwfDF8fHwxNzgzMjQxOTM5fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 35,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:01.844498Z"
+  },
+  {
+    "id": "p077",
+    "name": "Fleece Pullover",
+    "description": "Cozy quarter-zip fleece jacket.",
+    "price": 90.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "fleece",
+      "pullover",
+      "fleece",
+      "pullover"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1716393810972-0014eff53cab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxmbGVlY2UlMjBwdWxsb3ZlcnxlbnwwfDF8fHwxNzgzMjQxOTQwfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 36,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:02.613981Z"
+  },
+  {
+    "id": "p078",
+    "name": "Yoga Pants",
+    "description": "High-waisted stretchy leggings for workouts.",
+    "price": 92.5,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "yoga",
+      "pants",
+      "yoga",
+      "pants"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1651786095999-a0ed2b65981a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx5b2dhJTIwcGFudHN8ZW58MHwxfHx8MTc4MzI0MTk0MXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 37,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:03.614107Z"
+  },
+  {
+    "id": "p079",
+    "name": "Bucket Hat",
+    "description": "Cotton canvas casual summer hat.",
+    "price": 95.0,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "bucket",
+      "hat",
+      "bucket",
+      "hat"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1648422204972-4278784a9863?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxidWNrZXQlMjBoYXR8ZW58MHwxfHx8MTc4MzI0MTk0MXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 38,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:04.318444Z"
+  },
+  {
+    "id": "p080",
+    "name": "Chelsea Boots",
+    "description": "Sleek suede ankle boots with elastic side panels.",
+    "price": 97.5,
+    "salePrice": null,
+    "category": "fashion",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fashion",
+      "new"
+    ],
+    "searchTokens": [
+      "chelsea",
+      "boots",
+      "chelsea",
+      "boots"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1777987601423-f350ac29b3e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxjaGVsc2VhJTIwYm9vdHN8ZW58MHwxfHx8MTc4MzI0MTk0Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 39,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:05.054069Z"
+  },
+  {
+    "id": "p081",
+    "name": "Hyaluronic Acid Serum",
+    "description": "Intense hydration serum for plump skin.",
+    "price": 100.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "serum",
+      "bottle",
+      "hyaluronic",
+      "acid",
+      "serum"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1713768704571-6aeb0d0e5105?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzZXJ1bSUyMGJvdHRsZXxlbnwwfDF8fHwxNzgzMjQxOTQzfDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 40,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:05.843567Z"
+  },
+  {
+    "id": "p082",
+    "name": "Charcoal Face Wash",
+    "description": "Deep-cleaning foaming facial cleanser.",
+    "price": 102.5,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "face",
+      "wash",
+      "bottle",
+      "charcoal",
+      "face",
+      "wash"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1653919198052-546d44e2458e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxmYWNlJTIwd2FzaCUyMGJvdHRsZXxlbnwwfDF8fHwxNzgzMjQxOTQ0fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 41,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:06.666745Z"
+  },
+  {
+    "id": "p083",
+    "name": "Jade Roller",
+    "description": "Cooling stone roller for facial massage.",
+    "price": 105.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "jade",
+      "roller",
+      "jade",
+      "roller"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1714176774596-45946a7325fd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxqYWRlJTIwcm9sbGVyfGVufDB8MXx8fDE3ODMyNDE5NDR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 42,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:07.072478Z"
+  },
+  {
+    "id": "p084",
+    "name": "Retinol Night Cream",
+    "description": "Anti-aging night time moisturizer.",
+    "price": 107.5,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "face",
+      "cream",
+      "jar",
+      "retinol",
+      "night",
+      "cream"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1688413427501-3e4fac58ede1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxmYWNlJTIwY3JlYW0lMjBqYXJ8ZW58MHwxfHx8MTc4MzI0MTk0NXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 43,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:07.623346Z"
+  },
+  {
+    "id": "p085",
+    "name": "Rose Water Toner",
+    "description": "Refreshing and soothing facial mist.",
+    "price": 110.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "rose",
+      "water",
+      "spray",
+      "rose",
+      "water",
+      "toner"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1644641815757-37b5d1520bd7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxyb3NlJTIwd2F0ZXIlMjBzcHJheXxlbnwwfDF8fHwxNzgzMjQxOTQ1fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 44,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:08.432822Z"
+  },
+  {
+    "id": "p086",
+    "name": "Beard Oil",
+    "description": "Nourishing conditioning oil for men.",
+    "price": 112.5,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "beard",
+      "oil",
+      "bottle",
+      "beard",
+      "oil"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1673350963997-fc802e774580?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxiZWFyZCUyMG9pbCUyMGJvdHRsZXxlbnwwfDF8fHwxNzgzMjQxOTQ2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 45,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:09.065052Z"
+  },
+  {
+    "id": "p087",
+    "name": "SPF 50 Sunscreen",
+    "description": "Broad-spectrum invisible finish sunblock.",
+    "price": 115.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "sunscreen",
+      "tube",
+      "spf",
+      "50",
+      "sunscreen"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1654973552952-d0c98a3e3388?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzdW5zY3JlZW4lMjB0dWJlfGVufDB8MXx8fDE3ODMyNDE5NDd8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 46,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:09.861418Z"
+  },
+  {
+    "id": "p088",
+    "name": "Clay Mask",
+    "description": "Detoxifying bentonite clay skin treatment.",
+    "price": 117.5,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "clay",
+      "mask",
+      "jar",
+      "clay",
+      "mask"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1710693547912-db17dc079ed4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxjbGF5JTIwbWFzayUyMGphcnxlbnwwfDF8fHwxNzgzMjQxOTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 47,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:10.670349Z"
+  },
+  {
+    "id": "p089",
+    "name": "Lip Scrub",
+    "description": "Sugar exfoliating treatment for soft lips.",
+    "price": 120.0,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "lip",
+      "scrub",
+      "jar",
+      "lip",
+      "scrub"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1683944433023-027a3f443ae4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxsaXAlMjBzY3J1YiUyMGphcnxlbnwwfDF8fHwxNzgzMjQxOTQ4fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 48,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:11.396214Z"
+  },
+  {
+    "id": "p090",
+    "name": "Makeup Sponge",
+    "description": "Latex-free blending sponge for foundation.",
+    "price": 122.5,
+    "salePrice": null,
+    "category": "skincare",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "skincare",
+      "new"
+    ],
+    "searchTokens": [
+      "makeup",
+      "sponge",
+      "makeup",
+      "sponge"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1625435784289-4c3d68b43411?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxtYWtldXAlMjBzcG9uZ2V8ZW58MHwxfHx8MTc4MzI0MTk0OXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 49,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:11.975491Z"
+  },
+  {
+    "id": "p091",
+    "name": "Protein Shaker Bottle",
+    "description": "Leak-proof bottle with wire whisk.",
+    "price": 125.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "shaker",
+      "bottle",
+      "protein",
+      "shaker",
+      "bottle"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1593188543121-6441d07ad2e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxzaGFrZXIlMjBib3R0bGV8ZW58MHwxfHx8MTc4MzI0MTk1MHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 50,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:12.528210Z"
+  },
+  {
+    "id": "p092",
+    "name": "Yoga Block",
+    "description": "High-density foam block for support and balance.",
+    "price": 127.5,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "yoga",
+      "block",
+      "yoga",
+      "block"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1761971975858-c487bc10daab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx5b2dhJTIwYmxvY2t8ZW58MHwxfHx8MTc4MzI0MTk1MHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 51,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:13.047366Z"
+  },
+  {
+    "id": "p093",
+    "name": "Resistance Parachute",
+    "description": "Speed training parachute for runners.",
+    "price": 130.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "running",
+      "parachute",
+      "resistance",
+      "parachute"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1625457671990-7b1f1fb40a77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxydW5uaW5nJTIwcGFyYWNodXRlfGVufDB8MXx8fDE3ODMyNDE5NTF8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 52,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:13.912563Z"
+  },
+  {
+    "id": "p094",
+    "name": "Massage Gun",
+    "description": "Deep tissue percussive muscle massager.",
+    "price": 132.5,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "massage",
+      "gun",
+      "massage",
+      "gun"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1611908200005-b898ddde09cf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxtYXNzYWdlJTIwZ3VufGVufDB8MXx8fDE3ODMyNDE5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 53,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:14.696183Z"
+  },
+  {
+    "id": "p095",
+    "name": "Gym Bag",
+    "description": "Durable duffel bag with shoe compartment.",
+    "price": 135.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "gym",
+      "bag",
+      "gym",
+      "bag"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1581605405669-fcdf81165afa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxneW0lMjBiYWd8ZW58MHwxfHx8MTc4MzI0MTk1Mnww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 54,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:15.064953Z"
+  },
+  {
+    "id": "p096",
+    "name": "Ab Roller",
+    "description": "Core exercise wheel with knee pad.",
+    "price": 137.5,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "ab",
+      "roller",
+      "wheel",
+      "ab",
+      "roller"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxwcm9kdWN0fGVufDB8MHx8fDE3ODMwOTg1ODh8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 55,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:15.631195Z"
+  },
+  {
+    "id": "p097",
+    "name": "Grip Strengthener",
+    "description": "Adjustable hand exerciser tool.",
+    "price": 140.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "grip",
+      "strengthener",
+      "grip",
+      "strengthener"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1591940742878-13aba4b7a34e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxncmlwJTIwc3RyZW5ndGhlbmVyfGVufDB8MXx8fDE3ODMyNDE5NTR8MA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 56,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:16.643891Z"
+  },
+  {
+    "id": "p098",
+    "name": "Ankle Weights",
+    "description": "Wearable weights for legs and wrists.",
+    "price": 142.5,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "ankle",
+      "weights",
+      "ankle",
+      "weights"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1652363722945-5d3a1131eda8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxhbmtsZSUyMHdlaWdodHN8ZW58MHwxfHx8MTc4MzI0MTk1NHww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 57,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:17.395867Z"
+  },
+  {
+    "id": "p099",
+    "name": "Pull-Up Bar",
+    "description": "Doorway mounting chin-up bar.",
+    "price": 145.0,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "pull",
+      "up",
+      "bar",
+      "pull-up",
+      "bar"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHxwdWxsJTIwdXAlMjBiYXJ8ZW58MHwxfHx8MTc4MzI0MTk1NXww&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 58,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:17.953869Z"
+  },
+  {
+    "id": "p100",
+    "name": "Weightlifting Belt",
+    "description": "Leather support belt for heavy lifts.",
+    "price": 147.5,
+    "salePrice": null,
+    "category": "fitness",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "materials": [
+      "various"
+    ],
+    "style": [
+      "modern"
+    ],
+    "tags": [
+      "fitness",
+      "new"
+    ],
+    "searchTokens": [
+      "weightlifting",
+      "belt",
+      "weightlifting",
+      "belt"
+    ],
+    "imageUrls": [
+      "https://images.unsplash.com/photo-1532382708467-d720b918f0da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5ODkyNjB8MHwxfHNlYXJjaHwxfHx3ZWlnaHRsaWZ0aW5nJTIwYmVsdHxlbnwwfDF8fHwxNzgzMjQxOTU2fDA&ixlib=rb-4.1.0&q=80&w=1080"
+    ],
+    "rating": 4.5,
+    "reviewCount": 59,
+    "inventory": 50,
+    "isNew": true,
+    "isSale": false,
+    "createdAt": "2026-07-05T08:59:18.710460Z"
   }
 ]

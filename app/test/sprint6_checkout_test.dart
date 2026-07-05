@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:haul/core/api/api_client.dart';
 import 'package:haul/features/checkout/checkout_screens.dart';
+import 'package:haul/features/checkout/providers/orders_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 
@@ -111,10 +112,11 @@ void main() {
     final order = _order();
     await tester.pumpWidget(
       ProviderScope(
-        child: MaterialApp(
-          home: OrdersScreen(
-            loadOrders: () async => OrdersResponse(orders: [order], count: 1),
-          ),
+        overrides: [
+          ordersProvider.overrideWith((ref) => OrdersResponse(orders: [order], count: 1)),
+        ],
+        child: const MaterialApp(
+          home: OrdersScreen(),
         ),
       ),
     );

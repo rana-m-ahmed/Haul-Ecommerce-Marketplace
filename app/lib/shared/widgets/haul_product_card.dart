@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/design/design.dart';
 import '../../features/wishlist/providers/wishlist_controller.dart';
@@ -247,13 +248,14 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
     Widget imageWidget = ClipRRect(
       borderRadius: borderRadius,
       child: data.imageUrl != null
-          ? Image.network(
-              data.imageUrl!,
+          ? CachedNetworkImage(
+              imageUrl: data.imageUrl!,
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              errorBuilder: (context, error, stackTrace) =>
-                  _buildImagePlaceholder(),
+              memCacheWidth: 400,
+              errorWidget: (context, url, error) => _buildImagePlaceholder(),
+              placeholder: (context, url) => Container(color: AppColors.shimmerBase),
             )
           : _buildImagePlaceholder(),
     );
@@ -401,10 +403,9 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
   }
 
   Widget _buildWishlistButton() {
-    final wishlistedState = ref.watch(wishlistControllerProvider);
-    final wishlisted =
-        wishlistedState.value?.contains(widget.data.id) ??
-        widget.data.isWishlisted;
+    final wishlisted = ref.watch(wishlistControllerProvider.select((state) {
+      return state.value?.contains(widget.data.id) ?? widget.data.isWishlisted;
+    }));
 
     return GestureDetector(
       onTap: () {
@@ -429,6 +430,7 @@ class _HaulProductCardState extends ConsumerState<HaulProductCard>
         child: Center(
           child: AnimatedSwitcher(
             duration: AppMotion.durationFast,
+            transitionBuilder: (child, animation) => ScaleTransition(scale: animation, child: child),
             child: Icon(
               wishlisted ? Icons.favorite : Icons.favorite_border,
               key: ValueKey(wishlisted),

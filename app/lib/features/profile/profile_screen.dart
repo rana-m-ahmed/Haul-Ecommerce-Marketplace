@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../core/api/api_client.dart';
 import '../../core/auth/auth_provider.dart';
@@ -9,6 +10,7 @@ import '../../core/design/design.dart';
 import '../../shared/widgets/widgets.dart';
 import '../catalog/catalog_ui.dart';
 import '../wishlist/providers/wishlist_controller.dart';
+import '../wishlist/providers/wishlist_products_provider.dart';
 
 class ProfileIdentity {
   const ProfileIdentity({
@@ -270,36 +272,29 @@ class _GuestBadge extends StatelessWidget {
 
 class _WishlistProductLoader extends ConsumerWidget {
   const _WishlistProductLoader({required this.ids});
-
   final List<String> ids;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (ids.isEmpty) {
       return HaulEmptyState(
-        title: 'Nothing saved yet',
-        subtitle: 'Tap a heart on any product to keep it close.',
+        title: 'Your wishlist is empty',
+        subtitle: 'Save a few products and they will appear here.',
         icon: Icons.favorite_border_rounded,
         actionLabel: 'Browse products',
         onAction: () => context.go('/home'),
       );
     }
-    return FutureBuilder<List<Product>>(
-      future: Future.wait(
-        ids.take(4).map(ref.read(apiClientProvider).getProduct),
+
+    final previewAsync = ref.watch(wishlistPreviewProvider);
+
+    return previewAsync.when(
+      loading: _WishlistPreview.loading,
+      error: (_, _) => const HaulErrorState(
+        title: 'Saved items are waking up',
+        subtitle: 'Open your wishlist to retry.',
       ),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return _WishlistPreview.loading();
-        }
-        if (snapshot.hasError) {
-          return const HaulErrorState(
-            title: 'Saved items are waking up',
-            subtitle: 'Open your wishlist to retry.',
-          );
-        }
-        return _WishlistPreview(products: snapshot.data ?? const []);
-      },
+      data: (products) => _WishlistPreview(products: products),
     );
   }
 }
@@ -359,11 +354,14 @@ class _WishlistPreview extends StatelessWidget {
                   color: AppColors.border,
                   child: product.primaryImageUrl == null
                       ? const Icon(Icons.image_outlined)
-                      : Image.network(
-                          product.primaryImageUrl!,
+                      : CachedNetworkImage(
+                          imageUrl: product.primaryImageUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (_, _, _) =>
+                          memCacheWidth: 200,
+                          memCacheHeight: 300,
+                          errorWidget: (context, url, error) =>
                               const Icon(Icons.image_not_supported_outlined),
+                          placeholder: (context, url) => Container(color: AppColors.shimmerBase),
                         ),
                 ),
               ),

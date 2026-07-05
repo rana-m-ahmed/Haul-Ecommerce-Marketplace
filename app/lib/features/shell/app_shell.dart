@@ -19,9 +19,6 @@ class AppShell extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartState = ref.watch(cartControllerProvider);
-    final cartCount =
-        cartState.value?.fold(0, (sum, item) => sum + item.quantity) ?? 0;
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
@@ -29,7 +26,6 @@ class AppShell extends ConsumerWidget {
       body: navigationShell,
       bottomNavigationBar: _FloatingNavBar(
         currentIndex: navigationShell.currentIndex,
-        cartCount: cartCount,
         bottomPadding: bottomPadding,
         onTabTap: (index) => _onTap(context, index),
         onCameraTap: () => context.push('/camera'),
@@ -40,23 +36,25 @@ class AppShell extends ConsumerWidget {
 
 // ── Floating Nav Bar ────────────────────────────────────────────────────────
 
-class _FloatingNavBar extends StatelessWidget {
+class _FloatingNavBar extends ConsumerWidget {
   const _FloatingNavBar({
     required this.currentIndex,
-    required this.cartCount,
     required this.bottomPadding,
     required this.onTabTap,
     required this.onCameraTap,
   });
 
   final int currentIndex;
-  final int cartCount;
   final double bottomPadding;
   final ValueChanged<int> onTabTap;
   final VoidCallback onCameraTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartCount = ref.watch(cartControllerProvider.select((state) {
+      return state.value?.fold(0, (sum, item) => sum + item.quantity) ?? 0;
+    }));
+
     return Container(
       color: Colors.transparent,
       padding: EdgeInsets.fromLTRB(

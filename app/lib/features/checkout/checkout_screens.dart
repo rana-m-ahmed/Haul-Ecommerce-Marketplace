@@ -8,7 +8,8 @@ import '../../core/api/api_client.dart';
 import '../../core/design/design.dart';
 import '../../shared/widgets/widgets.dart';
 import '../cart/providers/cart_controller.dart';
-import 'dummy_payment_sheet.dart';
+
+import 'providers/orders_provider.dart';
 
 const _stripeKey = String.fromEnvironment('HAUL_STRIPE_PUBLISHABLE_KEY');
 
@@ -80,13 +81,12 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     
     // If Stripe is not configured, we use the Dummy Payment Flow
     if (_stripeKey.isEmpty) {
-      final success = await showDummyPaymentSheet(
-        context,
-        amount: intent.amount.toDouble(),
-        currency: intent.currency,
+      final success = await context.push<bool>(
+        '/checkout/payment-method',
+        extra: intent,
       );
       
-      if (success != true) return; // User cancelled the dummy sheet
+      if (success != true) return; // User cancelled the dummy flow
       
       setState(() {
         _loading = true;
@@ -420,11 +420,24 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
                   ),
                 ),
               AppSpacing.gapLg,
-              HaulButton(
-                label: 'View orders',
-                variant: HaulButtonVariant.secondary,
-                onPressed: () => context.go('/orders'),
-                fullWidth: true,
+              Row(
+                children: [
+                  Expanded(
+                    child: HaulButton(
+                      label: 'Shop',
+                      variant: HaulButtonVariant.secondary,
+                      onPressed: () => context.go('/home'),
+                    ),
+                  ),
+                  AppSpacing.gapMd,
+                  Expanded(
+                    child: HaulButton(
+                      label: 'View orders',
+                      variant: HaulButtonVariant.secondary,
+                      onPressed: () => context.go('/orders'),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -434,64 +447,43 @@ class _OrderSuccessScreenState extends State<OrderSuccessScreen>
   }
 }
 
-class OrdersScreen extends ConsumerStatefulWidget {
-  const OrdersScreen({super.key, this.loadOrders});
-
-  final Future<OrdersResponse> Function()? loadOrders;
+class OrdersScreen extends ConsumerWidget {
+  const OrdersScreen({super.key});
 
   @override
-  ConsumerState<OrdersScreen> createState() => _OrdersScreenState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final ordersAsync = ref.watch(ordersProvider);
 
-class _OrdersScreenState extends ConsumerState<OrdersScreen> {
-  late Future<OrdersResponse> _orders;
-
-  @override
-  void initState() {
-    super.initState();
-    _orders = _load();
-  }
-
-  Future<OrdersResponse> _load() {
-    if (widget.loadOrders != null) return widget.loadOrders!();
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid == null) {
-      return Future.value(const OrdersResponse(orders: [], count: 0));
-    }
-    return ref.read(apiClientProvider).getOrders(uid);
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
         title: Text('Orders', style: AppTypography.h2),
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textPrimary,
-      ),
-      body: FutureBuilder<OrdersResponse>(
-        future: _orders,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done) {
-            return ListView.separated(
-              padding: AppSpacing.paddingLg,
-              itemCount: 3,
-              separatorBuilder: (_, _) => AppSpacing.gapMd,
-              itemBuilder: (_, _) => HaulSkeleton.rect(
-                width: double.infinity,
-                height: 128,
-                borderRadius: AppRadius.cardBorderRadius,
+        leading: context.canPop()
+            ? BackButton(onPressed: () => context.pop())
+            : IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => context.go('/home'),
               ),
-            );
-          }
-          if (snapshot.hasError) {
-            return HaulErrorState(
-              subtitle: snapshot.error.toString(),
-              onRetry: () => setState(() => _orders = _load()),
-            );
-          }
-          final orders = snapshot.data!.orders;
+      ),
+      body: ordersAsync.when(
+        loading: () => ListView.separated(
+          padding: AppSpacing.paddingLg,
+          itemCount: 3,
+          separatorBuilder: (_, _) => AppSpacing.gapMd,
+          itemBuilder: (_, _) => HaulSkeleton.rect(
+            width: double.infinity,
+            height: 128,
+            borderRadius: AppRadius.cardBorderRadius,
+          ),
+        ),
+        error: (error, _) => HaulErrorState(
+          subtitle: error.toString(),
+          onRetry: () => ref.invalidate(ordersProvider),
+        ),
+        data: (response) {
+          final orders = response.orders;
           if (orders.isEmpty) {
             return const HaulEmptyState(
               title: 'No orders yet',
@@ -500,7 +492,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
             );
           }
           return RefreshIndicator(
-            onRefresh: () async => setState(() => _orders = _load()),
+            onRefresh: () async => ref.invalidate(ordersProvider),
             child: ListView.separated(
               padding: AppSpacing.paddingLg,
               itemCount: orders.length,
@@ -584,67 +576,92 @@ class OrderDetailScreen extends StatelessWidget {
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textPrimary,
       ),
-      body: ListView(
-        padding: AppSpacing.paddingLg,
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: _StatusBadge(status: order.status),
-          ),
-          AppSpacing.gapLg,
-          Text('Purchased snapshot', style: AppTypography.h2),
-          AppSpacing.gapSm,
-          ...order.items.map(
-            (item) => Container(
-              margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-              padding: AppSpacing.paddingMd,
-              decoration: BoxDecoration(
-                color: AppColors.surface,
-                borderRadius: AppRadius.buttonBorderRadius,
-              ),
-              child: Row(
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 24, top: 24, right: 24, bottom: 8),
+            sliver: SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${item.quantity} x ${item.name}',
-                          style: AppTypography.bodySmallMedium,
-                        ),
-                        Text(
-                          '${_formatMoney(item.unitPrice, order.currency)} each',
-                          style: AppTypography.caption,
-                        ),
-                      ],
-                    ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: _StatusBadge(status: order.status),
                   ),
-                  Text(
-                    _formatMoney(item.subtotal, order.currency),
-                    style: AppTypography.bodySmallMedium,
-                  ),
+                  AppSpacing.gapLg,
+                  Text('Purchased snapshot', style: AppTypography.h2),
                 ],
               ),
             ),
           ),
-          AppSpacing.gapMd,
-          Row(
-            children: [
-              Expanded(child: Text('Paid total', style: AppTypography.h3)),
-              Text(
-                _formatMoney(order.total, order.currency),
-                style: AppTypography.h2,
-              ),
-            ],
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            sliver: SliverList.builder(
+              itemCount: order.items.length,
+              itemBuilder: (context, index) {
+                final item = order.items[index];
+                return Container(
+                  margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                  padding: AppSpacing.paddingMd,
+                  decoration: BoxDecoration(
+                    color: AppColors.surface,
+                    borderRadius: AppRadius.buttonBorderRadius,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              '${item.quantity} x ${item.name}',
+                              style: AppTypography.bodySmallMedium,
+                            ),
+                            Text(
+                              '${_formatMoney(item.unitPrice, order.currency)} each',
+                              style: AppTypography.caption,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(
+                        _formatMoney(item.subtotal, order.currency),
+                        style: AppTypography.bodySmallMedium,
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ),
-          AppSpacing.gapLg,
-          Text('Ship to', style: AppTypography.h3),
-          AppSpacing.gapXs,
-          Text(
-            '${order.shippingAddress.line1}\n${order.shippingAddress.city}, '
-            '${order.shippingAddress.region ?? ''} ${order.shippingAddress.postalCode ?? ''}\n'
-            '${order.shippingAddress.country}',
-            style: AppTypography.bodySmall,
+          SliverPadding(
+            padding: const EdgeInsets.only(left: 24, right: 24, bottom: 24),
+            sliver: SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppSpacing.gapMd,
+                  Row(
+                    children: [
+                      Expanded(child: Text('Paid total', style: AppTypography.h3)),
+                      Text(
+                        _formatMoney(order.total, order.currency),
+                        style: AppTypography.h2,
+                      ),
+                    ],
+                  ),
+                  AppSpacing.gapLg,
+                  Text('Ship to', style: AppTypography.h3),
+                  AppSpacing.gapXs,
+                  Text(
+                    '${order.shippingAddress.line1}\n${order.shippingAddress.city}, '
+                    '${order.shippingAddress.region ?? ''} ${order.shippingAddress.postalCode ?? ''}\n'
+                    '${order.shippingAddress.country}',
+                    style: AppTypography.bodySmall,
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

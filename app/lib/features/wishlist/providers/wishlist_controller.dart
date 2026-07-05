@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../core/auth/auth_provider.dart';
 import 'wishlist_repository.dart';
@@ -10,13 +11,16 @@ class WishlistController extends _$WishlistController {
   Future<List<String>> build() async {
     final authState = ref.watch(authControllerProvider);
 
-    if (authState is AuthStateAuthenticated) {
-      final repo = ref.read(wishlistRepositoryProvider);
-      final cache = await repo.getCachedWishlist(authState.uid);
+    if (authState is AuthStateAuthenticated || authState is AuthStateGuest) {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final repo = ref.read(wishlistRepositoryProvider);
+        final cache = await repo.getCachedWishlist(user.uid);
 
-      // Async fetch from firestore
-      _fetchFirestore(authState.uid);
-      return cache;
+        // Async fetch from firestore
+        _fetchFirestore(user.uid);
+        return cache;
+      }
     }
 
     return [];
@@ -35,9 +39,12 @@ class WishlistController extends _$WishlistController {
 
   Future<void> toggleWishlist(String productId) async {
     final authState = ref.read(authControllerProvider);
-    if (authState is! AuthStateAuthenticated) return;
+    if (authState is! AuthStateAuthenticated && authState is! AuthStateGuest) return;
 
-    final uid = authState.uid;
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
+    
+    final uid = user.uid;
     final repo = ref.read(wishlistRepositoryProvider);
     final previousState = state;
 

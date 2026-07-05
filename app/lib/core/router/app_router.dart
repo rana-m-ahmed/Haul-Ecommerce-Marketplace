@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../features/checkout/payment_flow/payment_method_screen.dart';
+import '../../features/checkout/payment_flow/add_card_screen.dart';
+
 import '../api/api_client.dart';
 import '../auth/auth_provider.dart';
 import '../../features/catalog/catalog_ui.dart';
@@ -155,9 +158,24 @@ GoRouter appRouter(Ref ref) {
           );
         },
       ),
+
       GoRoute(
         path: '/checkout',
         builder: (context, state) => const CheckoutScreen(),
+        routes: [
+          GoRoute(
+            path: 'payment-method',
+            builder: (context, state) => PaymentMethodScreen(
+              intent: state.extra! as PaymentIntentResponse,
+            ),
+          ),
+          GoRoute(
+            path: 'add-card',
+            builder: (context, state) => AddCardScreen(
+              intent: state.extra! as PaymentIntentResponse,
+            ),
+          ),
+        ],
       ),
       GoRoute(
         path: '/order-success',

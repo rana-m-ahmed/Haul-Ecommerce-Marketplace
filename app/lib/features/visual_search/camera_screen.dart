@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -229,10 +230,10 @@ class _CameraScreenState extends ConsumerState<CameraScreen>
         fit: StackFit.expand,
         children: [
           _buildBackground(),
-          if (_state == CameraViewState.ready) ...[
-            _ScanningLine(animation: _scanController),
-            _FocusCorners(animation: _focusController),
-          ],
+          if (_state == CameraViewState.ready)
+            _RingsScannerOverlay(
+              animation: _scanController,
+            ),
           SafeArea(child: _buildControls()),
           if (_state == CameraViewState.processing)
             _ProcessingOverlay(wakingUp: _wakingUp),
@@ -515,93 +516,142 @@ class _RoundCameraButton extends StatelessWidget {
   }
 }
 
-class _ScanningLine extends StatelessWidget {
-  const _ScanningLine({required this.animation});
+class _RingsScannerOverlay extends StatelessWidget {
+  const _RingsScannerOverlay({
+    required this.animation,
+  });
 
   final Animation<double> animation;
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.xl,
-          vertical: AppSpacing.xxxl,
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        ColorFiltered(
+          colorFilter: ColorFilter.mode(
+            Colors.black.withValues(alpha: 0.7),
+            BlendMode.srcOut,
+          ),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  backgroundBlendMode: BlendMode.dstOut,
+                ),
+              ),
+              Center(
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width * 0.85,
+                  height: MediaQuery.sizeOf(context).width * 0.85,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
-        child: AnimatedBuilder(
-          animation: animation,
-          builder: (context, child) => Align(
-            alignment: Alignment(0, -1 + animation.value * 2),
-            child: Container(
-              height: AppSpacing.xxs / 2,
-              decoration: BoxDecoration(
-                color: AppColors.accent,
-                boxShadow: AppShadows.button,
+        Center(
+          child: RepaintBoundary(
+            child: AnimatedBuilder(
+              animation: animation,
+              builder: (context, child) => SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.85,
+                height: MediaQuery.sizeOf(context).width * 0.85,
+                child: CustomPaint(
+                  painter: _RingsPainter(animationValue: animation.value),
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _FocusCorners extends StatelessWidget {
-  const _FocusCorners({required this.animation});
-
-  final Animation<double> animation;
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: AnimatedBuilder(
-        animation: animation,
-        builder: (context, child) => Transform.scale(
-          scale: 0.96 + animation.value * 0.04,
-          child: CustomPaint(
-            size: const Size(AppSpacing.xxxl * 4, AppSpacing.xxxl * 4),
-            painter: _FocusCornerPainter(),
+        Positioned(
+          top: MediaQuery.paddingOf(context).top + AppSpacing.xxl,
+          left: 0,
+          right: 0,
+          child: Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(color: AppColors.accent.withValues(alpha: 0.3)),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.camera, color: AppColors.accent, size: AppSpacing.lg),
+                  AppSpacing.hGapSm,
+                  Text(
+                    'AI SCANNER',
+                    style: AppTypography.bodySmallMedium.copyWith(color: AppColors.accent, letterSpacing: 1.5),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
 
-class _FocusCornerPainter extends CustomPainter {
+class _RingsPainter extends CustomPainter {
+  _RingsPainter({required this.animationValue});
+  final double animationValue;
+
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = AppColors.surface
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = size.width / 2.5;
+
+    final paint1 = Paint()
+      ..color = AppColors.accent
       ..style = PaintingStyle.stroke
-      ..strokeWidth = AppSpacing.xxs / 2
-      ..strokeCap = StrokeCap.round;
-    const length = AppSpacing.lg;
-    final paths = [
-      Path()
-        ..moveTo(0, length)
-        ..lineTo(0, 0)
-        ..lineTo(length, 0),
-      Path()
-        ..moveTo(size.width - length, 0)
-        ..lineTo(size.width, 0)
-        ..lineTo(size.width, length),
-      Path()
-        ..moveTo(size.width, size.height - length)
-        ..lineTo(size.width, size.height)
-        ..lineTo(size.width - length, size.height),
-      Path()
-        ..moveTo(length, size.height)
-        ..lineTo(0, size.height)
-        ..lineTo(0, size.height - length),
-    ];
-    for (final path in paths) {
-      canvas.drawPath(path, paint);
-    }
+      ..strokeWidth = 2.5
+      ..maskFilter = const MaskFilter.blur(BlurStyle.solid, 2);
+
+    final paint2 = Paint()
+      ..color = AppColors.accent.withValues(alpha: 0.6)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5;
+
+    // Ring 1
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(math.pi / 6); 
+    canvas.scale(1.0, math.cos(animationValue * math.pi)); 
+    canvas.drawOval(
+      Rect.fromCenter(center: Offset.zero, width: radius * 2, height: radius * 2),
+      paint1,
+    );
+    canvas.restore();
+
+    // Ring 2
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(-math.pi / 3); 
+    canvas.scale(1.0, math.cos(animationValue * math.pi + math.pi / 2)); 
+    canvas.drawOval(
+      Rect.fromCenter(center: Offset.zero, width: radius * 2, height: radius * 2),
+      paint2,
+    );
+    canvas.restore();
+    
+    // Center pulse dot
+    final pulsePaint = Paint()
+      ..color = AppColors.accent.withValues(alpha: 0.4 + 0.6 * math.sin(animationValue * math.pi).abs())
+      ..style = PaintingStyle.fill;
+    canvas.drawCircle(center, 4, pulsePaint);
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _RingsPainter oldDelegate) => 
+      oldDelegate.animationValue != animationValue;
 }
 
 class _VisualSearchResultsSheet extends StatefulWidget {
