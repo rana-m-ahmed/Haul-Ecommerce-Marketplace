@@ -8,6 +8,7 @@ import '../../core/api/api_client.dart';
 import '../../core/design/design.dart';
 import '../../shared/widgets/widgets.dart';
 import '../cart/providers/cart_controller.dart';
+import 'dummy_payment_sheet.dart';
 
 const _stripeKey = String.fromEnvironment('HAUL_STRIPE_PUBLISHABLE_KEY');
 
@@ -76,12 +77,35 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   Future<void> _pay() async {
     final intent = _intent;
     if (intent == null) return;
+    
+    // If Stripe is not configured, we use the Dummy Payment Flow
     if (_stripeKey.isEmpty) {
+      final success = await showDummyPaymentSheet(
+        context,
+        amount: intent.amount.toDouble(),
+        currency: intent.currency,
+      );
+      
+      if (success != true) return; // User cancelled the dummy sheet
+      
       setState(() {
-        _error = 'Stripe test checkout is not configured on this build.';
+        _loading = true;
+        _error = null;
       });
+      try {
+        final order = await ref
+            .read(apiClientProvider)
+            .confirmOrder('dummy_${intent.paymentIntentId}');
+        ref.invalidate(cartControllerProvider);
+        if (mounted) context.go('/order-success', extra: order);
+      } on ApiException catch (error) {
+        if (mounted) setState(() => _error = error.error.message);
+      } finally {
+        if (mounted) setState(() => _loading = false);
+      }
       return;
     }
+
     setState(() {
       _loading = true;
       _error = null;

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart'
-    show defaultTargetPlatform, kIsWeb, kReleaseMode, TargetPlatform;
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -49,19 +48,9 @@ Uri resolveApiBaseUrl() {
     return Uri.parse(_configuredBaseUrl);
   }
   if (!kReleaseMode) {
-    if (kIsWeb) {
-      return Uri.parse('http://127.0.0.1:8001');
-    }
-    return switch (defaultTargetPlatform) {
-      TargetPlatform.android => Uri.parse('http://10.0.2.2:8001'),
-      TargetPlatform.iOS => Uri.parse('http://127.0.0.1:8001'),
-      TargetPlatform.macOS => Uri.parse('http://127.0.0.1:8001'),
-      TargetPlatform.windows => Uri.parse('http://127.0.0.1:8001'),
-      TargetPlatform.linux => Uri.parse('http://127.0.0.1:8001'),
-      TargetPlatform.fuchsia => Uri.parse('http://127.0.0.1:8001'),
-    };
+    return Uri.parse('https://rana-m-ahmed-haulbackend.hf.space');
   }
-  return Uri.parse('https://hual-api.hf.space');
+  return Uri.parse('https://rana-m-ahmed-haulbackend.hf.space');
 }
 
 class ApiClient {

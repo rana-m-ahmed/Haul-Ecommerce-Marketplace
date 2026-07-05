@@ -45,5 +45,11 @@ secrets/
 google-services.json
 GoogleService-Info.plist
 
+# Local catalog seeding checkpoints and review artifacts
+backend/seed/runs/
+backend/seed/seed-*.log
+backend/*.log
+backend-root*.log
+
 # Local configuration
 local.properties
