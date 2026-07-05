@@ -72,7 +72,6 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> loginAsGuest() async {
-    state = const AuthStateLoading();
     try {
       await FirebaseAuth.instance.signInAnonymously();
     } catch (e) {
@@ -85,7 +84,6 @@ class AuthController extends _$AuthController {
     final normalizedEmail = email.trim().toLowerCase();
     if (normalizedEmail.isEmpty || password.isEmpty) return;
 
-    state = const AuthStateLoading();
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: normalizedEmail,
@@ -107,7 +105,6 @@ class AuthController extends _$AuthController {
       return;
     }
 
-    state = const AuthStateLoading();
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
 
@@ -147,7 +144,6 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> loginWithGoogle() async {
-    state = const AuthStateLoading();
     try {
       final googleSignIn = GoogleSignIn();
       final googleUser = await googleSignIn.signIn();
@@ -194,7 +190,6 @@ class AuthController extends _$AuthController {
   }
 
   Future<void> logout() async {
-    state = const AuthStateLoading();
     try {
       await const SessionCleaner().clear();
       ref.read(recentSearchesProvider.notifier).clear();

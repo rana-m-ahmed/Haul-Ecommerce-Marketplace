@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../core/design/design.dart';
+import '../../core/auth/auth_provider.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -15,6 +17,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   late final AnimationController _controller;
   late final Animation<double> _scaleAnimation;
   late final Animation<double> _fadeAnimation;
+  bool _minimumTimePassed = false;
 
   @override
   void initState() {
@@ -33,6 +36,28 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     );
 
     _controller.forward();
+
+    Future.delayed(const Duration(milliseconds: 2500), () {
+      if (mounted) {
+        setState(() => _minimumTimePassed = true);
+        _navigateIfReady(ref.read(authControllerProvider));
+      }
+    });
+  }
+
+  void _navigateIfReady(AuthState state) {
+    if (!_minimumTimePassed || !mounted) return;
+    if (state is AuthStateLoading) return;
+
+    if (state is AuthStateUnauthenticated) {
+      context.go('/onboarding');
+    } else if (state is AuthStateGuest) {
+      context.go('/home');
+    } else if (state is AuthStateNewUser) {
+      context.go('/preferences');
+    } else if (state is AuthStateAuthenticated) {
+      context.go('/home');
+    }
   }
 
   @override
@@ -43,9 +68,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // We observe the auth state to redirect once loading is done.
-    // However, GoRouter handles redirects better at the router level.
-    // This widget just provides the visual while auth state is loading.
+    ref.listen<AuthState>(authControllerProvider, (previous, next) {
+      _navigateIfReady(next);
+    });
 
     return Scaffold(
       backgroundColor: AppColors.background,

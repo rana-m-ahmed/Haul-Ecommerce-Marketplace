@@ -56,12 +56,7 @@ GoRouter appRouter(Ref ref) {
       if (authState is AuthStateLoading) {
         return isSplash ? null : '/splash';
       }
-      if (isSplash) {
-        if (authState is AuthStateUnauthenticated) return '/onboarding';
-        if (authState is AuthStateGuest) return '/home';
-        if (authState is AuthStateNewUser) return '/preferences';
-        if (authState is AuthStateAuthenticated) return '/home';
-      }
+      // Splash screen handles its own navigation when auth is ready and timer finishes.
       if ((isAuth && !isLinking) || isOnboarding) {
         if (authState is AuthStateGuest) return '/home';
         if (authState is AuthStateNewUser) return '/preferences';

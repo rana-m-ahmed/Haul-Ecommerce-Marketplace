@@ -21,6 +21,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   final _confirmPasswordController = TextEditingController();
   final _usernameController = TextEditingController();
   bool _isSignUp = false;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -32,6 +33,7 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
   }
 
   Future<void> _onGuestLogin() async {
+    setState(() => _isLoading = true);
     try {
       await ref.read(authControllerProvider.notifier).loginAsGuest();
     } catch (e) {
@@ -40,19 +42,24 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           SnackBar(content: Text('Failed to sign in as guest: $e')),
         );
       }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
   Future<void> _onEmailSubmit() async {
     if (_emailController.text.isEmpty || _passwordController.text.isEmpty) return;
     
+    setState(() => _isLoading = true);
     if (_isSignUp) {
       if (_usernameController.text.trim().isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Please provide a username')));
+        setState(() => _isLoading = false);
         return;
       }
       if (_passwordController.text != _confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Passwords do not match')));
+        setState(() => _isLoading = false);
         return;
       }
       try {
@@ -74,9 +81,11 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
         if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Sign in failed: $e')));
       }
     }
+    if (mounted) setState(() => _isLoading = false);
   }
 
   Future<void> _onGoogleLogin() async {
+    setState(() => _isLoading = true);
     try {
       await ref.read(authControllerProvider.notifier).loginWithGoogle();
     } catch (e) {
@@ -85,13 +94,14 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
           SnackBar(content: Text('Google sign in failed: $e')),
         );
       }
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final authState = ref.watch(authControllerProvider);
-    final isLoading = authState is AuthStateLoading;
+    final isLoading = _isLoading;
 
     return Scaffold(
       backgroundColor: AppColors.background,
