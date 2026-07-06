@@ -1,4 +1,4 @@
-name: Keep Hual API Warm
+name: Keep Haul API Warm
 
 on:
   schedule:
@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Curl health endpoint
         env:
-          HUAL_API_URL: ${{ vars.HUAL_API_URL || 'https://hual-api.hf.space' }}
+          HAUL_API_URL: ${{ vars.HAUL_API_URL || 'https://rana-m-ahmed-haulbackend.hf.space' }}
         run: |
-          curl --fail --show-error --silent --max-time 20 "$HUAL_API_URL/health"
+          curl --fail --show-error --silent --max-time 20 "$HAUL_API_URL/health"

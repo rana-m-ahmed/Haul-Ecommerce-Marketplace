@@ -9,7 +9,7 @@ info:
 servers:
   - url: http://localhost:8000
     description: Local mock server
-  - url: https://hual-api.hf.space
+  - url: https://rana-m-ahmed-haulbackend.hf.space
     description: Hugging Face Spaces deployment
 security:
   - firebaseAuth: []

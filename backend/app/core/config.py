@@ -84,7 +84,7 @@ class Settings(BaseSettings):
     catalog_gemini_budget: int = 120
     ai_cache_ttl_seconds: int = 900
     hf_space_health_url: str = Field(
-        default="https://hual-api.hf.space/health",
+        default="https://rana-m-ahmed-haulbackend.hf.space/health",
         description="Used by the keep-warm workflow unless overridden by repository variables.",
     )
     auth_allow_test_tokens: bool = Field(
