@@ -49,3 +49,78 @@ final class UserRepositoryProvider
 }
 
 String _$userRepositoryHash() => r'1a4e42f29e04239b4ad4b601f59649a769f6431e';
+
+@ProviderFor(userProfile)
+final userProfileProvider = UserProfileFamily._();
+
+final class UserProfileProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<UserProfile?>,
+          UserProfile?,
+          Stream<UserProfile?>
+        >
+    with $FutureModifier<UserProfile?>, $StreamProvider<UserProfile?> {
+  UserProfileProvider._({
+    required UserProfileFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'userProfileProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$userProfileHash();
+
+  @override
+  String toString() {
+    return r'userProfileProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<UserProfile?> $createElement(
+    $ProviderPointer pointer,
+  ) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<UserProfile?> create(Ref ref) {
+    final argument = this.argument as String;
+    return userProfile(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserProfileProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$userProfileHash() => r'1b3229685001b3294e1f797ed6ebec3e72c5002a';
+
+final class UserProfileFamily extends $Family
+    with $FunctionalFamilyOverride<Stream<UserProfile?>, String> {
+  UserProfileFamily._()
+    : super(
+        retry: null,
+        name: r'userProfileProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  UserProfileProvider call(String uid) =>
+      UserProfileProvider._(argument: uid, from: this);
+
+  @override
+  String toString() => r'userProfileProvider';
+}

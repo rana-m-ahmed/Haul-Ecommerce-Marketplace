@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../core/api/api_client.dart';
 import '../../../core/design/design.dart';
@@ -36,20 +37,30 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
               AppSpacing.gapLg,
               _buildMethodTile(
                 id: 'card',
-                title: 'Credit / Debit Card',
-                icon: Icons.credit_card_outlined,
+                title: 'Credit or debit card',
+                iconBuilder: (isSelected) => Icon(
+                  Icons.credit_card_outlined,
+                  color: isSelected ? AppColors.accent : AppColors.textPrimary,
+                ),
               ),
               AppSpacing.gapMd,
               _buildMethodTile(
                 id: 'apple_pay',
                 title: 'Apple Pay',
-                icon: Icons.apple,
+                iconBuilder: (isSelected) => Icon(
+                  Icons.apple,
+                  color: isSelected ? AppColors.accent : AppColors.textPrimary,
+                ),
               ),
               AppSpacing.gapMd,
               _buildMethodTile(
                 id: 'google_pay',
                 title: 'Google Pay',
-                icon: Icons.g_mobiledata,
+                iconBuilder: (isSelected) => SvgPicture.asset(
+                  'assets/icons/google.svg',
+                  width: 24,
+                  height: 24,
+                ),
               ),
               const Spacer(),
               HaulButton(
@@ -82,7 +93,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     );
   }
 
-  Widget _buildMethodTile({required String id, required String title, required IconData icon}) {
+  Widget _buildMethodTile({required String id, required String title, required Widget Function(bool) iconBuilder}) {
     final isSelected = _selectedMethod == id;
     return InkWell(
       onTap: () => setState(() => _selectedMethod = id),
@@ -101,7 +112,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
         ),
         child: Row(
           children: [
-            Icon(icon, color: isSelected ? AppColors.accent : AppColors.textPrimary),
+            iconBuilder(isSelected),
             AppSpacing.gapMd,
             Expanded(child: Text(title, style: AppTypography.bodyLargeMedium)),
             if (isSelected)

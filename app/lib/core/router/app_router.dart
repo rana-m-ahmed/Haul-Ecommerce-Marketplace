@@ -21,6 +21,7 @@ import '../../features/wishlist/wishlist_screen.dart';
 import '../../features/visual_search/camera_screen.dart';
 import '../../features/checkout/checkout_screens.dart';
 import '../../features/profile/profile_screen.dart';
+import '../../features/profile/recommendation_settings_screen.dart';
 
 part 'app_router.g.dart';
 
@@ -137,6 +138,10 @@ GoRouter appRouter(Ref ref) {
       GoRoute(
         path: '/camera',
         builder: (context, state) => const CameraScreen(),
+      ),
+      GoRoute(
+        path: '/recommendation-settings',
+        builder: (context, state) => const RecommendationSettingsScreen(),
       ),
       GoRoute(
         path: '/products/:id',

@@ -158,7 +158,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                                 : 'Personalized from your selected categories',
                             onTap: identity.isGuest
                                 ? () => context.push('/auth?link=true')
-                                : null,
+                                : () => context.push('/recommendation-settings'),
                           ),
                           const _SettingsRow(
                             icon: Icons.shield_outlined,

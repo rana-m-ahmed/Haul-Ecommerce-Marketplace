@@ -145,7 +145,9 @@ class AuthController extends _$AuthController {
 
   Future<void> loginWithGoogle() async {
     try {
-      final googleSignIn = GoogleSignIn();
+      final googleSignIn = GoogleSignIn(
+        serverClientId: '820940595832-f1k4rsiv7a5obgg1mtev6l5pkr3gl87r.apps.googleusercontent.com',
+      );
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
         state = const AuthStateUnauthenticated();
@@ -186,6 +188,13 @@ class AuthController extends _$AuthController {
         state = AuthStateNewUser(uid);
         rethrow;
       }
+    }
+  }
+
+  Future<void> updateAuthenticatedPreferences(List<String> categories) async {
+    if (state is AuthStateAuthenticated) {
+      final uid = (state as AuthStateAuthenticated).uid;
+      await ref.read(userRepositoryProvider).updatePreferences(uid, categories);
     }
   }
 

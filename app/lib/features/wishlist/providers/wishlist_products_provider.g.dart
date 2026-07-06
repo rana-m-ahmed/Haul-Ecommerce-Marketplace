@@ -46,7 +46,7 @@ final class WishlistProductsProvider
   }
 }
 
-String _$wishlistProductsHash() => r'ed17e9fee9d77b208a08d84f16d775cecb77f5dd';
+String _$wishlistProductsHash() => r'c3510b0284d6a0b044f6a8a8313889f0c0813602';
 
 @ProviderFor(wishlistPreview)
 final wishlistPreviewProvider = WishlistPreviewProvider._();
@@ -85,4 +85,4 @@ final class WishlistPreviewProvider
   }
 }
 
-String _$wishlistPreviewHash() => r'5bb7749f4aa9eb7f52e5f8b2e15eb20d34d2b7c5';
+String _$wishlistPreviewHash() => r'4bbf945e862c025b6cecea3d5620cff109842edc';

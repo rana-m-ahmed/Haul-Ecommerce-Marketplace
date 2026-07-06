@@ -56,6 +56,15 @@ class UserRepository {
     return null;
   }
 
+  Stream<UserProfile?> watchUser(String uid) {
+    return _users.doc(uid).snapshots().map((doc) {
+      if (doc.exists) {
+        return UserProfile.fromFirestore(doc);
+      }
+      return null;
+    });
+  }
+
   Future<void> promoteGuest(String uid, User user) async {
     await _users.doc(uid).update({
       'email': user.email,
@@ -70,4 +79,9 @@ class UserRepository {
 @riverpod
 UserRepository userRepository(Ref ref) {
   return UserRepository(FirebaseFirestore.instance);
+}
+
+@riverpod
+Stream<UserProfile?> userProfile(Ref ref, String uid) {
+  return ref.watch(userRepositoryProvider).watchUser(uid);
 }
