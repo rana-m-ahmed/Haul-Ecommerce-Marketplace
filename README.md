@@ -4,7 +4,8 @@ Haul is an Android-first Flutter commerce portfolio app built around visual
 search, personalized recommendations, resilient offline state, and a
 server-authoritative Stripe test checkout.
 
-![Haul Android home](progress/screenshots/sprint7_android_launch.png)
+<img width="340" height="257" alt="Screenshot 2026-07-06 190940" src="https://github.com/user-attachments/assets/ed34a482-691f-4e59-af0c-9384a08c04c4" />
+
 
 ## Product Tour
 
@@ -38,9 +39,11 @@ order, counter, and cart changes in one Firestore transaction.
 
 ## Screens
 
-| Android Home | Guest Profile | Order Success |
-|---|---|---|
-| ![Home](progress/screenshots/sprint7_android_launch.png) | ![Profile](progress/screenshots/sprint7_profile/profile_android.png) | ![Success](progress/screenshots/sprint6_checkout/order_success.png) |
+<img width="300" height="250" alt="Screenshot 2026-07-06 180219" src="https://github.com/user-attachments/assets/ea2d1d39-e93a-4178-81ce-24ca218fe947" />
+<img width="300" height="250" alt="Screenshot 2026-07-06 182223" src="https://github.com/user-attachments/assets/5aaa75fc-8d2d-40d7-8500-5f018efd0258" />
+<img width="300" height="250" alt="Screenshot 2026-07-06 182947" src="https://github.com/user-attachments/assets/0478e9b1-e3da-4bf5-9164-9d5ddd2d8771" />
+<img width="300" height="250" alt="Screenshot 2026-07-06 183926" src="https://github.com/user-attachments/assets/1139816c-5b68-440a-8231-dd531d88dba7" />
+
 
 ## Run Android
 
@@ -109,10 +112,4 @@ Current evidence and known blockers are tracked in
 [`progress/08_TEST_LOG.md`](progress/08_TEST_LOG.md) and
 [`progress/09_HANDOFF.md`](progress/09_HANDOFF.md).
 
-## Release Status
 
-The Android build, responsive Profile UI, guest Profile routing, state cleanup
-unit coverage, web compilation, and 61-test Flutter suite are verified. Live
-Stripe checkout still requires the Flutter test publishable key. The final
-logout flow remains blocked by an Android-emulator Firebase session persistence
-defect documented as `BUG-020`; it is not represented as production-ready yet.
